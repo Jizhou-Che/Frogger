@@ -1,55 +1,40 @@
 package scyjc1.frogger;
 
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
 
 import java.util.ArrayList;
 
+/**
+ * All movable objects.
+ */
+public abstract class Actor extends ImageView {
+	/**
+	 * Changes position of the actor.
+	 *
+	 * @param dx X position of the actor.
+	 * @param dy Y position of the actor.
+	 */
+	void move(double dx, double dy) {
+		setX(getX() + dx);
+		setY(getY() + dy);
+	}
 
-public abstract class Actor extends ImageView{
+	/**
+	 * @return The world the actor is in.
+	 */
+	World getWorld() {
+		return (World) getParent();
+	}
 
-    public void move(double dx, double dy) {
-        setX(getX() + dx);
-        setY(getY() + dy);
-    }
+	<A extends Actor> java.util.List<A> getIntersectingActors(java.lang.Class<A> cls) {
+		ArrayList<A> intersectingActors = new ArrayList<A>();
+		for (A actor : getWorld().getObjects(cls)) {
+			if (actor != this && actor.intersects(this.getBoundsInLocal())) {
+				intersectingActors.add(actor);
+			}
+		}
+		return intersectingActors;
+	}
 
-    public World getWorld() {
-        return (World) getParent();
-    }
-
-    public double getWidth() {
-        return this.getBoundsInLocal().getWidth();
-    }
-
-    public double getHeight() {
-        return this.getBoundsInLocal().getHeight();
-    }
-
-    public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                someArray.add(actor);
-            }
-        }
-        return someArray;
-    }
-    
-    public void manageInput(InputEvent e) {
-        
-    }
-
-    public <A extends Actor> A getOneIntersectingObject(java.lang.Class<A> cls) {
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (A actor: getWorld().getObjects(cls)) {
-            if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-                someArray.add(actor);
-                break;
-            }
-        }
-        return someArray.get(0);
-    }
-
-    public abstract void act(long now);
-
+	public abstract void act(long now);
 }

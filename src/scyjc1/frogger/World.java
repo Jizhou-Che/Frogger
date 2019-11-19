@@ -1,9 +1,5 @@
 package scyjc1.frogger;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -11,100 +7,90 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class World extends Pane {
-    private AnimationTimer timer;
-    
-    public World() {
-    	
-    	sceneProperty().addListener(new ChangeListener<Scene>() {
+	private AnimationTimer timer;
 
+	World() {
+		sceneProperty().addListener(new ChangeListener<Scene>() {
 			@Override
 			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
 				if (newValue != null) {
 					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
 						@Override
 						public void handle(KeyEvent event) {
-							if(getOnKeyReleased() != null) 
+							if (getOnKeyReleased() != null)
 								getOnKeyReleased().handle(event);
 							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
+							for (Actor anActor : myActors) {
 								if (anActor.getOnKeyReleased() != null) {
 									anActor.getOnKeyReleased().handle(event);
 								}
 							}
 						}
-						
 					});
-					
-					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
+					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
 						@Override
 						public void handle(KeyEvent event) {
-							if(getOnKeyPressed() != null) 
+							if (getOnKeyPressed() != null)
 								getOnKeyPressed().handle(event);
 							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor: myActors) {
+							for (Actor anActor : myActors) {
 								if (anActor.getOnKeyPressed() != null) {
 									anActor.getOnKeyPressed().handle(event);
 								}
 							}
 						}
-						
 					});
 				}
-				
 			}
-    		
 		});
-    }
+	}
 
-    public void createTimer() {
-        timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                act(now);
-                List<Actor> actors = getObjects(Actor.class);
-                
-                for (Actor anActor: actors) {
-                	anActor.act(now);
-                }
-      
-            }
-        };
-    }
+	private void createTimer() {
+		timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				act(now);
+				List<Actor> actors = getObjects(Actor.class);
+				for (Actor anActor : actors) {
+					anActor.act(now);
+				}
+			}
+		};
+	}
 
-    public void start() {
-    	createTimer();
-        timer.start();
-    }
+	void start() {
+		createTimer();
+		timer.start();
+	}
 
-    public void stop() {
-        timer.stop();
-    }
-    
-    public void add(Actor actor) {
-        getChildren().add(actor);
-    }
+	void stop() {
+		timer.stop();
+	}
 
-    public void remove(Actor actor) {
-        getChildren().remove(actor);
-    }
+	void add(Actor actor) {
+		getChildren().add(actor);
+	}
 
-    public <A extends Actor> List<A> getObjects(Class<A> cls) {
-        ArrayList<A> someArray = new ArrayList<A>();
-        for (Node n: getChildren()) {
-            if (cls.isInstance(n)) {
-                someArray.add((A)n);
-            }
-        }
-        return someArray;
-    }
+	void remove(Actor actor) {
+		getChildren().remove(actor);
+	}
 
-    public abstract void act(long now);
+	<A extends Actor> ArrayList<A> getObjects(Class<A> cls) {
+		ArrayList<A> objects = new ArrayList<A>();
+		for (Node n : getChildren()) {
+			if (cls.isInstance(n)) {
+				objects.add((A) n);
+			}
+		}
+		return objects;
+	}
+
+	public abstract void act(long now);
 }
