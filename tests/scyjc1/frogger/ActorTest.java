@@ -55,6 +55,6 @@ class ActorTest {
 		intersectingActors.add(testActorSubset);
 		intersectingActors.add(testActorIntersect);
 		intersectingActors.add(testActorSuperset);
-		assertEquals(intersectingActors, (ArrayList<ActorImpl>) testActor.getIntersectingActors(ActorImpl.class));
+		assertEquals(intersectingActors, (ArrayList<ActorImpl>) testActor.getIntersectingObjects(ActorImpl.class));
 	}
 }

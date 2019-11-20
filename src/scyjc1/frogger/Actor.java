@@ -11,8 +11,8 @@ public abstract class Actor extends ImageView {
 	/**
 	 * Changes position of the actor.
 	 *
-	 * @param dx X position of the actor.
-	 * @param dy Y position of the actor.
+	 * @param dx movement to the x direction, can be negative.
+	 * @param dy movement to the y direction, can be negative.
 	 */
 	void move(double dx, double dy) {
 		setX(getX() + dx);
@@ -26,14 +26,14 @@ public abstract class Actor extends ImageView {
 		return (World) getParent();
 	}
 
-	<A extends Actor> java.util.List<A> getIntersectingActors(java.lang.Class<A> cls) {
-		ArrayList<A> intersectingActors = new ArrayList<A>();
+	<A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
+		ArrayList<A> intersectingObjects = new ArrayList<A>();
 		for (A actor : getWorld().getObjects(cls)) {
 			if (actor != this && actor.intersects(this.getBoundsInLocal())) {
-				intersectingActors.add(actor);
+				intersectingObjects.add(actor);
 			}
 		}
-		return intersectingActors;
+		return intersectingObjects;
 	}
 
 	public abstract void act(long now);

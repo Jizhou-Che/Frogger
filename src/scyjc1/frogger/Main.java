@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 	private AnimationTimer timer;
 	private MyStage background;
-	private Animal animal;
+	private Frog frog;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -66,13 +66,13 @@ public class Main extends Application {
 		//End end3 = new End();
 		//End end4 = new End();
 		//End end5 = new End();
-		background.add(new End(13, 96));
-		background.add(new End(141, 96));
-		background.add(new End(141 + 141 - 13, 96));
-		background.add(new End(141 + 141 - 13 + 141 - 13 + 1, 96));
-		background.add(new End(141 + 141 - 13 + 141 - 13 + 141 - 13 + 3, 96));
-		animal = new Animal("file:resources/froggerUp.png");
-		background.add(animal);
+		background.add(new Slot(13, 96));
+		background.add(new Slot(141, 96));
+		background.add(new Slot(141 + 141 - 13, 96));
+		background.add(new Slot(141 + 141 - 13 + 141 - 13 + 1, 96));
+		background.add(new Slot(141 + 141 - 13 + 141 - 13 + 141 - 13 + 3, 96));
+		frog = new Frog("file:resources/froggerUp.png");
+		background.add(frog);
 		background.add(new Obstacle("file:resources/truck1" + "Right.png", 0, 649, 1, 120, 120));
 		background.add(new Obstacle("file:resources/truck1" + "Right.png", 300, 649, 1, 120, 120));
 		background.add(new Obstacle("file:resources/truck1" + "Right.png", 600, 649, 1, 120, 120));
@@ -98,17 +98,16 @@ public class Main extends Application {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				if (animal.changeScore()) {
-					setNumber(animal.getPoints());
+				if (frog.changeScore()) {
+					setNumber(frog.getPoints());
 				}
-				if (animal.getStop()) {
-					System.out.print("STOP:");
+				if (frog.gameWon()) {
 					background.stopMusic();
 					stop();
 					background.stop();
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("You Have Won The Game!");
-					alert.setHeaderText("Your High Score: " + animal.getPoints() + "!");
+					alert.setHeaderText("Your High Score: " + frog.getPoints() + "!");
 					alert.setContentText("Highest Possible Score: 800");
 					alert.show();
 				}

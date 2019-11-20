@@ -7,7 +7,7 @@ public class WetTurtle extends Actor {
 	private Image turtle2;
 	private Image turtle3;
 	private Image turtle4;
-	private int speed;
+	int speed;
 	private boolean sunk = false;
 
 	@Override

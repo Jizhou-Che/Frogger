@@ -6,7 +6,7 @@ public class Turtle extends Actor {
 	private Image turtle1;
 	private Image turtle2;
 	private Image turtle3;
-	private int speed;
+	int speed;
 
 	@Override
 	public void act(long now) {
