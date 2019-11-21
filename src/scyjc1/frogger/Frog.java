@@ -41,24 +41,8 @@ public class Frog extends Actor {
 	private void handleKeyPressed(KeyEvent event) {
 		if (!noMove) {
 			if (keyHold) {
-				if (event.getCode() == KeyCode.W) {
-					move(0, -movementY);
-					changeScore = false;
-					setImage(imgUp);
-					keyHold = false;
-				} else if (event.getCode() == KeyCode.A) {
-					move(-movementX, 0);
-					setImage(imgLeft);
-					keyHold = false;
-				} else if (event.getCode() == KeyCode.S) {
-					move(0, movementY);
-					setImage(imgDown);
-					keyHold = false;
-				} else if (event.getCode() == KeyCode.D) {
-					move(movementX, 0);
-					setImage(imgRight);
-					keyHold = false;
-				}
+				handleKeyReleased(event);
+				keyHold = false; // Reset key hold status.
 			} else if (event.getCode() == KeyCode.W) {
 				move(0, -movementY);
 				setImage(imgUpJump);
@@ -84,9 +68,9 @@ public class Frog extends Actor {
 			if (event.getCode() == KeyCode.W) {
 				if (getY() < progressY) {
 					// A further reach in the current life. 10 points awarded.
-					changeScore = true;
 					progressY = getY();
 					points += 10;
+					changeScore = true;
 				}
 				move(0, -movementY);
 				setImage(imgUp);
@@ -243,7 +227,7 @@ public class Frog extends Actor {
 
 	/**
 	 * @return whether an update to the score digits is pending.
-	 *
+	 * <p>
 	 * Resets the pending status as a side effect.
 	 */
 	boolean changeScore() {
