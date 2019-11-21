@@ -62,10 +62,6 @@ public class Main extends Application {
 		//background.add(new Log("file:resources/log2.png", 100, 220, 1));
 		//background.add(new Log("file:resources/log2.png", 200, 220, 1));
 		//background.add(new Log("file:resources/log2.png", 400, 220, 1));
-		//End end2 = new End();
-		//End end3 = new End();
-		//End end4 = new End();
-		//End end5 = new End();
 		background.add(new Slot(13, 96));
 		background.add(new Slot(141, 96));
 		background.add(new Slot(141 + 141 - 13, 96));

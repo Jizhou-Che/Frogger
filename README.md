@@ -10,3 +10,11 @@ Project structure established, resources reorganised.
 Tests implemented for abstract classes.
 Modifications on visibility of classes and methods.
 Minor reformatting.
+
+20/11/19
+Frog class partially refactored.
+
+21/11/19
+Further refactoring on the Frog class.
+Bug: Points calculation error when frog enters the same slot multiple times.
+Bug: Points not awarded when holding W to progress forward.

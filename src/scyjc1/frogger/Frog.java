@@ -1,107 +1,110 @@
 package scyjc1.frogger;
 
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class Frog extends Actor {
-	private int points = 0;
-	private int slotsOccupied = 0;
-	private boolean jumping = false;
-	private boolean noMove = false;
-	private double movementX = 10.666666 * 2;
-	private double movementY = 13.3333333 * 2;
 	private int imgSize = 40;
-	private boolean carDeath = false;
-	private boolean waterDeath = false;
-	private boolean changeScore = false;
-	private int deathAnimationFlag = 0;
-	private double w = 800;
+	private int points = 0;
+	private double movementX = 10.666666 * 2;
+	private double movementY = 13.333333 * 2;
+	private int slotsOccupied = 0; // The number of occupied slots.
+	private boolean keyHold = false; // Whether the jump key is held.
+	private boolean noMove = false; // Whether the frog is forbidden to move.
+	private boolean carDeath = false; // Whether the frog is dead because of a car.
+	private boolean waterDeath = false; // Whether the frog is dead because of water.
+	private int deathAnimationFlag = 0; // The stage of death animation.
+	private boolean changeScore = false; // Whether the score should change in this frame.
+	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
+
+	private Image imgUp = new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true);
+	private Image imgLeft = new Image("file:resources/froggerLeft.png", imgSize, imgSize, true, true);
+	private Image imgDown = new Image("file:resources/froggerDown.png", imgSize, imgSize, true, true);
+	private Image imgRight = new Image("file:resources/froggerRight.png", imgSize, imgSize, true, true);
+	private Image imgUpJump = new Image("file:resources/froggerUpJump.png", imgSize, imgSize, true, true);
+	private Image imgLeftJump = new Image("file:resources/froggerLeftJump.png", imgSize, imgSize, true, true);
+	private Image imgDownJump = new Image("file:resources/froggerDownJump.png", imgSize, imgSize, true, true);
+	private Image imgRightJump = new Image("file:resources/froggerRightJump.png", imgSize, imgSize, true, true);
 
 	Frog(String imageLink) {
+		// Initialise image and position.
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
-		Image imgW1 = new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true);
-		Image imgA1 = new Image("file:resources/froggerLeft.png", imgSize, imgSize, true, true);
-		Image imgS1 = new Image("file:resources/froggerDown.png", imgSize, imgSize, true, true);
-		Image imgD1 = new Image("file:resources/froggerRight.png", imgSize, imgSize, true, true);
-		Image imgW2 = new Image("file:resources/froggerUpJump.png", imgSize, imgSize, true, true);
-		Image imgA2 = new Image("file:resources/froggerLeftJump.png", imgSize, imgSize, true, true);
-		Image imgS2 = new Image("file:resources/froggerDownJump.png", imgSize, imgSize, true, true);
-		Image imgD2 = new Image("file:resources/froggerRightJump.png", imgSize, imgSize, true, true);
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (!noMove) {
-					if (jumping) {
-						if (event.getCode() == KeyCode.W) {
-							move(0, -movementY);
-							changeScore = false;
-							setImage(imgW1);
-							jumping = false;
-						} else if (event.getCode() == KeyCode.A) {
-							move(-movementX, 0);
-							setImage(imgA1);
-							jumping = false;
-						} else if (event.getCode() == KeyCode.S) {
-							move(0, movementY);
-							setImage(imgS1);
-							jumping = false;
-						} else if (event.getCode() == KeyCode.D) {
-							move(movementX, 0);
-							setImage(imgD1);
-							jumping = false;
-						}
-					} else if (event.getCode() == KeyCode.W) {
-						move(0, -movementY);
-						setImage(imgW2);
-						jumping = true;
-					} else if (event.getCode() == KeyCode.A) {
-						move(-movementX, 0);
-						setImage(imgA2);
-						jumping = true;
-					} else if (event.getCode() == KeyCode.S) {
-						move(0, movementY);
-						setImage(imgS2);
-						jumping = true;
-					} else if (event.getCode() == KeyCode.D) {
-						move(movementX, 0);
-						setImage(imgD2);
-						jumping = true;
-					}
-				}
-			}
-		});
 
-		setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (!noMove) {
-					if (event.getCode() == KeyCode.W) {
-						if (getY() < w) {
-							changeScore = true;
-							w = getY();
-							points += 10;
-						}
-						move(0, -movementY);
-						setImage(imgW1);
-						jumping = false;
-					} else if (event.getCode() == KeyCode.A) {
-						move(-movementX, 0);
-						setImage(imgA1);
-						jumping = false;
-					} else if (event.getCode() == KeyCode.S) {
-						move(0, movementY);
-						setImage(imgS1);
-						jumping = false;
-					} else if (event.getCode() == KeyCode.D) {
-						move(movementX, 0);
-						setImage(imgD1);
-						jumping = false;
-					}
+		// Set key handlers.
+		setOnKeyPressed(this::handleKeyPressed);
+		setOnKeyReleased(this::handleKeyReleased);
+	}
+
+	private void handleKeyPressed(KeyEvent event) {
+		if (!noMove) {
+			if (keyHold) {
+				if (event.getCode() == KeyCode.W) {
+					move(0, -movementY);
+					changeScore = false;
+					setImage(imgUp);
+					keyHold = false;
+				} else if (event.getCode() == KeyCode.A) {
+					move(-movementX, 0);
+					setImage(imgLeft);
+					keyHold = false;
+				} else if (event.getCode() == KeyCode.S) {
+					move(0, movementY);
+					setImage(imgDown);
+					keyHold = false;
+				} else if (event.getCode() == KeyCode.D) {
+					move(movementX, 0);
+					setImage(imgRight);
+					keyHold = false;
 				}
+			} else if (event.getCode() == KeyCode.W) {
+				move(0, -movementY);
+				setImage(imgUpJump);
+				keyHold = true;
+			} else if (event.getCode() == KeyCode.A) {
+				move(-movementX, 0);
+				setImage(imgLeftJump);
+				keyHold = true;
+			} else if (event.getCode() == KeyCode.S) {
+				move(0, movementY);
+				setImage(imgDownJump);
+				keyHold = true;
+			} else if (event.getCode() == KeyCode.D) {
+				move(movementX, 0);
+				setImage(imgRightJump);
+				keyHold = true;
 			}
-		});
+		}
+	}
+
+	private void handleKeyReleased(KeyEvent event) {
+		if (!noMove) {
+			if (event.getCode() == KeyCode.W) {
+				if (getY() < progressY) {
+					// A further reach in the current life. 10 points awarded.
+					changeScore = true;
+					progressY = getY();
+					points += 10;
+				}
+				move(0, -movementY);
+				setImage(imgUp);
+				keyHold = false;
+			} else if (event.getCode() == KeyCode.A) {
+				move(-movementX, 0);
+				setImage(imgLeft);
+				keyHold = false;
+			} else if (event.getCode() == KeyCode.S) {
+				move(0, movementY);
+				setImage(imgDown);
+				keyHold = false;
+			} else if (event.getCode() == KeyCode.D) {
+				move(movementX, 0);
+				setImage(imgRight);
+				keyHold = false;
+			}
+		}
 	}
 
 	@Override
@@ -122,7 +125,8 @@ public class Frog extends Actor {
 		}
 
 		if (carDeath) {
-			noMove = true;
+			// Frog crashed by car.
+			noMove = true; // Disable moving.
 			if ((now) % 11 == 0) {
 				deathAnimationFlag++;
 			}
@@ -196,7 +200,7 @@ public class Frog extends Actor {
 			}
 			points += 50;
 			changeScore = true;
-			w = 800;
+			progressY = 800;
 			getIntersectingObjects(Slot.class).get(0).setEnd();
 			slotsOccupied++;
 			setX(300);
@@ -208,30 +212,40 @@ public class Frog extends Actor {
 	}
 
 	private void deathReset() {
-		// Set frog to original position.
-		setX(300);
-		setY(705);
 		// Clear death flags.
 		carDeath = waterDeath = false;
 		deathAnimationFlag = 0;
-		// Reset frog image.
-		setImage(new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true));
 		noMove = false;
-		// Modify score.
+		// Reset frog image and position.
+		setImage(new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true));
+		setX(300);
+		setY(705);
+		// Update score.
 		if (points > 50) {
 			points -= 50;
 			changeScore = true;
 		}
 	}
 
+	/**
+	 * @return boolean indicating whether all slots are occupied.
+	 */
 	boolean gameWon() {
 		return slotsOccupied == 5;
 	}
 
+	/**
+	 * @return the current points as integer.
+	 */
 	int getPoints() {
 		return points;
 	}
 
+	/**
+	 * @return whether an update to the score digits is pending.
+	 *
+	 * Resets the pending status as a side effect.
+	 */
 	boolean changeScore() {
 		if (changeScore) {
 			changeScore = false;

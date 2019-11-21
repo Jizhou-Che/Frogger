@@ -20,7 +20,7 @@ public abstract class Actor extends ImageView {
 	}
 
 	/**
-	 * @return The world the actor is in.
+	 * @return the world the actor is in.
 	 */
 	World getWorld() {
 		return (World) getParent();
