@@ -21,3 +21,6 @@ Bug: Points not awarded when holding W to progress forward.
 Fix: Points not awarded when holding W to progress forward: extract method refactoring.
 Bug: Points calculation error on certain deaths.
 Bug: Boundary movement issues at right and bottom.
+
+23/11/19
+Fix: Points display error.

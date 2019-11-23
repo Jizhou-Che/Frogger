@@ -103,14 +103,13 @@ public class Frog extends Actor {
 			setX(0);
 		}
 
-		if (getX() > 600) {
+		if (getX() > 600 - imgSize) {
 			// Frog exceeds right boundary.
 			setX(600 - imgSize);
 		}
 
 		if (carDeath) {
 			// Frog crashed by car.
-			noMove = true; // Disable moving.
 			if ((now) % 11 == 0) {
 				deathAnimationFlag++;
 			}
@@ -124,13 +123,12 @@ public class Frog extends Actor {
 				setImage(new Image("file:resources/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
-				// Animation finished, set position back to origin.
 				deathReset();
 			}
 		}
 
 		if (waterDeath) {
-			noMove = true;
+			// Frog falls in water.
 			if ((now) % 11 == 0) {
 				deathAnimationFlag++;
 			}
@@ -151,47 +149,50 @@ public class Frog extends Actor {
 			}
 		}
 
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			// Frog crashed by a car.
-			carDeath = true;
-		}
-
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			// Frog lands on a log.
-			Log currentLog = getIntersectingObjects(Log.class).get(0);
-			// Frog follows the log.
-			move(currentLog.speed, 0);
-		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			// Frog lands on a turtle.
-			Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
-			// Frog follows the turtle.
-			move(currentTurtle.speed, 0);
-		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			// Frog lands on a wet turtle.
-			WetTurtle currentWetTurtle = getIntersectingObjects(WetTurtle.class).get(0);
-			if (currentWetTurtle.isSunk()) {
-				// Frog dies when the wet turtle sinks.
+		if (!noMove) {
+			if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+				// Frog crashed by a car.
+				carDeath = true;
+				noMove = true; // Disable moving.
+			} else if (getIntersectingObjects(Log.class).size() >= 1) {
+				// Frog lands on a log.
+				Log currentLog = getIntersectingObjects(Log.class).get(0);
+				// Frog follows the log.
+				move(currentLog.speed, 0);
+			} else if (getIntersectingObjects(Turtle.class).size() >= 1) {
+				// Frog lands on a turtle.
+				Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
+				// Frog follows the turtle.
+				move(currentTurtle.speed, 0);
+			} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+				// Frog lands on a wet turtle.
+				WetTurtle currentWetTurtle = getIntersectingObjects(WetTurtle.class).get(0);
+				if (currentWetTurtle.isSunk()) {
+					// Frog dies when the wet turtle sinks.
+					waterDeath = true;
+					noMove = true; // Disable moving.
+				} else {
+					// Frog follows the wet turtle.
+					move(currentWetTurtle.speed, 0);
+				}
+			} else if (getIntersectingObjects(Slot.class).size() >= 1) {
+				// Frog reaches a slot.
+				if (getIntersectingObjects(Slot.class).get(0).isOccupied()) {
+					deathReset();
+				} else {
+					getIntersectingObjects(Slot.class).get(0).setOccupied();
+					slotsOccupied++;
+					points += 50;
+					changeScore = true;
+					progressY = 800;
+					setX(300);
+					setY(705);
+				}
+			} else if (getY() < 413) {
+				// Frog enters the river but lands on nothing.
 				waterDeath = true;
-			} else {
-				// Frog follows the wet turtle.
-				move(currentWetTurtle.speed, 0);
+				noMove = true; // Disable moving.
 			}
-		} else if (getIntersectingObjects(Slot.class).size() >= 1) {
-			// Frog reaches a slot.
-			if (getIntersectingObjects(Slot.class).get(0).isActivated()) {
-				slotsOccupied--;
-				points -= 50;
-			}
-			points += 50;
-			changeScore = true;
-			progressY = 800;
-			getIntersectingObjects(Slot.class).get(0).setEnd();
-			slotsOccupied++;
-			setX(300);
-			setY(705);
-		} else if (getY() < 413) {
-			// Frog enters the river but lands on nothing.
-			waterDeath = true;
 		}
 	}
 
