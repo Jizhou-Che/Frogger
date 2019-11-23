@@ -10,6 +10,7 @@ public class Frog extends Actor {
 	private double movementX = 10.666666 * 2;
 	private double movementY = 13.333333 * 2;
 	private int slotsOccupied = 0; // The number of occupied slots.
+	private char keyPressed;
 	private boolean keyHold = false; // Whether the jump key is held.
 	private boolean noMove = false; // Whether the frog is forbidden to move.
 	private boolean carDeath = false; // Whether the frog is dead because of a car.
@@ -42,48 +43,51 @@ public class Frog extends Actor {
 		if (!noMove) {
 			if (keyHold) {
 				handleKeyReleased(event);
-				keyHold = false; // Reset key hold status.
 			} else if (event.getCode() == KeyCode.W) {
 				move(0, -movementY);
 				setImage(imgUpJump);
+				keyPressed = 'W';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.A) {
 				move(-movementX, 0);
 				setImage(imgLeftJump);
+				keyPressed = 'A';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.S) {
 				move(0, movementY);
 				setImage(imgDownJump);
+				keyPressed = 'S';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.D) {
 				move(movementX, 0);
 				setImage(imgRightJump);
+				keyPressed = 'D';
 				keyHold = true;
 			}
 		}
 	}
 
 	private void handleKeyReleased(KeyEvent event) {
-		if (!noMove) {
-			if (event.getCode() == KeyCode.W) {
+		if (!noMove && keyHold) {
+			if (keyPressed == 'W') {
+				move(0, -movementY);
+				setImage(imgUp);
 				if (getY() < progressY) {
 					// A further reach in the current life. 10 points awarded.
 					progressY = getY();
 					points += 10;
 					changeScore = true;
 				}
-				move(0, -movementY);
-				setImage(imgUp);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.A) {
+			} else if (keyPressed == 'A') {
 				move(-movementX, 0);
 				setImage(imgLeft);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.S) {
+			} else if (keyPressed == 'S') {
 				move(0, movementY);
 				setImage(imgDown);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.D) {
+			} else if (keyPressed == 'D') {
 				move(movementX, 0);
 				setImage(imgRight);
 				keyHold = false;
@@ -179,16 +183,21 @@ public class Frog extends Actor {
 		} else if (getIntersectingObjects(Slot.class).size() >= 1) {
 			// Frog reaches a slot.
 			if (getIntersectingObjects(Slot.class).get(0).isActivated()) {
-				slotsOccupied--;
-				points -= 50;
+				// The slot is not empty.
+				deathReset();
+			} else {
+				// Occupy the slot.
+				getIntersectingObjects(Slot.class).get(0).setEnd();
+				slotsOccupied++;
+				// 50 points awarded.
+				points += 50;
+				changeScore = true;
+				// Reset furthest position reached.
+				progressY = 800;
+				// Reset frog position.
+				setX(300);
+				setY(705);
 			}
-			points += 50;
-			changeScore = true;
-			progressY = 800;
-			getIntersectingObjects(Slot.class).get(0).setEnd();
-			slotsOccupied++;
-			setX(300);
-			setY(705);
 		} else if (getY() < 413) {
 			// Frog enters the river but lands on nothing.
 			waterDeath = true;
@@ -196,14 +205,16 @@ public class Frog extends Actor {
 	}
 
 	private void deathReset() {
-		// Clear death flags.
-		carDeath = waterDeath = false;
-		deathAnimationFlag = 0;
-		noMove = false;
 		// Reset frog image and position.
 		setImage(new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
+		// Reset key holding status.
+		keyHold = false;
+		// Clear death flags.
+		carDeath = waterDeath = false;
+		deathAnimationFlag = 0;
+		noMove = false;
 		// Update score.
 		if (points > 50) {
 			points -= 50;

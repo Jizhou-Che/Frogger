@@ -20,4 +20,8 @@ Bug: Points calculation error when frog enters the same slot multiple times.
 Bug: Points not awarded when holding W to progress forward.
 Fix: Points not awarded when holding W to progress forward: extract method refactoring.
 Bug: Points calculation error on certain deaths.
-Bug: Boundary movement issues at right and bottom.
+Bug: Frog movement issues.
+
+23/11/19
+Fix: Points calculation error when frog enters the same slot multiple times.
+Fix: Frog movement issues.
