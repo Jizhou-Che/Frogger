@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class World extends Pane {
+class World extends Pane {
 	private AnimationTimer timer;
 
 	World() {
@@ -56,7 +56,6 @@ public abstract class World extends Pane {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				act(now);
 				List<Actor> actors = getObjects(Actor.class);
 				for (Actor anActor : actors) {
 					anActor.act(now);
@@ -91,6 +90,4 @@ public abstract class World extends Pane {
 		}
 		return objects;
 	}
-
-	public abstract void act(long now);
 }

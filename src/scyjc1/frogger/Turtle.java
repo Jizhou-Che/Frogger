@@ -6,7 +6,17 @@ public class Turtle extends Actor {
 	private Image turtle1;
 	private Image turtle2;
 	private Image turtle3;
-	int speed;
+	private double speed;
+
+	Turtle(int xpos, int ypos, double s, int w, int h) {
+		turtle1 = new Image("file:resources/images/TurtleAnimation1.png", w, h, true, true);
+		turtle2 = new Image("file:resources/images/TurtleAnimation2.png", w, h, true, true);
+		turtle3 = new Image("file:resources/images/TurtleAnimation3.png", w, h, true, true);
+		setImage(turtle2);
+		setX(xpos);
+		setY(ypos);
+		speed = s;
+	}
 
 	@Override
 	public void act(long now) {
@@ -28,13 +38,7 @@ public class Turtle extends Actor {
 		}
 	}
 
-	Turtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:resources/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:resources/TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image("file:resources/TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
+	double getSpeed() {
+		return speed;
 	}
 }

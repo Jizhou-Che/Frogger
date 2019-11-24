@@ -21,3 +21,9 @@ Bug: Points not awarded when holding W to progress forward.
 Fix: Points not awarded when holding W to progress forward: extract method refactoring.
 Bug: Points calculation error on certain deaths.
 Bug: Boundary movement issues at right and bottom.
+
+24/11/19
+Resources reorganised.
+General refactoring on concrete Actor classes.
+Extracted BackgroundMusic class from MyStage and applied with Singleton pattern.
+World class made concrete and MyStage class removed.

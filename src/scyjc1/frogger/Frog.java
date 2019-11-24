@@ -18,14 +18,14 @@ public class Frog extends Actor {
 	private boolean changeScore = false; // Whether the score should change in this frame.
 	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
 
-	private Image imgUp = new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true);
-	private Image imgLeft = new Image("file:resources/froggerLeft.png", imgSize, imgSize, true, true);
-	private Image imgDown = new Image("file:resources/froggerDown.png", imgSize, imgSize, true, true);
-	private Image imgRight = new Image("file:resources/froggerRight.png", imgSize, imgSize, true, true);
-	private Image imgUpJump = new Image("file:resources/froggerUpJump.png", imgSize, imgSize, true, true);
-	private Image imgLeftJump = new Image("file:resources/froggerLeftJump.png", imgSize, imgSize, true, true);
-	private Image imgDownJump = new Image("file:resources/froggerDownJump.png", imgSize, imgSize, true, true);
-	private Image imgRightJump = new Image("file:resources/froggerRightJump.png", imgSize, imgSize, true, true);
+	private Image imgUp = new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true);
+	private Image imgLeft = new Image("file:resources/images/froggerLeft.png", imgSize, imgSize, true, true);
+	private Image imgDown = new Image("file:resources/images/froggerDown.png", imgSize, imgSize, true, true);
+	private Image imgRight = new Image("file:resources/images/froggerRight.png", imgSize, imgSize, true, true);
+	private Image imgUpJump = new Image("file:resources/images/froggerUpJump.png", imgSize, imgSize, true, true);
+	private Image imgLeftJump = new Image("file:resources/images/froggerLeftJump.png", imgSize, imgSize, true, true);
+	private Image imgDownJump = new Image("file:resources/images/froggerDownJump.png", imgSize, imgSize, true, true);
+	private Image imgRightJump = new Image("file:resources/images/froggerRightJump.png", imgSize, imgSize, true, true);
 
 	Frog(String imageLink) {
 		// Initialise image and position.
@@ -115,13 +115,13 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/cardeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/cardeath1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/cardeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/cardeath2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/cardeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
 				// Animation finished, set position back to origin.
@@ -135,16 +135,16 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/waterdeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/waterdeath1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/waterdeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/waterdeath2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/waterdeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/waterdeath3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
-				setImage(new Image("file:resources/waterdeath4.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/waterdeath4.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 5) {
 				deathReset();
@@ -160,12 +160,12 @@ public class Frog extends Actor {
 			// Frog lands on a log.
 			Log currentLog = getIntersectingObjects(Log.class).get(0);
 			// Frog follows the log.
-			move(currentLog.speed, 0);
+			move(currentLog.getSpeed(), 0);
 		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
 			// Frog lands on a turtle.
 			Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
 			// Frog follows the turtle.
-			move(currentTurtle.speed, 0);
+			move(currentTurtle.getSpeed(), 0);
 		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
 			// Frog lands on a wet turtle.
 			WetTurtle currentWetTurtle = getIntersectingObjects(WetTurtle.class).get(0);
@@ -174,7 +174,7 @@ public class Frog extends Actor {
 				waterDeath = true;
 			} else {
 				// Frog follows the wet turtle.
-				move(currentWetTurtle.speed, 0);
+				move(currentWetTurtle.getSpeed(), 0);
 			}
 		} else if (getIntersectingObjects(Slot.class).size() >= 1) {
 			// Frog reaches a slot.
@@ -201,7 +201,7 @@ public class Frog extends Actor {
 		deathAnimationFlag = 0;
 		noMove = false;
 		// Reset frog image and position.
-		setImage(new Image("file:resources/froggerUp.png", imgSize, imgSize, true, true));
+		setImage(new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
 		// Update score.

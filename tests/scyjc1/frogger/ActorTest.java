@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 class ActorTest {
-	private WorldImpl testWorld = new WorldImpl();
+	private World testWorld = new World();
 	private ActorImpl testActor = new ActorImpl();
 
 	@Test

@@ -3,26 +3,37 @@ package scyjc1.frogger;
 import javafx.scene.image.Image;
 
 public class WetTurtle extends Actor {
-	private Image turtle1;
-	private Image turtle2;
-	private Image turtle3;
-	private Image turtle4;
-	int speed;
+	private Image wetTurtle1;
+	private Image wetTurtle2;
+	private Image wetTurtle3;
+	private Image wetTurtle4;
+	private double speed;
 	private boolean sunk = false;
+
+	WetTurtle(int xpos, int ypos, int s, int w, int h) {
+		wetTurtle1 = new Image("file:resources/images/TurtleAnimation1.png", w, h, true, true);
+		wetTurtle2 = new Image("file:resources/images/TurtleAnimation2Wet.png", w, h, true, true);
+		wetTurtle3 = new Image("file:resources/images/TurtleAnimation3Wet.png", w, h, true, true);
+		wetTurtle4 = new Image("file:resources/images/TurtleAnimation4Wet.png", w, h, true, true);
+		setImage(wetTurtle2);
+		setX(xpos);
+		setY(ypos);
+		speed = s;
+	}
 
 	@Override
 	public void act(long now) {
 		if (now / 900000000 % 4 == 0) {
-			setImage(turtle2);
+			setImage(wetTurtle2);
 			sunk = false;
 		} else if (now / 900000000 % 4 == 1) {
-			setImage(turtle1);
+			setImage(wetTurtle1);
 			sunk = false;
 		} else if (now / 900000000 % 4 == 2) {
-			setImage(turtle3);
+			setImage(wetTurtle3);
 			sunk = false;
 		} else if (now / 900000000 % 4 == 3) {
-			setImage(turtle4);
+			setImage(wetTurtle4);
 			sunk = true;
 		}
 
@@ -36,18 +47,11 @@ public class WetTurtle extends Actor {
 		}
 	}
 
-	WetTurtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:resources/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:resources/TurtleAnimation2Wet.png", w, h, true, true);
-		turtle3 = new Image("file:resources/TurtleAnimation3Wet.png", w, h, true, true);
-		turtle4 = new Image("file:resources/TurtleAnimation4Wet.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
-	}
-
 	boolean isSunk() {
 		return sunk;
+	}
+
+	double getSpeed() {
+		return speed;
 	}
 }

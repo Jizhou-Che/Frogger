@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorldTest {
-	private WorldImpl testWorld = new WorldImpl();
+	private World testWorld = new World();
 	private ActorImpl testActor = new ActorImpl();
 
 	@Test

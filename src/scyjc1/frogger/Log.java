@@ -3,7 +3,14 @@ package scyjc1.frogger;
 import javafx.scene.image.Image;
 
 public class Log extends Actor {
-	double speed;
+	private double speed;
+
+	Log(String imageLink, int size, int xpos, int ypos, double s) {
+		setImage(new Image(imageLink, size, size, true, true));
+		setX(xpos);
+		setY(ypos);
+		speed = s;
+	}
 
 	@Override
 	public void act(long now) {
@@ -18,14 +25,7 @@ public class Log extends Actor {
 		}
 	}
 
-	Log(String imageLink, int size, int xpos, int ypos, double s) {
-		setImage(new Image(imageLink, size, size, true, true));
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-	}
-
-	boolean getLeft() {
-		return speed < 0;
+	double getSpeed() {
+		return speed;
 	}
 }
