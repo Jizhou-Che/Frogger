@@ -123,6 +123,11 @@ public class Main extends Application {
 	}
 
 	private void setNumber(int n) {
+		// Clear digits.
+		for (Digit d : background.getObjects(Digit.class)) {
+			background.remove(d);
+		}
+		// Set new digits.
 		int shift = 0;
 		while (n > 0) {
 			int d = n / 10;

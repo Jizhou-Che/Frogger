@@ -8,13 +8,13 @@ public class Turtle extends Actor {
 	private Image turtle3;
 	private double speed;
 
-	Turtle(int xpos, int ypos, double s, int w, int h) {
+	Turtle(int x, int y, double s, int w, int h) {
 		turtle1 = new Image("file:resources/images/TurtleAnimation1.png", w, h, true, true);
 		turtle2 = new Image("file:resources/images/TurtleAnimation2.png", w, h, true, true);
 		turtle3 = new Image("file:resources/images/TurtleAnimation3.png", w, h, true, true);
 		setImage(turtle2);
-		setX(xpos);
-		setY(ypos);
+		setX(x);
+		setY(y);
 		speed = s;
 	}
 
@@ -33,7 +33,7 @@ public class Turtle extends Actor {
 		if (getX() > 600 && speed > 0) {
 			setX(-200);
 		}
-		if (getX() < -75 && speed < 0) {
+		if (getX() < -150 && speed < 0) {
 			setX(600);
 		}
 	}

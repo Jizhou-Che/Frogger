@@ -10,6 +10,7 @@ public class Frog extends Actor {
 	private double movementX = 10.666666 * 2;
 	private double movementY = 13.333333 * 2;
 	private int slotsOccupied = 0; // The number of occupied slots.
+	private char keyPressed;
 	private boolean keyHold = false; // Whether the jump key is held.
 	private boolean noMove = false; // Whether the frog is forbidden to move.
 	private boolean carDeath = false; // Whether the frog is dead because of a car.
@@ -42,48 +43,51 @@ public class Frog extends Actor {
 		if (!noMove) {
 			if (keyHold) {
 				handleKeyReleased(event);
-				keyHold = false; // Reset key hold status.
 			} else if (event.getCode() == KeyCode.W) {
 				move(0, -movementY);
 				setImage(imgUpJump);
+				keyPressed = 'W';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.A) {
 				move(-movementX, 0);
 				setImage(imgLeftJump);
+				keyPressed = 'A';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.S) {
 				move(0, movementY);
 				setImage(imgDownJump);
+				keyPressed = 'S';
 				keyHold = true;
 			} else if (event.getCode() == KeyCode.D) {
 				move(movementX, 0);
 				setImage(imgRightJump);
+				keyPressed = 'D';
 				keyHold = true;
 			}
 		}
 	}
 
 	private void handleKeyReleased(KeyEvent event) {
-		if (!noMove) {
-			if (event.getCode() == KeyCode.W) {
+		if (!noMove && keyHold) {
+			if (keyPressed == 'W') {
+				move(0, -movementY);
+				setImage(imgUp);
 				if (getY() < progressY) {
 					// A further reach in the current life. 10 points awarded.
 					progressY = getY();
 					points += 10;
 					changeScore = true;
 				}
-				move(0, -movementY);
-				setImage(imgUp);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.A) {
+			} else if (keyPressed == 'A') {
 				move(-movementX, 0);
 				setImage(imgLeft);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.S) {
+			} else if (keyPressed == 'S') {
 				move(0, movementY);
 				setImage(imgDown);
 				keyHold = false;
-			} else if (event.getCode() == KeyCode.D) {
+			} else if (keyPressed == 'D') {
 				move(movementX, 0);
 				setImage(imgRight);
 				keyHold = false;
@@ -103,14 +107,13 @@ public class Frog extends Actor {
 			setX(0);
 		}
 
-		if (getX() > 600) {
+		if (getX() > 600 - imgSize) {
 			// Frog exceeds right boundary.
 			setX(600 - imgSize);
 		}
 
 		if (carDeath) {
 			// Frog crashed by car.
-			noMove = true; // Disable moving.
 			if ((now) % 11 == 0) {
 				deathAnimationFlag++;
 			}
@@ -124,13 +127,12 @@ public class Frog extends Actor {
 				setImage(new Image("file:resources/images/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
-				// Animation finished, set position back to origin.
 				deathReset();
 			}
 		}
 
 		if (waterDeath) {
-			noMove = true;
+			// Frog falls in water.
 			if ((now) % 11 == 0) {
 				deathAnimationFlag++;
 			}
@@ -151,59 +153,65 @@ public class Frog extends Actor {
 			}
 		}
 
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			// Frog crashed by a car.
-			carDeath = true;
-		}
-
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-			// Frog lands on a log.
-			Log currentLog = getIntersectingObjects(Log.class).get(0);
-			// Frog follows the log.
-			move(currentLog.getSpeed(), 0);
-		} else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			// Frog lands on a turtle.
-			Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
-			// Frog follows the turtle.
-			move(currentTurtle.getSpeed(), 0);
-		} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			// Frog lands on a wet turtle.
-			WetTurtle currentWetTurtle = getIntersectingObjects(WetTurtle.class).get(0);
-			if (currentWetTurtle.isSunk()) {
-				// Frog dies when the wet turtle sinks.
+		if (!noMove) {
+			if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+				// Frog crashed by a car.
+				carDeath = true;
+				noMove = true; // Disable moving.
+			} else if (getIntersectingObjects(Log.class).size() >= 1) {
+				// Frog lands on a log.
+				Log currentLog = getIntersectingObjects(Log.class).get(0);
+				// Frog follows the log.
+				move(currentLog.getSpeed(), 0);
+			} else if (getIntersectingObjects(Turtle.class).size() >= 1) {
+				// Frog lands on a turtle.
+				Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
+				// Frog follows the turtle.
+				move(currentTurtle.getSpeed(), 0);
+			} else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+				// Frog lands on a wet turtle.
+				WetTurtle currentWetTurtle = getIntersectingObjects(WetTurtle.class).get(0);
+				if (currentWetTurtle.isSunk()) {
+					// Frog dies when the wet turtle sinks.
+					waterDeath = true;
+					noMove = true; // Disable moving.
+				} else {
+					// Frog follows the wet turtle.
+					move(currentWetTurtle.getSpeed(), 0);
+				}
+			} else if (getIntersectingObjects(Slot.class).size() >= 1) {
+				// Frog reaches a slot.
+				if (getIntersectingObjects(Slot.class).get(0).isOccupied()) {
+					waterDeath = true;
+					noMove = true; // Disable moving.
+				} else {
+					getIntersectingObjects(Slot.class).get(0).setOccupied();
+					slotsOccupied++;
+					points += 50;
+					changeScore = true;
+					progressY = 800;
+					setX(300);
+					setY(705);
+				}
+			} else if (getY() < 413) {
+				// Frog enters the river but lands on nothing.
 				waterDeath = true;
-			} else {
-				// Frog follows the wet turtle.
-				move(currentWetTurtle.getSpeed(), 0);
+				noMove = true; // Disable moving.
 			}
-		} else if (getIntersectingObjects(Slot.class).size() >= 1) {
-			// Frog reaches a slot.
-			if (getIntersectingObjects(Slot.class).get(0).isActivated()) {
-				slotsOccupied--;
-				points -= 50;
-			}
-			points += 50;
-			changeScore = true;
-			progressY = 800;
-			getIntersectingObjects(Slot.class).get(0).setEnd();
-			slotsOccupied++;
-			setX(300);
-			setY(705);
-		} else if (getY() < 413) {
-			// Frog enters the river but lands on nothing.
-			waterDeath = true;
 		}
 	}
 
 	private void deathReset() {
-		// Clear death flags.
-		carDeath = waterDeath = false;
-		deathAnimationFlag = 0;
-		noMove = false;
 		// Reset frog image and position.
 		setImage(new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
+		// Reset key holding status.
+		keyHold = false;
+		// Clear death flags.
+		carDeath = waterDeath = false;
+		deathAnimationFlag = 0;
+		noMove = false;
 		// Update score.
 		if (points > 50) {
 			points -= 50;

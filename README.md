@@ -20,6 +20,7 @@ Bug: Points calculation error when frog enters the same slot multiple times.
 Bug: Points not awarded when holding W to progress forward.
 Fix: Points not awarded when holding W to progress forward: extract method refactoring.
 Bug: Points calculation error on certain deaths.
+<<<<<<< HEAD
 Bug: Boundary movement issues at right and bottom.
 
 24/11/19
@@ -27,3 +28,14 @@ Resources reorganised.
 General refactoring on concrete Actor classes.
 Extracted BackgroundMusic class from MyStage and applied with Singleton pattern.
 World class made concrete and MyStage class removed.
+=======
+Bug: Frog movement issues.
+
+23/11/19
+Fix: Points calculation error when frog enters the same slot multiple times.
+Fix: Frog movement issues.
+Fix: Points display and calculation error.
+
+24/11/19
+Fix: Turtles and WetTurtles disappear on the left edge.
+>>>>>>> fix_001

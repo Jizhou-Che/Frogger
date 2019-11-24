@@ -10,14 +10,14 @@ public class WetTurtle extends Actor {
 	private double speed;
 	private boolean sunk = false;
 
-	WetTurtle(int xpos, int ypos, int s, int w, int h) {
+	WetTurtle(int x, int y, int s, int w, int h) {
 		wetTurtle1 = new Image("file:resources/images/TurtleAnimation1.png", w, h, true, true);
 		wetTurtle2 = new Image("file:resources/images/TurtleAnimation2Wet.png", w, h, true, true);
 		wetTurtle3 = new Image("file:resources/images/TurtleAnimation3Wet.png", w, h, true, true);
 		wetTurtle4 = new Image("file:resources/images/TurtleAnimation4Wet.png", w, h, true, true);
 		setImage(wetTurtle2);
-		setX(xpos);
-		setY(ypos);
+		setX(x);
+		setY(y);
 		speed = s;
 	}
 
@@ -42,7 +42,7 @@ public class WetTurtle extends Actor {
 		if (getX() > 600 && speed > 0) {
 			setX(-200);
 		}
-		if (getX() < -75 && speed < 0) {
+		if (getX() < -150 && speed < 0) {
 			setX(600);
 		}
 	}
