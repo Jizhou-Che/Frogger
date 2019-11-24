@@ -26,3 +26,6 @@ Bug: Frog movement issues.
 Fix: Points calculation error when frog enters the same slot multiple times.
 Fix: Frog movement issues.
 Fix: Points display and calculation error.
+
+24/11/19
+Fix: Turtles and WetTurtles disappear on the left edge.

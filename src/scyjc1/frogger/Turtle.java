@@ -23,17 +23,17 @@ public class Turtle extends Actor {
 		if (getX() > 600 && speed > 0) {
 			setX(-200);
 		}
-		if (getX() < -75 && speed < 0) {
+		if (getX() < -150 && speed < 0) {
 			setX(600);
 		}
 	}
 
-	Turtle(int xpos, int ypos, int s, int w, int h) {
+	Turtle(int x, int y, int s, int w, int h) {
 		turtle1 = new Image("file:resources/TurtleAnimation1.png", w, h, true, true);
 		turtle2 = new Image("file:resources/TurtleAnimation2.png", w, h, true, true);
 		turtle3 = new Image("file:resources/TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
+		setX(x);
+		setY(y);
 		speed = s;
 		setImage(turtle2);
 	}
