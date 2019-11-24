@@ -25,3 +25,4 @@ Bug: Frog movement issues.
 23/11/19
 Fix: Points calculation error when frog enters the same slot multiple times.
 Fix: Frog movement issues.
+Fix: Points display and calculation error.

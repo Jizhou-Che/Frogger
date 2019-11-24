@@ -3,7 +3,7 @@ package scyjc1.frogger;
 import javafx.scene.image.Image;
 
 public class Slot extends Actor {
-	private boolean activated = false;
+	private boolean occupied = false;
 
 	@Override
 	public void act(long now) {
@@ -15,12 +15,12 @@ public class Slot extends Actor {
 		setImage(new Image("file:resources/End.png", 60, 60, true, true));
 	}
 
-	void setEnd() {
+	void setOccupied() {
 		setImage(new Image("file:resources/FrogEnd.png", 70, 70, true, true));
-		activated = true;
+		occupied = true;
 	}
 
-	boolean isActivated() {
-		return activated;
+	boolean isOccupied() {
+		return occupied;
 	}
 }
