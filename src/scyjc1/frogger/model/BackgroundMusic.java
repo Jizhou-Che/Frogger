@@ -1,4 +1,4 @@
-package scyjc1.frogger;
+package scyjc1.frogger.model;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

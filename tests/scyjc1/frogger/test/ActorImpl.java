@@ -1,4 +1,6 @@
-package scyjc1.frogger;
+package scyjc1.frogger.test;
+
+import scyjc1.frogger.model.Actor;
 
 public class ActorImpl extends Actor {
 

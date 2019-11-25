@@ -1,6 +1,8 @@
-package scyjc1.frogger;
+package scyjc1.frogger.test;
 
 import org.junit.jupiter.api.Test;
+import scyjc1.frogger.model.Log;
+import scyjc1.frogger.model.World;
 
 import static org.junit.jupiter.api.Assertions.*;
 

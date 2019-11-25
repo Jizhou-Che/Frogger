@@ -1,4 +1,4 @@
-package scyjc1.frogger;
+package scyjc1.frogger.model;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.value.ChangeListener;
@@ -12,10 +12,10 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 
-class World extends Pane {
+public class World extends Pane {
 	private AnimationTimer timer;
 
-	World() {
+	public World() {
 		sceneProperty().addListener(new ChangeListener<Scene>() {
 			@Override
 			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
@@ -73,7 +73,7 @@ class World extends Pane {
 		timer.stop();
 	}
 
-	void add(Actor actor) {
+	public void add(Actor actor) {
 		getChildren().add(actor);
 	}
 
@@ -81,7 +81,7 @@ class World extends Pane {
 		getChildren().remove(actor);
 	}
 
-	<A extends Actor> ArrayList<A> getObjects(Class<A> cls) {
+	public <A extends Actor> ArrayList<A> getObjects(Class<A> cls) {
 		ArrayList<A> objects = new ArrayList<A>();
 		for (Node n : getChildren()) {
 			if (cls.isInstance(n)) {

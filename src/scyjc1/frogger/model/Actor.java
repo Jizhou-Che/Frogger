@@ -1,4 +1,4 @@
-package scyjc1.frogger;
+package scyjc1.frogger.model;
 
 import javafx.scene.image.ImageView;
 
@@ -14,7 +14,7 @@ public abstract class Actor extends ImageView {
 	 * @param dx movement to the x direction, can be negative.
 	 * @param dy movement to the y direction, can be negative.
 	 */
-	void move(double dx, double dy) {
+	public void move(double dx, double dy) {
 		setX(getX() + dx);
 		setY(getY() + dy);
 	}
@@ -22,11 +22,11 @@ public abstract class Actor extends ImageView {
 	/**
 	 * @return the world the actor is in.
 	 */
-	World getWorld() {
+	public World getWorld() {
 		return (World) getParent();
 	}
 
-	<A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
+	public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
 		ArrayList<A> intersectingObjects = new ArrayList<A>();
 		for (A actor : getWorld().getObjects(cls)) {
 			if (actor != this && actor.intersects(this.getBoundsInLocal())) {
