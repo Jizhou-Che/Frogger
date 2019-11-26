@@ -19,14 +19,14 @@ public class Frog extends Actor {
 	private boolean changeScore = false; // Whether the score should change in this frame.
 	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
 
-	private Image imgUp = new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true);
-	private Image imgLeft = new Image("file:resources/images/froggerLeft.png", imgSize, imgSize, true, true);
-	private Image imgDown = new Image("file:resources/images/froggerDown.png", imgSize, imgSize, true, true);
-	private Image imgRight = new Image("file:resources/images/froggerRight.png", imgSize, imgSize, true, true);
-	private Image imgUpJump = new Image("file:resources/images/froggerUpJump.png", imgSize, imgSize, true, true);
-	private Image imgLeftJump = new Image("file:resources/images/froggerLeftJump.png", imgSize, imgSize, true, true);
-	private Image imgDownJump = new Image("file:resources/images/froggerDownJump.png", imgSize, imgSize, true, true);
-	private Image imgRightJump = new Image("file:resources/images/froggerRightJump.png", imgSize, imgSize, true, true);
+	private Image imgUp = new Image("file:resources/images/frogger_up.png", imgSize, imgSize, true, true);
+	private Image imgLeft = new Image("file:resources/images/frogger_left.png", imgSize, imgSize, true, true);
+	private Image imgDown = new Image("file:resources/images/frogger_down.png", imgSize, imgSize, true, true);
+	private Image imgRight = new Image("file:resources/images/frogger_right.png", imgSize, imgSize, true, true);
+	private Image imgUpJump = new Image("file:resources/images/frogger_up_jump.png", imgSize, imgSize, true, true);
+	private Image imgLeftJump = new Image("file:resources/images/frogger_left_jump.png", imgSize, imgSize, true, true);
+	private Image imgDownJump = new Image("file:resources/images/frogger_down_jump.png", imgSize, imgSize, true, true);
+	private Image imgRightJump = new Image("file:resources/images/frogger_right_jump.png", imgSize, imgSize, true, true);
 
 	public Frog(String imageLink) {
 		// Initialise image and position.
@@ -118,13 +118,13 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/images/cardeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/images/cardeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/images/cardeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
 				deathReset();
@@ -137,16 +137,16 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/images/waterdeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/images/waterdeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/images/waterdeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
-				setImage(new Image("file:resources/images/waterdeath4.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_4.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 5) {
 				deathReset();
@@ -203,7 +203,7 @@ public class Frog extends Actor {
 
 	private void deathReset() {
 		// Reset frog image and position.
-		setImage(new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true));
+		setImage(new Image("file:resources/images/frogger_up.png", imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
 		// Reset key holding status.

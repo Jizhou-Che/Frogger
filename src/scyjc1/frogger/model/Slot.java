@@ -12,11 +12,11 @@ public class Slot extends Actor {
 	public Slot(int x, int y) {
 		setX(x);
 		setY(y);
-		setImage(new Image("file:resources/images/End.png", 60, 60, true, true));
+		setImage(new Image("file:resources/images/slot.png", 60, 60, true, true));
 	}
 
 	void setOccupied() {
-		setImage(new Image("file:resources/images/FrogEnd.png", 70, 70, true, true));
+		setImage(new Image("file:resources/images/slot_occupied.png", 70, 70, true, true));
 		occupied = true;
 	}
 
