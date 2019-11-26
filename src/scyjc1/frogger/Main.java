@@ -7,12 +7,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	public static Stage mainStage;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
+		mainStage = primaryStage;
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
 			Scene scene = new Scene(root, 600, 800);
@@ -20,6 +23,7 @@ public class Main extends Application {
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Frogger");
 			primaryStage.show();
+			root.requestFocus();
 		} catch(Exception e) {
 			//
 		}

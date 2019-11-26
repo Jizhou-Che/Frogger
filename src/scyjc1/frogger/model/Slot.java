@@ -9,7 +9,7 @@ public class Slot extends Actor {
 	public void act(long now) {
 	}
 
-	Slot(int x, int y) {
+	public Slot(int x, int y) {
 		setX(x);
 		setY(y);
 		setImage(new Image("file:resources/images/End.png", 60, 60, true, true));

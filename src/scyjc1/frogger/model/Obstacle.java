@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 public class Obstacle extends Actor {
 	private int speed;
 
-	Obstacle(String imageLink, int x, int y, int s, int w, int h) {
+	public Obstacle(String imageLink, int x, int y, int s, int w, int h) {
 		setImage(new Image(imageLink, w, h, true, true));
 		setX(x);
 		setY(y);

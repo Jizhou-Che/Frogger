@@ -8,7 +8,7 @@ public class Digit extends Actor {
 	public void act(long now) {
 	}
 
-	Digit(int n, int size, int x, int y) {
+	public Digit(int n, int size, int x, int y) {
 		setImage(new Image("file:resources/images/" + n + ".png", size, size, true, true));
 		setX(x);
 		setY(y);

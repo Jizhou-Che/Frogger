@@ -28,7 +28,7 @@ public class Frog extends Actor {
 	private Image imgDownJump = new Image("file:resources/images/froggerDownJump.png", imgSize, imgSize, true, true);
 	private Image imgRightJump = new Image("file:resources/images/froggerRightJump.png", imgSize, imgSize, true, true);
 
-	Frog(String imageLink) {
+	public Frog(String imageLink) {
 		// Initialise image and position.
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(300);
@@ -222,14 +222,14 @@ public class Frog extends Actor {
 	/**
 	 * @return boolean indicating whether all slots are occupied.
 	 */
-	boolean gameWon() {
+	public boolean gameWon() {
 		return slotsOccupied == 5;
 	}
 
 	/**
 	 * @return the current points as integer.
 	 */
-	int getPoints() {
+	public int getPoints() {
 		return points;
 	}
 
@@ -238,7 +238,7 @@ public class Frog extends Actor {
 	 * <p>
 	 * Resets the pending status as a side effect.
 	 */
-	boolean changeScore() {
+	public boolean changeScore() {
 		if (changeScore) {
 			changeScore = false;
 			return true;
