@@ -64,12 +64,12 @@ public class World extends Pane {
 		};
 	}
 
-	void start() {
+	public void start() {
 		createTimer();
 		timer.start();
 	}
 
-	void stop() {
+	public void stop() {
 		timer.stop();
 	}
 
@@ -77,7 +77,7 @@ public class World extends Pane {
 		getChildren().add(actor);
 	}
 
-	void remove(Actor actor) {
+	public void remove(Actor actor) {
 		getChildren().remove(actor);
 	}
 

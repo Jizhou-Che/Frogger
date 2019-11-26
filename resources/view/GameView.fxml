@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import scyjc1.frogger.model.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<World fx:id="world" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
+    <children>
+    <ImageView fitHeight="800.0" fitWidth="600.0">
+        <image>
+            <Image url="@../images/game_background.png" />
+        </image>
+    </ImageView>
+    </children>
+</World>

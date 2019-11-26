@@ -2,11 +2,15 @@ package scyjc1.frogger.controller;
 
 import javafx.fxml.FXML;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import scyjc1.frogger.Main;
 
 public class HomeController {
 	@FXML
@@ -54,6 +58,16 @@ public class HomeController {
 				break;
 			case ENTER:
 				switch (optionNew) {
+					case 0:
+						// Start game.
+						try {
+							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
+							Scene gameScene = new Scene(gameLoader, 600, 800);
+							Main.mainStage.setScene(gameScene);
+						} catch(Exception e) {
+							//
+						}
+						break;
 					case 3:
 						// Switch music.
 						switchMusic();

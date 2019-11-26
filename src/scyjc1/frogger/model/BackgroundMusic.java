@@ -9,25 +9,25 @@ import java.io.File;
  * The background music controller.
  * Singleton pattern applied.
  */
-class BackgroundMusic {
+public class BackgroundMusic {
 	private static BackgroundMusic bgm;
 	private static final MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/sounds/theme.mp3").toURI().toString()));
 
 	private BackgroundMusic() {}
 
-	static BackgroundMusic getBgm() {
+	public static BackgroundMusic getBgm() {
 		if (bgm == null) {
 			bgm = new BackgroundMusic();
 		}
 		return bgm;
 	}
 
-	void play() {
+	public void play() {
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 	}
 
-	void stop() {
+	public void stop() {
 		mediaPlayer.stop();
 	}
 }

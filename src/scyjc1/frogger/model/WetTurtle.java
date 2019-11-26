@@ -10,7 +10,7 @@ public class WetTurtle extends Actor {
 	private double speed;
 	private boolean sunk = false;
 
-	WetTurtle(int x, int y, int s, int w, int h) {
+	public WetTurtle(int x, int y, int s, int w, int h) {
 		wetTurtle1 = new Image("file:resources/images/TurtleAnimation1.png", w, h, true, true);
 		wetTurtle2 = new Image("file:resources/images/TurtleAnimation2Wet.png", w, h, true, true);
 		wetTurtle3 = new Image("file:resources/images/TurtleAnimation3Wet.png", w, h, true, true);

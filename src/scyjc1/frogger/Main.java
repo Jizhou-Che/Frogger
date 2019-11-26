@@ -4,16 +4,18 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+	public static Stage mainStage;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) {
+		mainStage = primaryStage;
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
 			Scene scene = new Scene(root, 600, 800);
