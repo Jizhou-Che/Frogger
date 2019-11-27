@@ -23,8 +23,9 @@ public class World extends Pane {
 					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
 						@Override
 						public void handle(KeyEvent event) {
-							if (getOnKeyReleased() != null)
+							if (getOnKeyReleased() != null) {
 								getOnKeyReleased().handle(event);
+							}
 							List<Actor> myActors = getObjects(Actor.class);
 							for (Actor anActor : myActors) {
 								if (anActor.getOnKeyReleased() != null) {
@@ -37,8 +38,9 @@ public class World extends Pane {
 					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
 						@Override
 						public void handle(KeyEvent event) {
-							if (getOnKeyPressed() != null)
+							if (getOnKeyPressed() != null) {
 								getOnKeyPressed().handle(event);
+							}
 							List<Actor> myActors = getObjects(Actor.class);
 							for (Actor anActor : myActors) {
 								if (anActor.getOnKeyPressed() != null) {
@@ -71,6 +73,10 @@ public class World extends Pane {
 
 	public void stop() {
 		timer.stop();
+	}
+
+	public void resume() {
+		timer.start();
 	}
 
 	public void add(Actor actor) {

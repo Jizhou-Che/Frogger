@@ -27,6 +27,10 @@ public class BackgroundMusic {
 		mediaPlayer.play();
 	}
 
+	public void pause() {
+		mediaPlayer.pause();
+	}
+
 	public void stop() {
 		mediaPlayer.stop();
 	}

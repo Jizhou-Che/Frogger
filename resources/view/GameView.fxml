@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 
 <?import javafx.scene.layout.HBox?>
-<World fx:id="world" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
+<World fx:id="world" onKeyPressed="#keyPressed"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
     <children>
         <ImageView fitHeight="800.0" fitWidth="600.0">
             <image>

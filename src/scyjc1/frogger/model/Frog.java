@@ -291,4 +291,8 @@ public class Frog extends Actor {
 			s.setEmpty();
 		}
 	}
+
+	public void toggleNoMove() {
+		noMove = !noMove;
+	}
 }
