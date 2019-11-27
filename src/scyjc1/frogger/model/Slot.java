@@ -20,6 +20,11 @@ public class Slot extends Actor {
 		occupied = true;
 	}
 
+	void setEmpty() {
+		setImage(new Image("file:resources/images/slot.png", 70, 70, true, true));
+		occupied = false;
+	}
+
 	boolean isOccupied() {
 		return occupied;
 	}

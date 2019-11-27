@@ -3,11 +3,14 @@ package scyjc1.frogger.controller;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.HBox;
 import scyjc1.frogger.model.*;
 
 public class GameController {
 	@FXML
 	private World world;
+	@FXML
+	public HBox lifeBox;
 
 	private AnimationTimer timer;
 	private Frog frog;
@@ -78,17 +81,24 @@ public class GameController {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+				if (frog.changeLives()) {
+					setLivesNumber(frog.getLives());
+				}
 				if (frog.changeScore()) {
-					setNumber(frog.getPoints());
+					setScoreNumber(frog.getScore());
 				}
 				if (frog.gameWon()) {
+					// Clear slots.
+					frog.clear_slots();
+				}
+				if (frog.gameOver()) {
 					bgm.stop();
 					stop();
 					world.stop();
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("You Have Won The Game!");
-					alert.setHeaderText("Your High Score: " + frog.getPoints() + "!");
-					alert.setContentText("Highest Possible Score: 800");
+					alert.setTitle("GAME OVER");
+					alert.setHeaderText("Score: " + frog.getScore());
+					alert.setContentText("Highest Possible Score: Infinity");
 					alert.show();
 				}
 			}
@@ -105,17 +115,23 @@ public class GameController {
 		timer.stop();
 	}
 
-	private void setNumber(int n) {
+	private void setLivesNumber(int lives) {
+		for (int i = 2; i >= lives; i--) {
+			lifeBox.getChildren().get(i).setVisible(false);
+		}
+	}
+
+	private void setScoreNumber(int score) {
 		// Clear digits.
 		for (Digit d : world.getObjects(Digit.class)) {
 			world.remove(d);
 		}
 		// Set new digits.
 		int shift = 0;
-		while (n > 0) {
-			int d = n / 10;
-			int k = n - d * 10;
-			n = d;
+		while (score > 0) {
+			int d = score / 10;
+			int k = score - d * 10;
+			score = d;
 			world.add(new Digit(k, 30, 360 - shift, 25));
 			shift += 30;
 		}
