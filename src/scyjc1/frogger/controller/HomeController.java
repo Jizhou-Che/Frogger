@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -36,7 +37,7 @@ public class HomeController {
 	}
 
 	@FXML
-	public void keyPressed(javafx.scene.input.KeyEvent event) {
+	private void keyPressed(KeyEvent event) {
 		optionOld = optionNew;
 		switchOption(event.getCode());
 	}
@@ -63,11 +64,22 @@ public class HomeController {
 						try {
 							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
 							Scene gameScene = new Scene(gameLoader, 600, 800);
+							gameScene.getRoot().requestFocus();
 							Main.mainStage.setScene(gameScene);
 						} catch(Exception e) {
 							//
 						}
 						break;
+					case 1:
+						// Go to leaderboard.
+						try {
+							Parent leaderboardLoader = FXMLLoader.load(getClass().getResource("/view/LeaderboardView.fxml"));
+							Scene leaderboardScene = new Scene(leaderboardLoader, 600, 800);
+							leaderboardScene.getRoot().requestFocus();
+							Main.mainStage.setScene(leaderboardScene);
+						} catch(Exception e) {
+							//
+						}
 					case 3:
 						// Switch music.
 						switchMusic();

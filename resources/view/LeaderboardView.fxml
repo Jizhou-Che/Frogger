@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.LeaderboardController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="600.0">
+         <image>
+            <Image url="@../images/leaderboard_background.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="leaderboard" fill="#ffe500" layoutX="165.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" textAlignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <Text fx:id="home" fill="#ffe500" layoutX="176.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Home &lt;" textAlignment="CENTER" wrappingWidth="250.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
