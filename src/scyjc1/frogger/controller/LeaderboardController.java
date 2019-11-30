@@ -18,10 +18,8 @@ public class LeaderboardController {
 
 	@FXML
 	private void initialize() {
-		// Set font.
-		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 25);
-		leaderboard.setFont(prstartk);
-		home.setFont(prstartk);
+		// Load font.
+		Font prstartkLarge = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 	}
 
 	@FXML

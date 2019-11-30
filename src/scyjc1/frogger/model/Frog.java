@@ -221,7 +221,7 @@ public class Frog extends Actor {
 		deathAnimationFlag = 0;
 		noMove = false;
 		// Update score.
-		if (score > 50) {
+		if (score >= 50) {
 			score -= 50;
 			changeScore = true;
 		}

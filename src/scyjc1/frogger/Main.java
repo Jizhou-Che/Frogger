@@ -17,7 +17,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		mainStage = primaryStage;
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
+//			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/HighScoreView.fxml"));
 			Scene scene = new Scene(root, 600, 800);
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);

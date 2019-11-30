@@ -64,7 +64,6 @@ public class HomeController {
 						try {
 							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
 							Scene gameScene = new Scene(gameLoader, 600, 800);
-							gameScene.getRoot().requestFocus();
 							Main.mainStage.setScene(gameScene);
 						} catch(Exception e) {
 							//
