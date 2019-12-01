@@ -1,14 +1,8 @@
 package scyjc1.frogger.model;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,38 +10,30 @@ public class World extends Pane {
 	private AnimationTimer timer;
 
 	public World() {
-		sceneProperty().addListener(new ChangeListener<Scene>() {
-			@Override
-			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-				if (newValue != null) {
-					newValue.setOnKeyReleased(new EventHandler<KeyEvent>() {
-						@Override
-						public void handle(KeyEvent event) {
-							if (getOnKeyReleased() != null)
-								getOnKeyReleased().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor : myActors) {
-								if (anActor.getOnKeyReleased() != null) {
-									anActor.getOnKeyReleased().handle(event);
-								}
-							}
+		sceneProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				newValue.setOnKeyPressed(event -> {
+					if (getOnKeyPressed() != null) {
+						getOnKeyPressed().handle(event);
+					}
+					List<Actor> myActors = getObjects(Actor.class);
+					for (Actor anActor : myActors) {
+						if (anActor.getOnKeyPressed() != null) {
+							anActor.getOnKeyPressed().handle(event);
 						}
-					});
-
-					newValue.setOnKeyPressed(new EventHandler<KeyEvent>() {
-						@Override
-						public void handle(KeyEvent event) {
-							if (getOnKeyPressed() != null)
-								getOnKeyPressed().handle(event);
-							List<Actor> myActors = getObjects(Actor.class);
-							for (Actor anActor : myActors) {
-								if (anActor.getOnKeyPressed() != null) {
-									anActor.getOnKeyPressed().handle(event);
-								}
-							}
+					}
+				});
+				newValue.setOnKeyReleased(event -> {
+					if (getOnKeyReleased() != null) {
+						getOnKeyReleased().handle(event);
+					}
+					List<Actor> myActors = getObjects(Actor.class);
+					for (Actor anActor : myActors) {
+						if (anActor.getOnKeyReleased() != null) {
+							anActor.getOnKeyReleased().handle(event);
 						}
-					});
-				}
+					}
+				});
 			}
 		});
 	}
@@ -71,6 +57,10 @@ public class World extends Pane {
 
 	public void stop() {
 		timer.stop();
+	}
+
+	public void resume() {
+		timer.start();
 	}
 
 	public void add(Actor actor) {

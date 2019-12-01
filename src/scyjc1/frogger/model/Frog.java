@@ -6,7 +6,8 @@ import javafx.scene.input.KeyEvent;
 
 public class Frog extends Actor {
 	private int imgSize = 40;
-	private int points = 0;
+	private int lives = 3;
+	private int score = 0;
 	private double movementX = 10.666666 * 2;
 	private double movementY = 13.333333 * 2;
 	private int slotsOccupied = 0; // The number of occupied slots.
@@ -16,17 +17,18 @@ public class Frog extends Actor {
 	private boolean carDeath = false; // Whether the frog is dead because of a car.
 	private boolean waterDeath = false; // Whether the frog is dead because of water.
 	private int deathAnimationFlag = 0; // The stage of death animation.
-	private boolean changeScore = false; // Whether the score should change in this frame.
+	private boolean changeLives = false; // Whether the number of lives should be redisplayed in this frame.
+	private boolean changeScore = false; // Whether the score should be redisplayed in this frame.
 	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
 
-	private Image imgUp = new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true);
-	private Image imgLeft = new Image("file:resources/images/froggerLeft.png", imgSize, imgSize, true, true);
-	private Image imgDown = new Image("file:resources/images/froggerDown.png", imgSize, imgSize, true, true);
-	private Image imgRight = new Image("file:resources/images/froggerRight.png", imgSize, imgSize, true, true);
-	private Image imgUpJump = new Image("file:resources/images/froggerUpJump.png", imgSize, imgSize, true, true);
-	private Image imgLeftJump = new Image("file:resources/images/froggerLeftJump.png", imgSize, imgSize, true, true);
-	private Image imgDownJump = new Image("file:resources/images/froggerDownJump.png", imgSize, imgSize, true, true);
-	private Image imgRightJump = new Image("file:resources/images/froggerRightJump.png", imgSize, imgSize, true, true);
+	private Image imgUp = new Image("file:resources/images/frogger_up.png", imgSize, imgSize, true, true);
+	private Image imgLeft = new Image("file:resources/images/frogger_left.png", imgSize, imgSize, true, true);
+	private Image imgDown = new Image("file:resources/images/frogger_down.png", imgSize, imgSize, true, true);
+	private Image imgRight = new Image("file:resources/images/frogger_right.png", imgSize, imgSize, true, true);
+	private Image imgUpJump = new Image("file:resources/images/frogger_up_jump.png", imgSize, imgSize, true, true);
+	private Image imgLeftJump = new Image("file:resources/images/frogger_left_jump.png", imgSize, imgSize, true, true);
+	private Image imgDownJump = new Image("file:resources/images/frogger_down_jump.png", imgSize, imgSize, true, true);
+	private Image imgRightJump = new Image("file:resources/images/frogger_right_jump.png", imgSize, imgSize, true, true);
 
 	public Frog(String imageLink) {
 		// Initialise image and position.
@@ -75,7 +77,7 @@ public class Frog extends Actor {
 				if (getY() < progressY) {
 					// A further reach in the current life. 10 points awarded.
 					progressY = getY();
-					points += 10;
+					score += 10;
 					changeScore = true;
 				}
 				keyHold = false;
@@ -118,13 +120,13 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/images/cardeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/images/cardeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/images/cardeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/car_death_animation_3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
 				deathReset();
@@ -137,16 +139,16 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:resources/images/waterdeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_1.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:resources/images/waterdeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_2.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:resources/images/waterdeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_3.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 4) {
-				setImage(new Image("file:resources/images/waterdeath4.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:resources/images/water_death_animation_4.png", imgSize, imgSize, true, true));
 			}
 			if (deathAnimationFlag == 5) {
 				deathReset();
@@ -187,7 +189,7 @@ public class Frog extends Actor {
 				} else {
 					getIntersectingObjects(Slot.class).get(0).setOccupied();
 					slotsOccupied++;
-					points += 50;
+					score += 50;
 					changeScore = true;
 					progressY = 800;
 					setX(300);
@@ -201,9 +203,15 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Resets death associated data.
+	 */
 	private void deathReset() {
+		// Decrement number of lives.
+		lives--;
+		changeLives = true;
 		// Reset frog image and position.
-		setImage(new Image("file:resources/images/froggerUp.png", imgSize, imgSize, true, true));
+		setImage(new Image("file:resources/images/frogger_up.png", imgSize, imgSize, true, true));
 		setX(300);
 		setY(705);
 		// Reset key holding status.
@@ -213,8 +221,8 @@ public class Frog extends Actor {
 		deathAnimationFlag = 0;
 		noMove = false;
 		// Update score.
-		if (points > 50) {
-			points -= 50;
+		if (score >= 50) {
+			score -= 50;
 			changeScore = true;
 		}
 	}
@@ -227,15 +235,42 @@ public class Frog extends Actor {
 	}
 
 	/**
-	 * @return the current points as integer.
+	 * @return boolean indicating whether all lives are spent.
 	 */
-	public int getPoints() {
-		return points;
+	public boolean gameOver() {
+		return lives == 0;
 	}
 
 	/**
-	 * @return whether an update to the score digits is pending.
-	 * <p>
+	 * @return the current number of lives as an integer.
+	 */
+	public int getLives() {
+		return lives;
+	}
+
+	/**
+	 * @return the current points as an integer.
+	 */
+	public int getScore() {
+		return score;
+	}
+
+	/**
+	 * @return boolean indicating whether an update to the life images is pending.
+	 *
+	 * Resets the pending status as a side effect.
+	 */
+	public boolean changeLives() {
+		if (changeLives) {
+			changeLives = false;
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @return boolean indicating whether an update to the score digits is pending.
+	 *
 	 * Resets the pending status as a side effect.
 	 */
 	public boolean changeScore() {
@@ -244,5 +279,20 @@ public class Frog extends Actor {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Resets all slots to empty.
+	 */
+	public void clear_slots() {
+		slotsOccupied = 0;
+		for (Actor a : getWorld().getObjects(Slot.class)) {
+			Slot s = (Slot) a;
+			s.setEmpty();
+		}
+	}
+
+	public void toggleNoMove() {
+		noMove = !noMove;
 	}
 }

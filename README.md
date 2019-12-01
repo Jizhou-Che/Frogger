@@ -40,3 +40,11 @@ Start adopting the MVC pattern.
 26/11/19
 Preliminary design to the Home view.
 Game view generally adapted to the MVC pattern.
+Refined pictures on Game view.
+
+27/11/19
+Feature: Making the game infinite and adding life limits to the frog.
+Feature: Adding pausing functionality to the game.
+
+29/11/19
+Preliminary design to the High Score view.

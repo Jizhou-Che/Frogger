@@ -1,0 +1,31 @@
+Text {
+    -fx-font-family: "Press Start K";
+    -fx-text-alignment: center;
+}
+
+ListView {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-font-family: "Press Start K";
+    -fx-font-size: 15;
+    -fx-text-fill: #ffe500;
+    -fx-cell-size: 50;
+    -fx-text-overrun: hidden;
+}
+
+.list-view .scroll-bar,
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+    -fx-opacity: 0;
+}
+
+#title {
+    -fx-font-size: 30;
+}
+
+#home {
+    -fx-font-size: 25;
+}

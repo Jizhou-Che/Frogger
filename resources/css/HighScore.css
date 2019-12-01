@@ -1,0 +1,20 @@
+Text {
+    -fx-font-family: "Press Start K";
+    -fx-text-alignment: center;
+}
+
+#title {
+    -fx-font-size: 30;
+}
+
+#label1 {
+    -fx-font-size: 20;
+}
+
+#label2 {
+    -fx-font-size: 20;
+}
+
+#name {
+    -fx-font-size: 25;
+}
