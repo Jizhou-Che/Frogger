@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import scyjc1.frogger.Main;
@@ -27,6 +26,7 @@ public class GameController {
 	private Frog frog;
 	private BackgroundMusic bgm = BackgroundMusic.getBgm();
 	private boolean gamePaused = false;
+	private boolean musicMuted = false;
 	static int score;
 
 	@FXML
@@ -66,7 +66,7 @@ public class GameController {
 		world.add(new Obstacle("file:resources/images/truck_2_right.png", 500, 540, 1, 200, 200));
 		world.add(new Obstacle("file:resources/images/car_1_left.png", 500, 490, -5, 50, 50));
 		// Add frog.
-		frog = new Frog("file:resources/images/frogger_up.png");
+		frog = new Frog();
 		world.add(frog);
 		// Initialise score.
 		setScoreNumber(0);
@@ -76,13 +76,23 @@ public class GameController {
 
 	@FXML
 	public void keyPressed(KeyEvent event) {
-		if (event.getCode() == KeyCode.SPACE) {
-			if (gamePaused) {
-				resumeGame();
-			} else {
-				pauseGame();
-			}
-			gamePaused = !gamePaused;
+		switch (event.getCode()) {
+			case SPACE:
+				if (gamePaused) {
+					resumeGame();
+				} else {
+					pauseGame();
+				}
+				gamePaused = !gamePaused;
+				break;
+			case M:
+				if (musicMuted) {
+					bgm.unmute();
+				} else {
+					bgm.mute();
+				}
+				musicMuted = !musicMuted;
+				break;
 		}
 	}
 
@@ -109,28 +119,36 @@ public class GameController {
 	}
 
 	private void startGame() {
-		bgm.play();
+		if (HomeController.musicOn) {
+			bgm.play();
+		}
 		createTimer();
 		timer.start();
 		world.start();
 	}
 
 	private void pauseGame() {
-		bgm.pause();
+		if (HomeController.musicOn) {
+			bgm.pause();
+		}
 		timer.stop();
 		frog.toggleNoMove();
 		world.stop();
 	}
 
 	private void resumeGame() {
-		bgm.play();
+		if (HomeController.musicOn) {
+			bgm.play();
+		}
 		timer.start();
 		frog.toggleNoMove();
 		world.resume();
 	}
 
 	private void stopGame() {
-		bgm.stop();
+		if (HomeController.musicOn) {
+			bgm.stop();
+		}
 		timer.stop();
 		frog.toggleNoMove();
 		world.stop();

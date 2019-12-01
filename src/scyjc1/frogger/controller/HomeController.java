@@ -19,7 +19,7 @@ public class HomeController {
 
 	private int optionOld = 0;
 	private int optionNew = 0;
-	private boolean musicOn = true;
+	static boolean musicOn = true;
 
 	@FXML
 	private void initialize() {
@@ -33,6 +33,11 @@ public class HomeController {
 				t.setScaleX(1.2);
 				t.setScaleY(1.2);
 			}
+		}
+		// Set music status.
+		if (!musicOn) {
+			Text t = (Text) optionBox.getChildren().get(3);
+			t.setText("MUSIC: OFF");
 		}
 	}
 
@@ -79,6 +84,7 @@ public class HomeController {
 						} catch(Exception e) {
 							//
 						}
+						break;
 					case 3:
 						// Switch music.
 						switchMusic();
