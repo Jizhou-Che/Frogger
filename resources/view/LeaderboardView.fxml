@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Leaderboard.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.LeaderboardController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="600.0">
+         <image>
+            <Image url="@../images/leaderboard_background.png" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="800.0" prefWidth="600.0">
+         <children>
+            <Text id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" wrappingWidth="600.0">
+               <VBox.margin>
+                  <Insets top="80.0" />
+               </VBox.margin></Text>
+            <HBox prefHeight="530.0" prefWidth="600.0">
+               <children>
+                  <ListView id="score" fx:id="score" focusTraversable="false" prefHeight="530.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin></ListView>
+                  <ListView id="date" fx:id="date" focusTraversable="false" prefHeight="530.0" prefWidth="150.0" />
+                  <ListView id="name" fx:id="name" focusTraversable="false" prefHeight="530.0" prefWidth="280.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></ListView>
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <Text id="home" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Home &lt;" wrappingWidth="600.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin></Text>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
