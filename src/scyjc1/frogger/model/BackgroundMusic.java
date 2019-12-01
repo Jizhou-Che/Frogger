@@ -25,6 +25,7 @@ public class BackgroundMusic {
 	public void play() {
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
+		mediaPlayer.setVolume(0.5);
 	}
 
 	public void pause() {
@@ -33,5 +34,13 @@ public class BackgroundMusic {
 
 	public void stop() {
 		mediaPlayer.stop();
+	}
+
+	public void mute() {
+		mediaPlayer.setMute(true);
+	}
+
+	public void unmute() {
+		mediaPlayer.setMute(false);
 	}
 }

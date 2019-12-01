@@ -30,9 +30,9 @@ public class Frog extends Actor {
 	private Image imgDownJump = new Image("file:resources/images/frogger_down_jump.png", imgSize, imgSize, true, true);
 	private Image imgRightJump = new Image("file:resources/images/frogger_right_jump.png", imgSize, imgSize, true, true);
 
-	public Frog(String imageLink) {
+	public Frog() {
 		// Initialise image and position.
-		setImage(new Image(imageLink, imgSize, imgSize, true, true));
+		setImage(imgUp);
 		setX(300);
 		setY(705);
 
