@@ -1,7 +1,7 @@
 package scyjc1.frogger.controller;
 
-import javafx.fxml.FXML;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -65,8 +65,8 @@ public class HomeController {
 							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
 							Scene gameScene = new Scene(gameLoader, 600, 800);
 							Main.mainStage.setScene(gameScene);
-						} catch(Exception e) {
-							//
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 						break;
 					case 1:
@@ -76,8 +76,8 @@ public class HomeController {
 							Scene leaderboardScene = new Scene(leaderboardLoader, 600, 800);
 							leaderboardScene.getRoot().requestFocus();
 							Main.mainStage.setScene(leaderboardScene);
-						} catch(Exception e) {
-							//
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					case 3:
 						// Switch music.
@@ -86,6 +86,7 @@ public class HomeController {
 					case 4:
 						// Quit game.
 						Platform.exit();
+						System.exit(0);
 						break;
 				}
 				break;

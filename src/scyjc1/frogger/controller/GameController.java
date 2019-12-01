@@ -135,11 +135,6 @@ public class GameController {
 		frog.toggleNoMove();
 		world.stop();
 		score = frog.getScore();
-//		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//		alert.setTitle("GAME OVER");
-//		alert.setHeaderText("Score: " + frog.getScore());
-//		alert.setContentText("Highest Possible Score: Infinity");
-//		alert.show();
 		// Check for high score.
 		try {
 			File dataDirectory = new File(".data");

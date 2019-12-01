@@ -48,3 +48,6 @@ Feature: Adding pausing functionality to the game.
 
 29/11/19
 Preliminary design to the High Score view.
+
+01/12/19
+Feature: leaderboard system.
