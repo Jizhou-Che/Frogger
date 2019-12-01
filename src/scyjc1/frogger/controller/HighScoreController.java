@@ -66,15 +66,19 @@ public class HighScoreController {
 							try {
 								File dataDirectory = new File(".data");
 								File leaderboardFile = new File(dataDirectory, "leaderboard.csv");
-								if (!leaderboardFile.exists()) {
-									throw new Exception("Failed to access leaderboard file.");
+								if (!dataDirectory.mkdir()) {
+									if (!dataDirectory.exists()) {
+										throw new Exception("Failed to create the data directory.");
+									}
+								}
+								if (!leaderboardFile.createNewFile()) {
+									if (!leaderboardFile.exists()) {
+										throw new Exception("Failed to create the leaderboard file.");
+									}
 								}
 								List<String> records = Files.readAllLines(Paths.get(".data/leaderboard.csv"), StandardCharsets.UTF_8);
 								records.add(GameController.score + "," + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy")) + "," + name.getText().substring(2, name.getText().length() - 2));
 								records.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, s.indexOf(','))), Comparator.reverseOrder()));
-								//
-								System.out.println(records);
-								//
 								if (records.size() >= 10) {
 									Files.write(Paths.get(".data/leaderboard.csv"), records.subList(0, 10));
 								} else {
@@ -90,7 +94,7 @@ public class HighScoreController {
 								leaderboardScene.getRoot().requestFocus();
 								Main.mainStage.setScene(leaderboardScene);
 							} catch (Exception e) {
-								//
+								e.printStackTrace();
 							}
 						}
 						break;
