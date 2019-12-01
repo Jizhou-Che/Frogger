@@ -50,4 +50,6 @@ Feature: Adding pausing functionality to the game.
 Preliminary design to the High Score view.
 
 01/12/19
-Feature: leaderboard system.
+Feature: Leaderboard system implemented.
+Feature: Muting functionality added.
+Home view adapted to css.

@@ -3,7 +3,6 @@ package scyjc1.frogger.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -24,20 +23,13 @@ public class HomeController {
 	@FXML
 	private void initialize() {
 		// Set font.
-		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 25);
-		for (Node n : optionBox.getChildren()) {
-			Text t = (Text) n;
-			t.setFont(prstartk);
-			// Set style for start.
-			if (n == optionBox.getChildren().get(0)) {
-				t.setScaleX(1.2);
-				t.setScaleY(1.2);
-			}
-		}
+		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
+		// Set style for start.
+		optionBox.getChildren().get(0).getStyleClass().add("active");
 		// Set music status.
 		if (!musicOn) {
-			Text t = (Text) optionBox.getChildren().get(3);
-			t.setText("MUSIC: OFF");
+			Text musicText = (Text) optionBox.getChildren().get(3);
+			musicText.setText("MUSIC: OFF");
 		}
 	}
 
@@ -101,15 +93,13 @@ public class HomeController {
 		// Set text.
 		if (optionNew != optionOld) {
 			// Reset original option text.
-			Text tOld = (Text) optionBox.getChildren().get(optionOld);
-			tOld.setText(tOld.getText().substring(2, tOld.getText().length() - 2));
-			tOld.setScaleX(1);
-			tOld.setScaleY(1);
+			Text textOld = (Text) optionBox.getChildren().get(optionOld);
+			textOld.setText(textOld.getText().substring(2, textOld.getText().length() - 2));
+			textOld.getStyleClass().clear();
 			// Set new option text.
-			Text tNew = (Text) optionBox.getChildren().get(optionNew);
-			tNew.setText("> " + tNew.getText() + " <");
-			tNew.setScaleX(1.2);
-			tNew.setScaleY(1.2);
+			Text textNew = (Text) optionBox.getChildren().get(optionNew);
+			textNew.setText("> " + textNew.getText() + " <");
+			textNew.getStyleClass().add("active");
 		}
 	}
 
