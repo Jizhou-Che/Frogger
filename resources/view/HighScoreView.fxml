@@ -16,7 +16,7 @@
       </ImageView>
       <VBox prefHeight="800.0" prefWidth="600.0">
          <children>
-            <Text id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGH SCORE" wrappingWidth="600.0">
+            <Text fx:id="title" id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="HIGH SCORE" wrappingWidth="600.0">
                <VBox.margin>
                   <Insets top="80.0" />
                </VBox.margin></Text>

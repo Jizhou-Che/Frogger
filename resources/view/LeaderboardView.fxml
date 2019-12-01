@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
@@ -16,13 +18,29 @@
       </ImageView>
       <VBox prefHeight="800.0" prefWidth="600.0">
          <children>
-            <Text fx:id="leaderboard" id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" wrappingWidth="600.0">
+            <Text id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD" wrappingWidth="600.0">
                <VBox.margin>
                   <Insets top="80.0" />
                </VBox.margin></Text>
-            <Text fx:id="home" id="home" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Home &lt;" wrappingWidth="600.0">
+            <HBox prefHeight="530.0" prefWidth="600.0">
+               <children>
+                  <ListView id="score" fx:id="score" focusTraversable="false" prefHeight="530.0" prefWidth="120.0">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin></ListView>
+                  <ListView id="date" fx:id="date" focusTraversable="false" prefHeight="530.0" prefWidth="150.0" />
+                  <ListView id="name" fx:id="name" focusTraversable="false" prefHeight="530.0" prefWidth="280.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></ListView>
+               </children>
                <VBox.margin>
-                  <Insets top="600.0" />
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <Text id="home" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; Home &lt;" wrappingWidth="600.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
                </VBox.margin></Text>
          </children>
       </VBox>
