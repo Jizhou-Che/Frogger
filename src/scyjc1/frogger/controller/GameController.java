@@ -28,6 +28,7 @@ public class GameController {
 	private boolean gamePaused = false;
 	private boolean musicMuted = false;
 	static int score;
+	private int level = 1;
 
 	@FXML
 	private void initialize() {
@@ -71,10 +72,15 @@ public class GameController {
 				}
 				if (frog.changeScore()) {
 					setScoreNumber(frog.getScore());
+					//
+					levelUp();
+					//
 				}
 				if (frog.gameWon()) {
 					// Clear slots.
-					frog.clear_slots();
+					frog.resetSlots();
+					// Level up.
+					levelUp();
 				}
 				if (frog.gameOver()) {
 					// Stop game.
@@ -174,6 +180,49 @@ public class GameController {
 				shift += 30;
 				score /= 10;
 			}
+		}
+	}
+
+	private void levelUp() {
+		level++;
+		switch (level) {
+			case 2:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add crocodile heads into slots.
+				// Add fly into slots.
+				break;
+			case 3:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snake at the middle.
+				break;
+			case 4:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 329 || a.getY() == 376 || a.getY() == 490 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Replace some logs with crocodiles.
+				break;
+			case 5:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snakes on logs.
+				break;
 		}
 	}
 }

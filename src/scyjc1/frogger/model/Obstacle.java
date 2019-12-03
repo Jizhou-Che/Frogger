@@ -3,10 +3,10 @@ package scyjc1.frogger.model;
 import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
-public class Obstacle extends Actor {
-	private int speed;
+public class Obstacle extends MovingActor {
+	private double speed;
 
-	public Obstacle(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") int speed) {
+	public Obstacle(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		switch (type) {
 			case 1:
 				setImage(new Image("file:resources/images/car_1_left.png", size, size, true, true));
@@ -29,7 +29,7 @@ public class Obstacle extends Actor {
 		}
 		setX(x);
 		setY(y);
-		this.speed = speed;
+		setSpeed(speed);
 	}
 
 	@Override
@@ -41,5 +41,15 @@ public class Obstacle extends Actor {
 		if (getX() < -50 && speed < 0) {
 			setX(600);
 		}
+	}
+
+	@Override
+	public double getSpeed() {
+		return speed;
+	}
+
+	@Override
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 }

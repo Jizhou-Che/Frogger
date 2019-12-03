@@ -284,7 +284,7 @@ public class Frog extends Actor {
 	/**
 	 * Resets all slots to empty.
 	 */
-	public void clear_slots() {
+	public void resetSlots() {
 		slotsOccupied = 0;
 		for (Actor a : getWorld().getObjects(Slot.class)) {
 			Slot s = (Slot) a;

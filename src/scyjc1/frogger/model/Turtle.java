@@ -3,7 +3,7 @@ package scyjc1.frogger.model;
 import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
-public class Turtle extends Actor {
+public class Turtle extends MovingActor {
 	private Image turtle1;
 	private Image turtle2;
 	private Image turtle3;
@@ -16,7 +16,7 @@ public class Turtle extends Actor {
 		setImage(turtle2);
 		setX(x);
 		setY(y);
-		this.speed = speed;
+		setSpeed(speed);
 	}
 
 	@Override
@@ -39,7 +39,13 @@ public class Turtle extends Actor {
 		}
 	}
 
-	double getSpeed() {
+	@Override
+	public double getSpeed() {
 		return speed;
+	}
+
+	@Override
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 }

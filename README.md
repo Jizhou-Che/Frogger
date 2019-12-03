@@ -57,3 +57,4 @@ Home view adapted to css.
 03/12/19
 Game view adapted to the MVC pattern.
 Tests written for concrete classes.
+Adding feature of speeding up on level up: abstract class MovingActor.

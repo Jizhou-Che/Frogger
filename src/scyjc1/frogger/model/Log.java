@@ -3,7 +3,7 @@ package scyjc1.frogger.model;
 import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
-public class Log extends Actor {
+public class Log extends MovingActor {
 	private double speed;
 
 	public Log(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
@@ -20,7 +20,7 @@ public class Log extends Actor {
 		}
 		setX(x);
 		setY(y);
-		this.speed = speed;
+		setSpeed(speed);
 	}
 
 	@Override
@@ -36,7 +36,13 @@ public class Log extends Actor {
 		}
 	}
 
-	double getSpeed() {
+	@Override
+	public double getSpeed() {
 		return speed;
+	}
+
+	@Override
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 }
