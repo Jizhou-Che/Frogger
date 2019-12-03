@@ -204,6 +204,7 @@ public class GameController {
 					}
 				}
 				// Add snake at the middle.
+				world.add(new Snake(80, -100, 440, 2));
 				break;
 			case 4:
 				// Speed up.

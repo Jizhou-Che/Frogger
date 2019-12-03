@@ -156,8 +156,8 @@ public class Frog extends Actor {
 		}
 
 		if (!noMove) {
-			if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-				// Frog crashed by a car.
+			if (getIntersectingObjects(Obstacle.class).size() >= 1 || getIntersectingObjects(Snake.class).size() >= 1) {
+				// Frog crashed by a car or eaten by the snake.
 				carDeath = true;
 				noMove = true; // Disable moving.
 			} else if (getIntersectingObjects(Log.class).size() >= 1) {

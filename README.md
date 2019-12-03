@@ -58,3 +58,4 @@ Home view adapted to css.
 Game view adapted to the MVC pattern.
 Tests written for concrete classes.
 Adding feature of speeding up on level up: abstract class MovingActor.
+Adding the snake to the game.
