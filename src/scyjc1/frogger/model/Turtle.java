@@ -1,5 +1,6 @@
 package scyjc1.frogger.model;
 
+import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
 public class Turtle extends Actor {
@@ -8,14 +9,14 @@ public class Turtle extends Actor {
 	private Image turtle3;
 	private double speed;
 
-	public Turtle(int x, int y, double s, int w, int h) {
-		turtle1 = new Image("file:resources/images/turtle_animation_1.png", w, h, true, true);
-		turtle2 = new Image("file:resources/images/turtle_animation_2.png", w, h, true, true);
-		turtle3 = new Image("file:resources/images/turtle_animation_3.png", w, h, true, true);
+	public Turtle(@NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
+		turtle1 = new Image("file:resources/images/turtle_animation_1.png", size, size, true, true);
+		turtle2 = new Image("file:resources/images/turtle_animation_2.png", size, size, true, true);
+		turtle3 = new Image("file:resources/images/turtle_animation_3.png", size, size, true, true);
 		setImage(turtle2);
 		setX(x);
 		setY(y);
-		speed = s;
+		this.speed = speed;
 	}
 
 	@Override

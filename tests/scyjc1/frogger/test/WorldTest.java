@@ -14,8 +14,12 @@ class WorldTest {
 	void addTest() {
 		testWorld.add(testActor);
 		assertSame(testWorld, testActor.getWorld());
-//		testWorld.remove(testActor);
-//		assertNotSame(testWorld, testActor.getWorld());
+	}
+
+	@Test
+	void removeTest() {
+		testWorld.remove(testActor);
+		assertNotSame(testWorld, testActor.getWorld());
 	}
 
 	@Test

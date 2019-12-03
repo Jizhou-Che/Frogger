@@ -53,3 +53,7 @@ Preliminary design to the High Score view.
 Feature: Leaderboard system implemented.
 Feature: Muting functionality added.
 Home view adapted to css.
+
+03/12/19
+Game view adapted to the MVC pattern.
+Tests written for concrete classes.

@@ -1,15 +1,26 @@
 package scyjc1.frogger.model;
 
+import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
 public class Log extends Actor {
 	private double speed;
 
-	public Log(String imageLink, int size, int x, int y, double s) {
-		setImage(new Image(imageLink, size, size, true, true));
+	public Log(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
+		switch (type) {
+			case 1:
+				setImage(new Image("file:resources/images/log_1.png", size, size, true, true));
+				break;
+			case 2:
+				setImage(new Image("file:resources/images/log_2.png", size, size, true, true));
+				break;
+			case 3:
+				setImage(new Image("file:resources/images/log_3.png", size, size, true, true));
+				break;
+		}
 		setX(x);
 		setY(y);
-		speed = s;
+		this.speed = speed;
 	}
 
 	@Override
