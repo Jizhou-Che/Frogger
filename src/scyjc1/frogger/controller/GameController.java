@@ -28,6 +28,10 @@ public class GameController {
 	private boolean gamePaused = false;
 	private boolean musicMuted = false;
 	static int score;
+	private int level = 1;
+	private int timeValue = 0;
+	private boolean specialSlots = false;
+	private int numSpecialSlots = 0;
 
 	@FXML
 	private void initialize() {
@@ -66,15 +70,45 @@ public class GameController {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+				timeValue++;
 				if (frog.changeLives()) {
 					setLivesNumber(frog.getLives());
 				}
 				if (frog.changeScore()) {
 					setScoreNumber(frog.getScore());
+					//
+					// For temporary testing.
+//					levelUp();
+					//
+				}
+				if (specialSlots && timeValue % 500 == 0) {
+					if (numSpecialSlots == 0) {
+						// Add a special slot.
+						Slot randomSlot = world.getObjects(Slot.class).get((int) (Math.random() * 5));
+						if (randomSlot.getStatus() == 0) {
+							// Make a random special slot.
+							if ((int) (Math.random() * 2) == 0) {
+								randomSlot.setCrocodile();
+							} else {
+								randomSlot.setFly();
+							}
+						}
+						numSpecialSlots++;
+					} else {
+						// Remove the special slot.
+						for (Slot s : world.getObjects(Slot.class)) {
+							if (s.getStatus() >= 2) {
+								s.setEmpty();
+							}
+						}
+						numSpecialSlots--;
+					}
 				}
 				if (frog.gameWon()) {
 					// Clear slots.
-					frog.clear_slots();
+					frog.resetSlots();
+					// Level up.
+					levelUp();
 				}
 				if (frog.gameOver()) {
 					// Stop game.
@@ -174,6 +208,50 @@ public class GameController {
 				shift += 30;
 				score /= 10;
 			}
+		}
+	}
+
+	private void levelUp() {
+		level++;
+		switch (level) {
+			case 2:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add crocodile head and fly into slots.
+				specialSlots = true;
+				break;
+			case 3:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snake at the middle.
+				world.add(new Snake(80, -100, 440, 2));
+				break;
+			case 4:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 329 || a.getY() == 376 || a.getY() == 440 || a.getY() == 490 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Replace some logs with crocodiles.
+				break;
+			case 5:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 440 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snakes on logs.
+				break;
 		}
 	}
 }
