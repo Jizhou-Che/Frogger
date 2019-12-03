@@ -24,8 +24,8 @@ public class Main extends Application {
 			primaryStage.setTitle("Frogger");
 			primaryStage.show();
 			root.requestFocus();
-		} catch(Exception e) {
-			//
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

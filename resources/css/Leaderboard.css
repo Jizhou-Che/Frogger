@@ -27,4 +27,5 @@ ListView {
 
 #home {
     -fx-font-size: 25;
+    -fx-stroke-width: 2;
 }

@@ -1,0 +1,20 @@
+Text {
+    -fx-font-family: "Press Start K";
+}
+
+#title {
+    -fx-font-size: 30;
+}
+
+#home {
+    -fx-font-size: 25;
+    -fx-stroke-width: 2;
+}
+
+.subtitles {
+    -fx-font-size: 15;
+}
+
+.instructions {
+    -fx-font-size: 15;
+}

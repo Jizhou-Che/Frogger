@@ -22,7 +22,7 @@ public class HomeController {
 
 	@FXML
 	private void initialize() {
-		// Set font.
+		// Load font.
 		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Set style for start.
 		optionBox.getChildren().get(0).getStyleClass().add("active");
@@ -73,6 +73,17 @@ public class HomeController {
 							Scene leaderboardScene = new Scene(leaderboardLoader, 600, 800);
 							leaderboardScene.getRoot().requestFocus();
 							Main.mainStage.setScene(leaderboardScene);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						break;
+					case 2:
+						// Go to help.
+						try {
+							Parent helpLoader = FXMLLoader.load(getClass().getResource("/view/HelpView.fxml"));
+							Scene helpScene = new Scene(helpLoader, 600, 800);
+							helpScene.getRoot().requestFocus();
+							Main.mainStage.setScene(helpScene);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

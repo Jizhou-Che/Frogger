@@ -65,7 +65,7 @@ public class LeaderboardController {
 				homeScene.getRoot().requestFocus();
 				Main.mainStage.setScene(homeScene);
 			} catch (Exception e) {
-				//
+				e.printStackTrace();
 			}
 		}
 	}

@@ -194,7 +194,7 @@ public class Frog extends Actor {
 				} else {
 					if (getIntersectingObjects(Slot.class).get(0).getStatus() == 3) {
 						// Fly slot.
-						score += 30;
+						score += 25;
 					}
 					getIntersectingObjects(Slot.class).get(0).setOccupied();
 					slotsOccupied++;
