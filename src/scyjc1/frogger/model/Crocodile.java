@@ -51,6 +51,7 @@ public class Crocodile extends MovingActor {
 		ImageView crocodileHead = new ImageView();
 		crocodileHead.setX(getX() + getImage().getWidth() - getImage().getHeight() / 2);
 		crocodileHead.setY(getY() + getImage().getHeight() / 2);
+		crocodileHead.setFitWidth(getImage().getHeight() / 2);
 		return crocodileHead.intersects(frogBoundsInLocal);
 	}
 }

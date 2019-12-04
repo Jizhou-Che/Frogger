@@ -63,3 +63,7 @@ Adding crocodile head and fly to the slots.
 
 04/12/19
 Introducing crocodiles to the game.
+Introducing log snakes to the game.
+Refined digit pictures.
+Improved killing accuracy of crocodile head.
+Level indicator added.
