@@ -60,3 +60,6 @@ Tests written for concrete classes.
 Adding feature of speeding up on level up: abstract class MovingActor.
 Adding the snake to the game.
 Adding crocodile head and fly to the slots.
+
+04/12/19
+Introducing crocodiles to the game.

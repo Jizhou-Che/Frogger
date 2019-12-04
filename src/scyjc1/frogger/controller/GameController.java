@@ -78,7 +78,7 @@ public class GameController {
 					setScoreNumber(frog.getScore());
 					//
 					// For temporary testing.
-//					levelUp();
+					levelUp();
 					//
 				}
 				if (specialSlots && timeValue % 500 == 0) {
@@ -242,6 +242,13 @@ public class GameController {
 					}
 				}
 				// Replace some logs with crocodiles.
+				Log oldLog1 = world.getObjects(Log.class).get(0);
+				world.add(new Crocodile(150, (int) oldLog1.getX(), (int) oldLog1.getY(), oldLog1.getSpeed()));
+				world.remove(oldLog1);
+				Log oldLog2 = world.getObjects(Log.class).get(5);
+				world.add(new Crocodile(150, (int) oldLog2.getX(), (int) oldLog2.getY(), oldLog2.getSpeed()));
+				world.remove(oldLog2);
+				frog.toFront();
 				break;
 			case 5:
 				// Speed up.
