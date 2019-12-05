@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import scyjc1.frogger.Main;
 import scyjc1.frogger.model.*;
-
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -21,52 +21,30 @@ public class GameController {
 	@FXML
 	private World world;
 	@FXML
-	public HBox lifeBox;
+	private HBox lifeBox;
+	@FXML
+	private Text levelText;
+	@FXML
+	private Text message;
 
 	private AnimationTimer timer;
 	private Frog frog;
 	private BackgroundMusic bgm = BackgroundMusic.getBgm();
 	private boolean gamePaused = false;
+	private boolean musicMuted = false;
 	static int score;
+	private int level = 1;
+	private int timeValue = 0;
+	private boolean specialSlots = false;
+	private int numSpecialSlots = 0;
+	private boolean logSnakes = false;
 
 	@FXML
 	private void initialize() {
-		// Add slots.
-		world.add(new Slot(13, 96));
-		world.add(new Slot(141, 96));
-		world.add(new Slot(141 + 141 - 13, 96));
-		world.add(new Slot(141 + 141 - 13 + 141 - 13 + 1, 96));
-		world.add(new Slot(141 + 141 - 13 + 141 - 13 + 141 - 13 + 3, 96));
-		// Add logs.
-		world.add(new Log("file:resources/images/log_1.png", 150, 0, 166, 0.75));
-		world.add(new Log("file:resources/images/log_1.png", 150, 220, 166, 0.75));
-		world.add(new Log("file:resources/images/log_1.png", 150, 440, 166, 0.75));
-		world.add(new Log("file:resources/images/log_3.png", 300, 0, 276, -2));
-		world.add(new Log("file:resources/images/log_3.png", 300, 400, 276, -2));
-		world.add(new Log("file:resources/images/log_1.png", 150, 50, 329, 0.75));
-		world.add(new Log("file:resources/images/log_1.png", 150, 270, 329, 0.75));
-		world.add(new Log("file:resources/images/log_1.png", 150, 490, 329, 0.75));
-		// Add turtles.
-		world.add(new Turtle(500, 376, -1, 130, 130));
-		world.add(new Turtle(300, 376, -1, 130, 130));
-		// Add wet turtles.
-		world.add(new WetTurtle(700, 376, -1, 130, 130));
-		world.add(new WetTurtle(600, 217, -1, 130, 130));
-		world.add(new WetTurtle(400, 217, -1, 130, 130));
-		world.add(new WetTurtle(200, 217, -1, 130, 130));
-		// Add obstacles.
-		world.add(new Obstacle("file:resources/images/truck_1_right.png", 0, 649, 1, 120, 120));
-		world.add(new Obstacle("file:resources/images/truck_1_right.png", 300, 649, 1, 120, 120));
-		world.add(new Obstacle("file:resources/images/truck_1_right.png", 600, 649, 1, 120, 120));
-		world.add(new Obstacle("file:resources/images/car_1_left.png", 100, 597, -1, 50, 50));
-		world.add(new Obstacle("file:resources/images/car_1_left.png", 250, 597, -1, 50, 50));
-		world.add(new Obstacle("file:resources/images/car_1_left.png", 400, 597, -1, 50, 50));
-		world.add(new Obstacle("file:resources/images/car_1_left.png", 550, 597, -1, 50, 50));
-		world.add(new Obstacle("file:resources/images/truck_2_right.png", 0, 540, 1, 200, 200));
-		world.add(new Obstacle("file:resources/images/truck_2_right.png", 500, 540, 1, 200, 200));
-		world.add(new Obstacle("file:resources/images/car_1_left.png", 500, 490, -5, 50, 50));
+		// Load font.
+		Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Add frog.
-		frog = new Frog("file:resources/images/frogger_up.png");
+		frog = new Frog();
 		world.add(frog);
 		// Initialise score.
 		setScoreNumber(0);
@@ -76,13 +54,23 @@ public class GameController {
 
 	@FXML
 	public void keyPressed(KeyEvent event) {
-		if (event.getCode() == KeyCode.SPACE) {
-			if (gamePaused) {
-				resumeGame();
-			} else {
-				pauseGame();
-			}
-			gamePaused = !gamePaused;
+		switch (event.getCode()) {
+			case SPACE:
+				if (gamePaused) {
+					resumeGame();
+				} else {
+					pauseGame();
+				}
+				gamePaused = !gamePaused;
+				break;
+			case M:
+				if (musicMuted) {
+					bgm.unmute();
+				} else {
+					bgm.mute();
+				}
+				musicMuted = !musicMuted;
+				break;
 		}
 	}
 
@@ -90,15 +78,50 @@ public class GameController {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
+				timeValue++;
 				if (frog.changeLives()) {
 					setLivesNumber(frog.getLives());
 				}
 				if (frog.changeScore()) {
 					setScoreNumber(frog.getScore());
+					if (message.isVisible()) {
+						message.setVisible(false);
+					}
+				}
+				if (specialSlots && timeValue % 500 == 0) {
+					if (numSpecialSlots == 0) {
+						// Add a special slot.
+						Slot randomSlot = world.getObjects(Slot.class).get((int) (Math.random() * 5));
+						if (randomSlot.getStatus() == 0) {
+							// Make a random special slot.
+							if ((int) (Math.random() * 2) == 0) {
+								randomSlot.setCrocodile();
+							} else {
+								randomSlot.setFly();
+							}
+						}
+						numSpecialSlots++;
+					} else {
+						// Remove the special slot.
+						for (Slot s : world.getObjects(Slot.class)) {
+							if (s.getStatus() >= 2) {
+								s.setEmpty();
+							}
+						}
+						numSpecialSlots--;
+					}
+				}
+				if (logSnakes && timeValue % 750 == 0) {
+					world.add(new LogSnake(world.getObjects(Log.class).get((int) (Math.random() * world.getObjects(Log.class).size())), 0.5 - (int) (Math.random() * 2)));
+					frog.toFront();
 				}
 				if (frog.gameWon()) {
 					// Clear slots.
-					frog.clear_slots();
+					frog.resetSlots();
+					// Level up.
+					levelUp();
+					levelText.setText("LEVEL-" + level);
+					message.setVisible(true);
 				}
 				if (frog.gameOver()) {
 					// Stop game.
@@ -109,37 +132,40 @@ public class GameController {
 	}
 
 	private void startGame() {
-		bgm.play();
+		if (HomeController.musicOn) {
+			bgm.play();
+		}
 		createTimer();
 		timer.start();
 		world.start();
 	}
 
 	private void pauseGame() {
-		bgm.pause();
+		if (HomeController.musicOn) {
+			bgm.pause();
+		}
 		timer.stop();
 		frog.toggleNoMove();
 		world.stop();
 	}
 
 	private void resumeGame() {
-		bgm.play();
+		if (HomeController.musicOn) {
+			bgm.play();
+		}
 		timer.start();
 		frog.toggleNoMove();
 		world.resume();
 	}
 
 	private void stopGame() {
-		bgm.stop();
+		if (HomeController.musicOn) {
+			bgm.stop();
+		}
 		timer.stop();
 		frog.toggleNoMove();
 		world.stop();
 		score = frog.getScore();
-//		Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//		alert.setTitle("GAME OVER");
-//		alert.setHeaderText("Score: " + frog.getScore());
-//		alert.setContentText("Highest Possible Score: Infinity");
-//		alert.show();
 		// Check for high score.
 		try {
 			File dataDirectory = new File(".data");
@@ -186,15 +212,67 @@ public class GameController {
 		}
 		// Set new digits.
 		if (score == 0) {
-			world.add(new Digit(0, 30, 360, 25));
+			world.add(new Digit(0, 30, 500, 25));
 		} else {
 			int shift = 0;
 			while (score > 0) {
 				int k = score - (score / 10) * 10;
-				world.add(new Digit(k, 30, 360 - shift, 25));
-				shift += 30;
+				world.add(new Digit(k, 30, 500 - shift, 25));
+				shift += 25;
 				score /= 10;
 			}
+		}
+	}
+
+	private void levelUp() {
+		level++;
+		switch (level) {
+			case 2:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add crocodile head and fly into slots.
+				specialSlots = true;
+				break;
+			case 3:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 540 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snake at the middle.
+				world.add(new Snake(80, -100, 440, 2));
+				break;
+			case 4:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 329 || a.getY() == 376 || a.getY() == 440 || a.getY() == 490 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Replace some logs with crocodiles.
+				Log oldLog1 = world.getObjects(Log.class).get(0);
+				world.add(new Crocodile(150, (int) oldLog1.getX(), (int) oldLog1.getY(), oldLog1.getSpeed()));
+				world.remove(oldLog1);
+				Log oldLog2 = world.getObjects(Log.class).get(5);
+				world.add(new Crocodile(150, (int) oldLog2.getX(), (int) oldLog2.getY(), oldLog2.getSpeed()));
+				world.remove(oldLog2);
+				frog.toFront();
+				break;
+			case 5:
+				// Speed up.
+				for (MovingActor a : world.getObjects(MovingActor.class)) {
+					if (a.getY() == 166 || a.getY() == 217 || a.getY() == 276 || a.getY() == 329 || a.getY() == 376 || a.getY() == 440 || a.getY() == 540 || a.getY() == 597 || a.getY() == 649) {
+						a.setSpeed(a.getSpeed() * 1.2);
+					}
+				}
+				// Add snakes on logs.
+				logSnakes = true;
+				break;
 		}
 	}
 }

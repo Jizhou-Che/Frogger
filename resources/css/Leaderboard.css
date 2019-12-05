@@ -13,7 +13,6 @@ ListView {
     -fx-font-size: 15;
     -fx-text-fill: #ffe500;
     -fx-cell-size: 50;
-    -fx-text-overrun: hidden;
 }
 
 .list-view .scroll-bar,
@@ -28,4 +27,5 @@ ListView {
 
 #home {
     -fx-font-size: 25;
+    -fx-stroke-width: 2;
 }

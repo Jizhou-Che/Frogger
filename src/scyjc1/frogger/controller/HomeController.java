@@ -1,9 +1,8 @@
 package scyjc1.frogger.controller;
 
-import javafx.fxml.FXML;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -19,20 +18,18 @@ public class HomeController {
 
 	private int optionOld = 0;
 	private int optionNew = 0;
-	private boolean musicOn = true;
+	static boolean musicOn = true;
 
 	@FXML
 	private void initialize() {
-		// Set font.
-		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 25);
-		for (Node n : optionBox.getChildren()) {
-			Text t = (Text) n;
-			t.setFont(prstartk);
-			// Set style for start.
-			if (n == optionBox.getChildren().get(0)) {
-				t.setScaleX(1.2);
-				t.setScaleY(1.2);
-			}
+		// Load font.
+		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
+		// Set style for start.
+		optionBox.getChildren().get(0).getStyleClass().add("active");
+		// Set music status.
+		if (!musicOn) {
+			Text musicText = (Text) optionBox.getChildren().get(3);
+			musicText.setText("MUSIC: OFF");
 		}
 	}
 
@@ -65,8 +62,8 @@ public class HomeController {
 							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
 							Scene gameScene = new Scene(gameLoader, 600, 800);
 							Main.mainStage.setScene(gameScene);
-						} catch(Exception e) {
-							//
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 						break;
 					case 1:
@@ -76,9 +73,21 @@ public class HomeController {
 							Scene leaderboardScene = new Scene(leaderboardLoader, 600, 800);
 							leaderboardScene.getRoot().requestFocus();
 							Main.mainStage.setScene(leaderboardScene);
-						} catch(Exception e) {
-							//
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
+						break;
+					case 2:
+						// Go to help.
+						try {
+							Parent helpLoader = FXMLLoader.load(getClass().getResource("/view/HelpView.fxml"));
+							Scene helpScene = new Scene(helpLoader, 600, 800);
+							helpScene.getRoot().requestFocus();
+							Main.mainStage.setScene(helpScene);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						break;
 					case 3:
 						// Switch music.
 						switchMusic();
@@ -86,6 +95,7 @@ public class HomeController {
 					case 4:
 						// Quit game.
 						Platform.exit();
+						System.exit(0);
 						break;
 				}
 				break;
@@ -94,15 +104,13 @@ public class HomeController {
 		// Set text.
 		if (optionNew != optionOld) {
 			// Reset original option text.
-			Text tOld = (Text) optionBox.getChildren().get(optionOld);
-			tOld.setText(tOld.getText().substring(2, tOld.getText().length() - 2));
-			tOld.setScaleX(1);
-			tOld.setScaleY(1);
+			Text textOld = (Text) optionBox.getChildren().get(optionOld);
+			textOld.setText(textOld.getText().substring(2, textOld.getText().length() - 2));
+			textOld.getStyleClass().clear();
 			// Set new option text.
-			Text tNew = (Text) optionBox.getChildren().get(optionNew);
-			tNew.setText("> " + tNew.getText() + " <");
-			tNew.setScaleX(1.2);
-			tNew.setScaleY(1.2);
+			Text textNew = (Text) optionBox.getChildren().get(optionNew);
+			textNew.setText("> " + textNew.getText() + " <");
+			textNew.getStyleClass().add("active");
 		}
 	}
 

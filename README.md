@@ -48,3 +48,23 @@ Feature: Adding pausing functionality to the game.
 
 29/11/19
 Preliminary design to the High Score view.
+
+01/12/19
+Feature: Leaderboard system implemented.
+Feature: Muting functionality added.
+Home view adapted to css.
+
+03/12/19
+Game view adapted to the MVC pattern.
+Tests written for concrete classes.
+Adding feature of speeding up on level up: abstract class MovingActor.
+Adding the snake to the game.
+Adding crocodile head and fly to the slots.
+Help view implemented.
+
+04/12/19
+Introducing crocodiles to the game.
+Introducing log snakes to the game.
+Refined digit pictures.
+Improved killing accuracy of crocodile head.
+Level indicator added.

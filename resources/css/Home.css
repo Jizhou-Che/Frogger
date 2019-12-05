@@ -1,0 +1,11 @@
+Text {
+    -fx-font-family: "Press Start K";
+    -fx-text-alignment: center;
+    -fx-font-size: 25;
+    -fx-stroke-width: 2;
+}
+
+.active {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}

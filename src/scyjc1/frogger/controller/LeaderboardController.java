@@ -33,8 +33,15 @@ public class LeaderboardController {
 		try {
 			File dataDirectory = new File(".data");
 			File leaderboardFile = new File(dataDirectory, "leaderboard.csv");
-			if (!leaderboardFile.exists()) {
-				throw new Exception("Failed to access leaderboard file.");
+			if (!dataDirectory.mkdir()) {
+				if (!dataDirectory.exists()) {
+					throw new Exception("Failed to create the data directory.");
+				}
+			}
+			if (!leaderboardFile.createNewFile()) {
+				if (!leaderboardFile.exists()) {
+					throw new Exception("Failed to create the leaderboard file.");
+				}
 			}
 			List<String> records = Files.readAllLines(Paths.get(".data/leaderboard.csv"), StandardCharsets.UTF_8);
 			for (String record : records) {
@@ -58,7 +65,7 @@ public class LeaderboardController {
 				homeScene.getRoot().requestFocus();
 				Main.mainStage.setScene(homeScene);
 			} catch (Exception e) {
-				//
+				e.printStackTrace();
 			}
 		}
 	}

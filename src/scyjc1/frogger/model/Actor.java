@@ -1,11 +1,10 @@
 package scyjc1.frogger.model;
 
 import javafx.scene.image.ImageView;
-
 import java.util.ArrayList;
 
 /**
- * All movable objects.
+ * All active objects.
  */
 public abstract class Actor extends ImageView {
 	/**

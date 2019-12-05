@@ -1,33 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import scyjc1.frogger.model.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.HBox?>
+<?import scyjc1.frogger.model.*?>
+<?import javafx.scene.text.Text?>
 
-<World fx:id="world" onKeyPressed="#keyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
-    <children>
-        <ImageView fitHeight="800.0" fitWidth="600.0">
-            <image>
-                <Image url="@../images/game_background.png" />
-            </image>
+<World fx:id="world" onKeyPressed="#keyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+       minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Game.css" xmlns="http://javafx.com/javafx/11.0.1"
+       xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
+    <ImageView fitHeight="800.0" fitWidth="600.0">
+        <Image url="@../images/game_background.png"/>
+    </ImageView>
+
+    <HBox fx:id="lifeBox" layoutX="50.0" layoutY="25.0" prefHeight="110.0" prefWidth="30.0" spacing="10.0">
+        <ImageView fitHeight="30.0" fitWidth="30.0">
+            <Image url="@../images/frogger_icon.png"/>
         </ImageView>
-        <HBox fx:id="lifeBox" layoutX="50.0" layoutY="25.0" prefHeight="110.0" prefWidth="30.0" spacing="10.0">
-            <ImageView fitHeight="30.0" fitWidth="30.0">
-                <image>
-                    <Image url="@../images/frogger_icon.png" />
-                </image>
-            </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
-                <image>
-                    <Image url="@../images/frogger_icon.png" />
-                </image>
-            </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0">
-                <image>
-                    <Image url="@../images/frogger_icon.png" />
-                </image>
-            </ImageView>
-        </HBox>
-    </children>
+        <ImageView fitHeight="30.0" fitWidth="30.0">
+            <Image url="@../images/frogger_icon.png"/>
+        </ImageView>
+        <ImageView fitHeight="30.0" fitWidth="30.0">
+            <Image url="@../images/frogger_icon.png"/>
+        </ImageView>
+    </HBox>
+
+    <Text fx:id="levelText" layoutX="200.0" layoutY="50.0" fill="#fc3f00" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL-1" wrappingWidth="200.0"/>
+    <Text fx:id="message" layoutX="200.0" layoutY="460.0" fill="#fc3f00" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL UP!" wrappingWidth="200.0" visible="false"/>
+
+    <Slot x="13" y="96"/>
+    <Slot x="141" y="96"/>
+    <Slot x="269" y="96"/>
+    <Slot x="398" y="96"/>
+    <Slot x="528" y="96"/>
+
+    <Log type="1" size="150" x="0" y="166" speed="0.75"/>
+    <Log type="1" size="150" x="220" y="166" speed="0.75"/>
+    <Log type="1" size="150" x="440" y="166" speed="0.75"/>
+    <Log type="3" size="300" x="0" y="276" speed="-2"/>
+    <Log type="3" size="300" x="400" y="276" speed="-2"/>
+    <Log type="1" size="150" x="50" y="329" speed="0.75"/>
+    <Log type="1" size="150" x="270" y="329" speed="0.75"/>
+    <Log type="1" size="150" x="490" y="329" speed="0.75"/>
+
+    <Turtle size="130" x="500" y="376" speed="-1"/>
+    <Turtle size="130" x="300" y="376" speed="-1"/>
+
+    <WetTurtle size="130" x="700" y="376" speed="-1"/>
+    <WetTurtle size="130" x="600" y="217" speed="-1"/>
+    <WetTurtle size="130" x="400" y="217" speed="-1"/>
+    <WetTurtle size="130" x="200" y="217" speed="-1"/>
+
+    <Obstacle type="4" size="120" x="0" y="649" speed="1"/>
+    <Obstacle type="4" size="120" x="300" y="649" speed="1"/>
+    <Obstacle type="4" size="120" x="600" y="649" speed="1"/>
+    <Obstacle type="1" size="50" x="100" y="597" speed="-1"/>
+    <Obstacle type="1" size="50" x="250" y="597" speed="-1"/>
+    <Obstacle type="1" size="50" x="400" y="597" speed="-1"/>
+    <Obstacle type="1" size="50" x="550" y="597" speed="-1"/>
+    <Obstacle type="6" size="200" x="0" y="540" speed="1"/>
+    <Obstacle type="6" size="200" x="500" y="540" speed="1"/>
+    <Obstacle type="1" size="50" x="500" y="490" speed="-5"/>
 </World>
