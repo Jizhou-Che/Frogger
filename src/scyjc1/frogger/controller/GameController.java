@@ -133,6 +133,7 @@ public class GameController {
 
 	private void startGame() {
 		if (HomeController.musicOn) {
+			bgm.unmute();
 			bgm.play();
 		}
 		createTimer();

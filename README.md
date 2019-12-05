@@ -68,3 +68,7 @@ Introducing log snakes to the game.
 Refined digit pictures.
 Improved killing accuracy of crocodile head.
 Level indicator added.
+
+05/12/19
+Fix: Reset music mute status for each game.
+Help view refined.
