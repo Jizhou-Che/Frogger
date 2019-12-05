@@ -7,9 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import scyjc1.frogger.Main;
 import scyjc1.frogger.model.*;
-
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,7 +21,11 @@ public class GameController {
 	@FXML
 	private World world;
 	@FXML
-	public HBox lifeBox;
+	private HBox lifeBox;
+	@FXML
+	private Text levelText;
+	@FXML
+	private Text message;
 
 	private AnimationTimer timer;
 	private Frog frog;
@@ -32,9 +37,12 @@ public class GameController {
 	private int timeValue = 0;
 	private boolean specialSlots = false;
 	private int numSpecialSlots = 0;
+	private boolean logSnakes = false;
 
 	@FXML
 	private void initialize() {
+		// Load font.
+		Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Add frog.
 		frog = new Frog();
 		world.add(frog);
@@ -76,10 +84,9 @@ public class GameController {
 				}
 				if (frog.changeScore()) {
 					setScoreNumber(frog.getScore());
-					//
-					// For temporary testing.
-//					levelUp();
-					//
+					if (message.isVisible()) {
+						message.setVisible(false);
+					}
 				}
 				if (specialSlots && timeValue % 500 == 0) {
 					if (numSpecialSlots == 0) {
@@ -104,11 +111,17 @@ public class GameController {
 						numSpecialSlots--;
 					}
 				}
+				if (logSnakes && timeValue % 750 == 0) {
+					world.add(new LogSnake(world.getObjects(Log.class).get((int) (Math.random() * world.getObjects(Log.class).size())), 0.5 - (int) (Math.random() * 2)));
+					frog.toFront();
+				}
 				if (frog.gameWon()) {
 					// Clear slots.
 					frog.resetSlots();
 					// Level up.
 					levelUp();
+					levelText.setText("LEVEL-" + level);
+					message.setVisible(true);
 				}
 				if (frog.gameOver()) {
 					// Stop game.
@@ -199,13 +212,13 @@ public class GameController {
 		}
 		// Set new digits.
 		if (score == 0) {
-			world.add(new Digit(0, 30, 360, 25));
+			world.add(new Digit(0, 30, 500, 25));
 		} else {
 			int shift = 0;
 			while (score > 0) {
 				int k = score - (score / 10) * 10;
-				world.add(new Digit(k, 30, 360 - shift, 25));
-				shift += 30;
+				world.add(new Digit(k, 30, 500 - shift, 25));
+				shift += 25;
 				score /= 10;
 			}
 		}
@@ -242,6 +255,13 @@ public class GameController {
 					}
 				}
 				// Replace some logs with crocodiles.
+				Log oldLog1 = world.getObjects(Log.class).get(0);
+				world.add(new Crocodile(150, (int) oldLog1.getX(), (int) oldLog1.getY(), oldLog1.getSpeed()));
+				world.remove(oldLog1);
+				Log oldLog2 = world.getObjects(Log.class).get(5);
+				world.add(new Crocodile(150, (int) oldLog2.getX(), (int) oldLog2.getY(), oldLog2.getSpeed()));
+				world.remove(oldLog2);
+				frog.toFront();
 				break;
 			case 5:
 				// Speed up.
@@ -251,6 +271,7 @@ public class GameController {
 					}
 				}
 				// Add snakes on logs.
+				logSnakes = true;
 				break;
 		}
 	}

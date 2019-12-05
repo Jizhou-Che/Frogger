@@ -61,3 +61,10 @@ Adding feature of speeding up on level up: abstract class MovingActor.
 Adding the snake to the game.
 Adding crocodile head and fly to the slots.
 Help view implemented.
+
+04/12/19
+Introducing crocodiles to the game.
+Introducing log snakes to the game.
+Refined digit pictures.
+Improved killing accuracy of crocodile head.
+Level indicator added.

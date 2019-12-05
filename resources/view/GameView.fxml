@@ -3,9 +3,10 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.HBox?>
 <?import scyjc1.frogger.model.*?>
+<?import javafx.scene.text.Text?>
 
 <World fx:id="world" onKeyPressed="#keyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-       minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
+       minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Game.css" xmlns="http://javafx.com/javafx/11.0.1"
        xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
     <ImageView fitHeight="800.0" fitWidth="600.0">
         <Image url="@../images/game_background.png"/>
@@ -22,6 +23,9 @@
             <Image url="@../images/frogger_icon.png"/>
         </ImageView>
     </HBox>
+
+    <Text fx:id="levelText" layoutX="200.0" layoutY="50.0" fill="#fc3f00" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL-1" wrappingWidth="200.0"/>
+    <Text fx:id="message" layoutX="200.0" layoutY="460.0" fill="#fc3f00" strokeType="OUTSIDE" strokeWidth="0.0" text="LEVEL UP!" wrappingWidth="200.0" visible="false"/>
 
     <Slot x="13" y="96"/>
     <Slot x="141" y="96"/>

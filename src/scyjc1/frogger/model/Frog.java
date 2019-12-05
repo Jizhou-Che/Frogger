@@ -156,8 +156,8 @@ public class Frog extends Actor {
 		}
 
 		if (!noMove) {
-			if (getIntersectingObjects(Obstacle.class).size() >= 1 || getIntersectingObjects(Snake.class).size() >= 1) {
-				// Frog crashed by a car or eaten by the snake.
+			if (getIntersectingObjects(Obstacle.class).size() >= 1 || getIntersectingObjects(Snake.class).size() >= 1 || getIntersectingObjects(LogSnake.class).size() >= 1) {
+				// Frog crashed by a car or eaten by a snake.
 				carDeath = true;
 				noMove = true;
 			} else if (getIntersectingObjects(Log.class).size() >= 1) {
@@ -165,6 +165,17 @@ public class Frog extends Actor {
 				Log currentLog = getIntersectingObjects(Log.class).get(0);
 				// Frog follows the log.
 				move(currentLog.getSpeed(), 0);
+			} else if (getIntersectingObjects(Crocodile.class).size() >= 1) {
+				// Frog lands on a crocodile.
+				Crocodile currentCrocodile = getIntersectingObjects(Crocodile.class).get(0);
+				if (currentCrocodile.killsFrog(getBoundsInLocal())) {
+					// Frog killed by crocodile.
+					carDeath = true;
+					noMove = true;
+				} else {
+					// Frog follows the crocodile.
+					move(currentCrocodile.getSpeed(), 0);
+				}
 			} else if (getIntersectingObjects(Turtle.class).size() >= 1) {
 				// Frog lands on a turtle.
 				Turtle currentTurtle = getIntersectingObjects(Turtle.class).get(0);
