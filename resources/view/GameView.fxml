@@ -8,8 +8,12 @@
 <World fx:id="world" onKeyPressed="#keyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
        minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Game.css" xmlns="http://javafx.com/javafx/11.0.1"
        xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
-    <ImageView fitHeight="800.0" fitWidth="600.0">
+    <ImageView fx:id="background" fitHeight="800.0" fitWidth="600.0">
         <Image url="@../images/game_background.png"/>
+    </ImageView>
+
+    <ImageView fx:id="snow" fitHeight="800.0" fitWidth="800.0" layoutX="-200.0" opacity="0">
+        <Image url="@../images/snow.gif"/>
     </ImageView>
 
     <HBox fx:id="lifeBox" layoutX="50.0" layoutY="25.0" prefHeight="110.0" prefWidth="30.0" spacing="10.0">
