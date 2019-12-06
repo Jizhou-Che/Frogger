@@ -269,6 +269,15 @@ public class Frog extends Actor {
 	}
 
 	/**
+	 * @param lives the number of lives to be set.
+	 *
+	 * Sets the number of lives of the frog.
+	 */
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
+
+	/**
 	 * @return the current points as an integer.
 	 */
 	public int getScore() {

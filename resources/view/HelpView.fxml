@@ -47,20 +47,20 @@
             </font>
          </Text>
          <Text fill="#ffe500" layoutX="14.0" layoutY="40.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="USE THE W, A, S, D KEYS TO HELP THE FROG REACH THE OTHER SIDE." wrappingWidth="240.9652099609375" />
-         <Text fill="#ffe500" layoutX="14.0" layoutY="306.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="AVOID RUNNING VEHICLES, FALLING INTO WATER AND DEADLY CREATURES." wrappingWidth="329.9652099609375" />
-         <Text fill="#ffe500" layoutX="187.0" layoutY="183.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="MAKE GOOD USE OF LOGS, TURTLES AND CROCODILES, BUT WATCH OUT FOR THEIR DANGEROUS BEHAVIOUR!" textAlignment="RIGHT" wrappingWidth="389.9652099609375" />
+         <Text fill="#ffe500" layoutX="14.0" layoutY="329.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="AVOID RUNNING VEHICLES, FALLING INTO WATER AND DEADLY CREATURES." wrappingWidth="329.9652099609375" />
+         <Text fill="#ffe500" layoutX="187.0" layoutY="190.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="MAKE GOOD USE OF LOGS, TURTLES AND CROCODILES, BUT WATCH OUT FOR THEIR DANGEROUS BEHAVIOUR!" textAlignment="RIGHT" wrappingWidth="389.9652099609375" />
          <Text fill="#ffe500" layoutX="260.0" layoutY="469.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="CATCH FLIES AND GET BONUS POINTS!" textAlignment="RIGHT" wrappingWidth="321.9652099609375" />
-         <ImageView fitHeight="29.0" fitWidth="81.0" layoutX="346.0" layoutY="277.0">
+         <ImageView fitHeight="29.0" fitWidth="81.0" layoutX="333.0" layoutY="282.0">
             <image>
-               <Image url="@../images/snake_animation_1.png" />
+               <Image url="@../images/snake_right_animation_1.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="48.0" fitWidth="71.0" layoutX="433.0" layoutY="324.0">
+         <ImageView fitHeight="48.0" fitWidth="71.0" layoutX="433.0" layoutY="347.0">
             <image>
                <Image url="@../images/car_1_left.png" />
             </image>
          </ImageView>
-         <ImageView fitHeight="62.0" fitWidth="178.0" layoutX="34.0" layoutY="175.0">
+         <ImageView fitHeight="62.0" fitWidth="178.0" layoutX="34.0" layoutY="182.0">
             <image>
                <Image url="@../images/turtle_animation_2.png" />
             </image>

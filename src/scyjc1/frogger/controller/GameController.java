@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
@@ -26,6 +28,10 @@ public class GameController {
 	private Text levelText;
 	@FXML
 	private Text message;
+	@FXML
+	private ImageView background;
+	@FXML
+	private ImageView snow;
 
 	private AnimationTimer timer;
 	private Frog frog;
@@ -38,6 +44,8 @@ public class GameController {
 	private boolean specialSlots = false;
 	private int numSpecialSlots = 0;
 	private boolean logSnakes = false;
+	private int easterEgg = 0;
+	private boolean easterEggOn = false;
 
 	@FXML
 	private void initialize() {
@@ -70,6 +78,45 @@ public class GameController {
 					bgm.mute();
 				}
 				musicMuted = !musicMuted;
+				break;
+			case S:
+				if (easterEgg == 0) {
+					easterEgg++;
+				} else {
+					easterEgg = 0;
+				}
+				break;
+			case C:
+				if (easterEgg == 1) {
+					easterEgg++;
+				} else if (easterEgg == 4) {
+					easterEgg++;
+				} else {
+					easterEgg = 0;
+				}
+				break;
+			case Y:
+				if (easterEgg == 2) {
+					easterEgg++;
+				} else {
+					easterEgg = 0;
+				}
+				break;
+			case J:
+				if (easterEgg == 3) {
+					easterEgg++;
+				} else {
+					easterEgg = 0;
+				}
+				break;
+			case DIGIT1:
+				if (easterEgg == 5) {
+					toggleEasterEgg();
+				}
+				easterEgg = 0;
+				break;
+			default:
+				easterEgg = 0;
 				break;
 		}
 	}
@@ -122,6 +169,11 @@ public class GameController {
 					levelUp();
 					levelText.setText("LEVEL-" + level);
 					message.setVisible(true);
+					// Award an extra life on occasion.
+					if (level % 5 == 1 && frog.getLives() < 3) {
+						frog.setLives(frog.getLives() + 1);
+						setLivesNumber(frog.getLives());
+					}
 				}
 				if (frog.gameOver()) {
 					// Stop game.
@@ -133,6 +185,7 @@ public class GameController {
 
 	private void startGame() {
 		if (HomeController.musicOn) {
+			bgm.unmute();
 			bgm.play();
 		}
 		createTimer();
@@ -200,8 +253,8 @@ public class GameController {
 	}
 
 	private void setLivesNumber(int lives) {
-		for (int i = 2; i >= lives; i--) {
-			lifeBox.getChildren().get(i).setVisible(false);
+		for (int i = 0; i < 3; i++) {
+			lifeBox.getChildren().get(i).setVisible(i + 1 <= lives);
 		}
 	}
 
@@ -273,6 +326,20 @@ public class GameController {
 				// Add snakes on logs.
 				logSnakes = true;
 				break;
+		}
+	}
+
+	private void toggleEasterEgg() {
+		easterEggOn = !easterEggOn;
+		if (easterEggOn) {
+			// Turn easter egg on.
+			background.setImage(new Image("file:resources/images/game_background_snow.png", 600, 600, true, true));
+			snow.setOpacity(100);
+			snow.toFront();
+		} else {
+			// Turn easter egg off.
+			background.setImage(new Image("file:resources/images/game_background.png", 600, 600, true, true));
+			snow.setOpacity(0);
 		}
 	}
 }

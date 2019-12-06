@@ -68,3 +68,12 @@ Introducing log snakes to the game.
 Refined digit pictures.
 Improved killing accuracy of crocodile head.
 Level indicator added.
+
+05/12/19
+Fix: Reset music mute status for each game.
+Help view refined.
+
+06/12/19
+Feature: easter egg.
+Feature: Application icon added.
+Giving a bonus life for every passed 5 levels.
