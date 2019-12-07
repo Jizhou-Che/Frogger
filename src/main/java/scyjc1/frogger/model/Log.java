@@ -9,13 +9,13 @@ public class Log extends MovingActor {
 	public Log(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		switch (type) {
 			case 1:
-				setImage(new Image("file:resources/images/log_1.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/log_1.png", size, size, true, true));
 				break;
 			case 2:
-				setImage(new Image("file:resources/images/log_2.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/log_2.png", size, size, true, true));
 				break;
 			case 3:
-				setImage(new Image("file:resources/images/log_3.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/log_3.png", size, size, true, true));
 				break;
 		}
 		setX(x);

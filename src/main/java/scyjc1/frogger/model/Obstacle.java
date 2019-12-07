@@ -9,22 +9,22 @@ public class Obstacle extends MovingActor {
 	public Obstacle(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		switch (type) {
 			case 1:
-				setImage(new Image("file:resources/images/car_1_left.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/car_1_left.png", size, size, true, true));
 				break;
 			case 2:
-				setImage(new Image("file:resources/images/car_1_right.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/car_1_right.png", size, size, true, true));
 				break;
 			case 3:
-				setImage(new Image("file:resources/images/truck_1_left.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/truck_1_left.png", size, size, true, true));
 				break;
 			case 4:
-				setImage(new Image("file:resources/images/truck_1_right.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/truck_1_right.png", size, size, true, true));
 				break;
 			case 5:
-				setImage(new Image("file:resources/images/truck_2_left.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/truck_2_left.png", size, size, true, true));
 				break;
 			case 6:
-				setImage(new Image("file:resources/images/truck_2_right.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/truck_2_right.png", size, size, true, true));
 				break;
 		}
 		setX(x);

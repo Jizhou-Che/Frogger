@@ -11,8 +11,8 @@ public class Crocodile extends MovingActor {
 	private double speed;
 
 	public Crocodile(int size, int x, int y, double speed) {
-		crocodile1 = new Image("file:resources/images/crocodile_animation_1.png", size, size, true, true);
-		crocodile2 = new Image("file:resources/images/crocodile_animation_2.png", size, size, true, true);
+		crocodile1 = new Image("file:src/main/resources/images/crocodile_animation_1.png", size, size, true, true);
+		crocodile2 = new Image("file:src/main/resources/images/crocodile_animation_2.png", size, size, true, true);
 		setImage(crocodile1);
 		setX(x);
 		setY(y);

@@ -23,7 +23,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Frogger");
-			primaryStage.getIcons().add(new Image("file:resources/images/frogger_icon.png"));
+			primaryStage.getIcons().add(new Image("file:src/main/resources/images/frogger_icon.png"));
 			primaryStage.show();
 			root.requestFocus();
 		} catch (Exception e) {

@@ -9,7 +9,7 @@ public class Digit extends Actor {
 	}
 
 	public Digit(int n, int size, int x, int y) {
-		setImage(new Image("file:resources/images/digit_" + n + ".png", size, size, true, true));
+		setImage(new Image("file:src/main/resources/images/digit_" + n + ".png", size, size, true, true));
 		setX(x);
 		setY(y);
 	}

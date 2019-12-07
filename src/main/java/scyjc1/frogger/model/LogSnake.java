@@ -14,12 +14,12 @@ public class LogSnake extends MovingActor {
 
 	public LogSnake(Log log, double speed) {
 		int size = (int) (log.getImage().getHeight() * 1.4);
-		logSnakeLeft1 = new Image("file:resources/images/snake_left_animation_1.png", size, size, true, true);
-		logSnakeLeft2 = new Image("file:resources/images/snake_left_animation_2.png", size, size, true, true);
-		logSnakeLeft3 = new Image("file:resources/images/snake_left_animation_3.png", size, size, true, true);
-		logSnakeRight1 = new Image("file:resources/images/snake_right_animation_1.png", size, size, true, true);
-		logSnakeRight2 = new Image("file:resources/images/snake_right_animation_2.png", size, size, true, true);
-		logSnakeRight3 = new Image("file:resources/images/snake_right_animation_3.png", size, size, true, true);
+		logSnakeLeft1 = new Image("file:src/main/resources/images/snake_left_animation_1.png", size, size, true, true);
+		logSnakeLeft2 = new Image("file:src/main/resources/images/snake_left_animation_2.png", size, size, true, true);
+		logSnakeLeft3 = new Image("file:src/main/resources/images/snake_left_animation_3.png", size, size, true, true);
+		logSnakeRight1 = new Image("file:src/main/resources/images/snake_right_animation_1.png", size, size, true, true);
+		logSnakeRight2 = new Image("file:src/main/resources/images/snake_right_animation_2.png", size, size, true, true);
+		logSnakeRight3 = new Image("file:src/main/resources/images/snake_right_animation_3.png", size, size, true, true);
 		if (speed >= 0) {
 			setImage(logSnakeRight1);
 			setX(log.getX());

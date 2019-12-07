@@ -14,26 +14,26 @@ public class Slot extends Actor {
 	public Slot(@NamedArg("x") int x, @NamedArg("y") int y) {
 		setX(x);
 		setY(y);
-		setImage(new Image("file:resources/images/slot.png", 60, 60, true, true));
+		setImage(new Image("file:src/main/resources/images/slot.png", 60, 60, true, true));
 	}
 
 	public void setEmpty() {
-		setImage(new Image("file:resources/images/slot.png", 60, 60, true, true));
+		setImage(new Image("file:src/main/resources/images/slot.png", 60, 60, true, true));
 		status = 0;
 	}
 
 	void setOccupied() {
-		setImage(new Image("file:resources/images/slot_occupied.png", 65, 65, true, true));
+		setImage(new Image("file:src/main/resources/images/slot_occupied.png", 65, 65, true, true));
 		status = 1;
 	}
 
 	public void setCrocodile() {
-		setImage(new Image("file:resources/images/slot_crocodile.png", 65, 65, true, true));
+		setImage(new Image("file:src/main/resources/images/slot_crocodile.png", 65, 65, true, true));
 		status = 2;
 	}
 
 	public void setFly() {
-		setImage(new Image("file:resources/images/slot_fly.png", 65, 65, true, true));
+		setImage(new Image("file:src/main/resources/images/slot_fly.png", 65, 65, true, true));
 		status = 3;
 	}
 
