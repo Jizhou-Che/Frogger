@@ -11,7 +11,7 @@ import java.io.File;
  */
 public class BackgroundMusic {
 	private static BackgroundMusic bgm;
-	private static final MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("resources/sounds/theme.mp3").toURI().toString()));
+	private static final MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("src/main/resources/sounds/theme.mp3").toURI().toString()));
 
 	private BackgroundMusic() {}
 

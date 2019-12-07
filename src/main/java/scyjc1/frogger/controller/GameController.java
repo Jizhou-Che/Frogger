@@ -333,12 +333,12 @@ public class GameController {
 		easterEggOn = !easterEggOn;
 		if (easterEggOn) {
 			// Turn easter egg on.
-			background.setImage(new Image("file:resources/images/game_background_snow.png", 600, 600, true, true));
+			background.setImage(new Image("file:src/main/resources/images/game_background_snow.png", 600, 600, true, true));
 			snow.setOpacity(100);
 			snow.toFront();
 		} else {
 			// Turn easter egg off.
-			background.setImage(new Image("file:resources/images/game_background.png", 600, 600, true, true));
+			background.setImage(new Image("file:src/main/resources/images/game_background.png", 600, 600, true, true));
 			snow.setOpacity(0);
 		}
 	}

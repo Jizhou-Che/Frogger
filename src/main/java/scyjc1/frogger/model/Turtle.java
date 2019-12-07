@@ -10,9 +10,9 @@ public class Turtle extends MovingActor {
 	private double speed;
 
 	public Turtle(@NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
-		turtle1 = new Image("file:resources/images/turtle_animation_1.png", size, size, true, true);
-		turtle2 = new Image("file:resources/images/turtle_animation_2.png", size, size, true, true);
-		turtle3 = new Image("file:resources/images/turtle_animation_3.png", size, size, true, true);
+		turtle1 = new Image("file:src/main/resources/images/turtle_animation_1.png", size, size, true, true);
+		turtle2 = new Image("file:src/main/resources/images/turtle_animation_2.png", size, size, true, true);
+		turtle3 = new Image("file:src/main/resources/images/turtle_animation_3.png", size, size, true, true);
 		setImage(turtle2);
 		setX(x);
 		setY(y);

@@ -4,7 +4,7 @@
 
 ### 1. Project Organisation
 
-* Using Maven as build tool: a standarised project structure makes the project easier to use or import from a different context.
+* Using Maven as build tool: a standardised project structure makes the project easier to use or import from a different context.
 
 * Packaging of source code: model, controller, test.
 
@@ -12,7 +12,7 @@
 
 ### 2. Testing
 
-* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring to ensure that the most crutial functionalities were always preserved.
+* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring to ensure that the most crucial functionalities were always preserved.
 
 * Unit tests for concrete models such as World and Obstacle were created along the refactoring of the respective classes. All further refactoring or extension were introduced with the premise of passing all previous tests for quality and correctness assurance.
 
@@ -42,7 +42,7 @@
     * Score calculation and display logic.
     * Handling of key press events.
     * Death checking logic.
-    * Movement issues under control or around boundries.
+    * Movement issues under control or around boundaries.
 
 ### 6. The MVC Pattern
 
@@ -67,12 +67,12 @@
 * Infinite game, limited number of lives.
 
 * Levels:
-    * #1: Ordinary obstacles, logs, turtles and wet turtles. Slow speed.
-    * #2: Random crocodile heads and flies start to emerge in slotsIncreased speed.
-    * #3: Snakes start to appear in middle lane. Medium speed.
-    * #4: Introducing swimming crocodiles. Increased speed.
-    * #5: Occasional snakes on logs. High speed.
-    * #6 and onwards: same as level #5.
+    * Level 1: Ordinary obstacles, logs, turtles and wet turtles. Slow speed.
+    * Level 2: Random crocodile heads and flies start to emerge in slots. Increased speed.
+    * Level 3: Snakes start to appear in middle lane. Medium speed.
+    * Level 4: Introducing swimming crocodiles. Increased speed.
+    * Level 5: Occasional snakes on logs. High speed.
+    * Level 6 and onwards: Same as level #5.
 
 * Bonus points for catching a fly.
 

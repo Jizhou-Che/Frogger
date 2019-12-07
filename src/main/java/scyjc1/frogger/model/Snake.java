@@ -12,12 +12,12 @@ public class Snake extends MovingActor {
 	private double speed;
 
 	public Snake(int size, int x, int y, double speed) {
-		snakeLeft1 = new Image("file:resources/images/snake_left_animation_1.png", size, size, true, true);
-		snakeLeft2 = new Image("file:resources/images/snake_left_animation_2.png", size, size, true, true);
-		snakeLeft3 = new Image("file:resources/images/snake_left_animation_3.png", size, size, true, true);
-		snakeRight1 = new Image("file:resources/images/snake_right_animation_1.png", size, size, true, true);
-		snakeRight2 = new Image("file:resources/images/snake_right_animation_2.png", size, size, true, true);
-		snakeRight3 = new Image("file:resources/images/snake_right_animation_3.png", size, size, true, true);
+		snakeLeft1 = new Image("file:src/main/resources/images/snake_left_animation_1.png", size, size, true, true);
+		snakeLeft2 = new Image("file:src/main/resources/images/snake_left_animation_2.png", size, size, true, true);
+		snakeLeft3 = new Image("file:src/main/resources/images/snake_left_animation_3.png", size, size, true, true);
+		snakeRight1 = new Image("file:src/main/resources/images/snake_right_animation_1.png", size, size, true, true);
+		snakeRight2 = new Image("file:src/main/resources/images/snake_right_animation_2.png", size, size, true, true);
+		snakeRight3 = new Image("file:src/main/resources/images/snake_right_animation_3.png", size, size, true, true);
 		if (speed >= 0) {
 			setImage(snakeRight1);
 		} else {
