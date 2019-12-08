@@ -9,16 +9,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import scyjc1.frogger.Main;
 import scyjc1.frogger.model.*;
+
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Controls behaviours and handles events on the game view.
+ */
 public class GameController {
 	@FXML
 	private World world;
@@ -47,10 +50,11 @@ public class GameController {
 	private int easterEgg = 0;
 	private boolean easterEggOn = false;
 
+	/**
+	 * Initialises the game view.
+	 */
 	@FXML
 	private void initialize() {
-		// Load font.
-		Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Add frog.
 		frog = new Frog();
 		world.add(frog);
@@ -60,6 +64,12 @@ public class GameController {
 		startGame();
 	}
 
+	/**
+	 * Handles key-pressed events on the game view.
+	 * This includes the movement controls of the frog, pausing or muting the game, and the activation of the easter egg.
+	 *
+	 * @param event the key-pressed event.
+	 */
 	@FXML
 	public void keyPressed(KeyEvent event) {
 		switch (event.getCode()) {
@@ -121,26 +131,35 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Creates the timer for checking events consecutively.
+	 * The events include the change of score or number of lives, addition of random elements, and the winning or losing of the game.
+	 */
 	private void createTimer() {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				timeValue++;
+
+				// Set number of lives if applicable.
 				if (frog.changeLives()) {
 					setLivesNumber(frog.getLives());
 				}
+
+				// Set the score if applicable.
 				if (frog.changeScore()) {
 					setScoreNumber(frog.getScore());
-					if (message.isVisible()) {
-						message.setVisible(false);
-					}
+					// Hide the message on score change.
+					message.setVisible(false);
 				}
+
+				// Make a random special slot periodically.
 				if (specialSlots && timeValue % 500 == 0) {
 					if (numSpecialSlots == 0) {
-						// Add a special slot.
+						// Choose a random slot.
 						Slot randomSlot = world.getObjects(Slot.class).get((int) (Math.random() * 5));
 						if (randomSlot.getStatus() == 0) {
-							// Make a random special slot.
+							// Make a random special slot if the chosen slot is empty.
 							if ((int) (Math.random() * 2) == 0) {
 								randomSlot.setCrocodile();
 							} else {
@@ -149,7 +168,7 @@ public class GameController {
 						}
 						numSpecialSlots++;
 					} else {
-						// Remove the special slot.
+						// Remove the special slot if there is already one.
 						for (Slot s : world.getObjects(Slot.class)) {
 							if (s.getStatus() >= 2) {
 								s.setEmpty();
@@ -158,15 +177,20 @@ public class GameController {
 						numSpecialSlots--;
 					}
 				}
+
+				// Put a log snake on a random log periodically.
 				if (logSnakes && timeValue % 750 == 0) {
 					world.add(new LogSnake(world.getObjects(Log.class).get((int) (Math.random() * world.getObjects(Log.class).size())), 0.5 - (int) (Math.random() * 2)));
 					frog.toFront();
 				}
-				if (frog.gameWon()) {
+
+				// Handles the completion of a level.
+				if (frog.levelComplete()) {
 					// Clear slots.
 					frog.resetSlots();
 					// Level up.
 					levelUp();
+					// Display message.
 					levelText.setText("LEVEL-" + level);
 					message.setVisible(true);
 					// Award an extra life on occasion.
@@ -175,6 +199,8 @@ public class GameController {
 						setLivesNumber(frog.getLives());
 					}
 				}
+
+				// Handles the ending of the game.
 				if (frog.gameOver()) {
 					// Stop game.
 					stopGame();
@@ -183,6 +209,9 @@ public class GameController {
 		};
 	}
 
+	/**
+	 * Starts the game.
+	 */
 	private void startGame() {
 		if (HomeController.musicOn) {
 			bgm.unmute();
@@ -193,6 +222,9 @@ public class GameController {
 		world.start();
 	}
 
+	/**
+	 * Pauses the game.
+	 */
 	private void pauseGame() {
 		if (HomeController.musicOn) {
 			bgm.pause();
@@ -202,6 +234,9 @@ public class GameController {
 		world.stop();
 	}
 
+	/**
+	 * Resumes the game.
+	 */
 	private void resumeGame() {
 		if (HomeController.musicOn) {
 			bgm.play();
@@ -211,6 +246,10 @@ public class GameController {
 		world.resume();
 	}
 
+	/**
+	 * Stops the game.
+	 * Checks for high scores and switches to the respective view on demand.
+	 */
 	private void stopGame() {
 		if (HomeController.musicOn) {
 			bgm.stop();
@@ -218,8 +257,9 @@ public class GameController {
 		timer.stop();
 		frog.toggleNoMove();
 		world.stop();
-		score = frog.getScore();
+
 		// Check for high score.
+		score = frog.getScore();
 		try {
 			File dataDirectory = new File(".data");
 			File leaderboardFile = new File(dataDirectory, "leaderboard.csv");
@@ -252,12 +292,22 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Displays the number of lives with corresponding number of pictures.
+	 *
+	 * @param lives the number of lives to be set as an integer.
+	 */
 	private void setLivesNumber(int lives) {
 		for (int i = 0; i < 3; i++) {
 			lifeBox.getChildren().get(i).setVisible(i + 1 <= lives);
 		}
 	}
 
+	/**
+	 * Displays the score with pictures.
+	 *
+	 * @param score the score to be set as an integer.
+	 */
 	private void setScoreNumber(int score) {
 		// Clear digits.
 		for (Digit d : world.getObjects(Digit.class)) {
@@ -277,6 +327,9 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Handles the speeding up of moving elements and the introduction of challenging elements on level up.
+	 */
 	private void levelUp() {
 		level++;
 		switch (level) {
@@ -329,6 +382,9 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Toggles the easter egg on or off.
+	 */
 	private void toggleEasterEgg() {
 		easterEggOn = !easterEggOn;
 		if (easterEggOn) {

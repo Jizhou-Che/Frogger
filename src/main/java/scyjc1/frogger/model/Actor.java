@@ -4,14 +4,14 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 
 /**
- * All active objects.
+ * All active ImageView objects that can be added to the game view.
  */
 public abstract class Actor extends ImageView {
 	/**
-	 * Changes position of the actor.
+	 * Changes position of the Actor.
 	 *
-	 * @param dx movement to the x direction, can be negative.
-	 * @param dy movement to the y direction, can be negative.
+	 * @param dx movement to the x direction, possibly negative.
+	 * @param dy movement to the y direction, possibly negative.
 	 */
 	public void move(double dx, double dy) {
 		setX(getX() + dx);
@@ -19,13 +19,22 @@ public abstract class Actor extends ImageView {
 	}
 
 	/**
-	 * @return the world the actor is in.
+	 * Gets the game world the Actor is in.
+	 *
+	 * @return the pane the actor is in as a World.
 	 */
 	public World getWorld() {
 		return (World) getParent();
 	}
 
-	public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls) {
+	/**
+	 * Gets all intersecting objects with the actor in the game world.
+	 *
+	 * @param cls the class of objects to check for intersection.
+	 * @param <A> the name of the class to be specified.
+	 * @return all intersecting objects as an ArrayList.
+	 */
+	public <A extends Actor> ArrayList<A> getIntersectingObjects(Class<A> cls) {
 		ArrayList<A> intersectingObjects = new ArrayList<A>();
 		for (A actor : getWorld().getObjects(cls)) {
 			if (actor != this && actor.intersects(this.getBoundsInLocal())) {
@@ -35,5 +44,10 @@ public abstract class Actor extends ImageView {
 		return intersectingObjects;
 	}
 
+	/**
+	 * Defines the behaviour of the Actor with respect to the current time.
+	 *
+	 * @param now the current time.
+	 */
 	public abstract void act(long now);
 }

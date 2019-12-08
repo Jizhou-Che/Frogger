@@ -6,16 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Font;
 import scyjc1.frogger.Main;
 
+/**
+ * Controls behaviours and handles events on the help view.
+ */
 public class HelpController {
 	@FXML
 	private void initialize() {
-		// Load font.
-		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 	}
 
+	/**
+	 * Handles key-pressed events on the help view.
+	 * This includes the scene switching to the home view.
+	 *
+	 * @param keyEvent the key-pressed event.
+	 */
 	@FXML
 	private void keyPressed(KeyEvent keyEvent) {
 		if (keyEvent.getCode() == KeyCode.ENTER) {

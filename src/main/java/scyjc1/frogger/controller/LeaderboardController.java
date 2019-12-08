@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.text.Font;
 import scyjc1.frogger.Main;
 
 import java.io.File;
@@ -16,19 +15,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * Controls behaviours and handles events on the leaderboard view.
+ */
 public class LeaderboardController {
 	@FXML
-	private ListView score;
+	private ListView<String> score;
 	@FXML
-	private ListView date;
+	private ListView<String> date;
 	@FXML
-	private ListView name;
+	private ListView<String> name;
 
+	/**
+	 * Initialises the leaderboard view.
+	 */
 	@FXML
 	private void initialize() {
-		// Load font.
-		Font prstartkLarge = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
-
 		// Load high scores.
 		try {
 			File dataDirectory = new File(".data");
@@ -55,6 +57,12 @@ public class LeaderboardController {
 		}
 	}
 
+	/**
+	 * Handles the key-pressed events on the leaderboard view.
+	 * This includes the scene switching to the home view.
+	 *
+	 * @param keyEvent the key-pressed event.
+	 */
 	@FXML
 	private void keyPressed(KeyEvent keyEvent) {
 		if (keyEvent.getCode() == KeyCode.ENTER) {

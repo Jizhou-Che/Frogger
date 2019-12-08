@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -14,8 +15,17 @@ public class Main extends Application {
 		launch(args);
 	}
 
+	/**
+	 * Initialises the primary stage of the application.
+	 * This includes the loading of the home view, fonts, title and icon.
+	 *
+	 * @param primaryStage the primary stage of the application.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
+		// Load font.
+		Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
+		// Load the home view.
 		mainStage = primaryStage;
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));

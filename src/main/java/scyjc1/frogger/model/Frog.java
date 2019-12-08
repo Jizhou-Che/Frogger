@@ -250,7 +250,7 @@ public class Frog extends Actor {
 	/**
 	 * @return boolean indicating whether all slots are occupied.
 	 */
-	public boolean gameWon() {
+	public boolean levelComplete() {
 		return slotsOccupied == 5;
 	}
 

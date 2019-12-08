@@ -77,3 +77,7 @@ Giving a bonus life for every passed 5 levels.
 
 07/12/19
 Draft of README written.
+
+08/12/19
+Refactoring on the controllers for single responsibility.
+Javadoc partially added.

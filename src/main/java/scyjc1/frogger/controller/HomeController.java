@@ -5,25 +5,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import scyjc1.frogger.Main;
 
+/**
+ * Controls behaviours and handles events on the home view.
+ */
 public class HomeController {
 	@FXML
 	private VBox optionBox;
 
-	private int optionOld = 0;
 	private int optionNew = 0;
 	static boolean musicOn = true;
 
+	/**
+	 * Initialises the home view.
+	 */
 	@FXML
 	private void initialize() {
-		// Load font.
-		Font prstartk = Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Set style for start.
 		optionBox.getChildren().get(0).getStyleClass().add("active");
 		// Set music status.
@@ -33,15 +34,19 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * Handles the key-pressed events on the home view.
+	 * This includes the switching of options and the scene switching to other views.
+	 *
+	 * @param keyEvent the key-pressed event.
+	 */
 	@FXML
-	private void keyPressed(KeyEvent event) {
-		optionOld = optionNew;
-		switchOption(event.getCode());
-	}
+	private void keyPressed(KeyEvent keyEvent) {
+		// Remember old option.
+		int optionOld = optionNew;
 
-	private void switchOption(KeyCode code) {
 		// Get new option.
-		switch (code) {
+		switch (keyEvent.getCode()) {
 			case W:
 				optionNew = optionOld - 1;
 				if (optionNew < 0) {
@@ -90,7 +95,13 @@ public class HomeController {
 						break;
 					case 3:
 						// Switch music.
-						switchMusic();
+						Text tMusic = (Text) optionBox.getChildren().get(3);
+						if (musicOn) {
+							tMusic.setText("> MUSIC: OFF <");
+						} else {
+							tMusic.setText("> MUSIC: ON <");
+						}
+						musicOn = !musicOn;
 						break;
 					case 4:
 						// Quit game.
@@ -112,15 +123,5 @@ public class HomeController {
 			textNew.setText("> " + textNew.getText() + " <");
 			textNew.getStyleClass().add("active");
 		}
-	}
-
-	private void switchMusic() {
-		Text tMusic = (Text) optionBox.getChildren().get(3);
-		if (musicOn) {
-			tMusic.setText("> MUSIC: OFF <");
-		} else {
-			tMusic.setText("> MUSIC: ON <");
-		}
-		musicOn = !musicOn;
 	}
 }

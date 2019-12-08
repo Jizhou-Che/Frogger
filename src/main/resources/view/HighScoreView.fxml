@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/HighScore.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.HighScoreController">
+<AnchorPane onKeyTyped="#keyTyped" onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/HighScore.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.HighScoreController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="600.0">
          <image>
