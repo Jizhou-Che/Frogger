@@ -26,6 +26,8 @@ public class GameController {
 	@FXML
 	private World world;
 	@FXML
+	private Frog frog;
+	@FXML
 	private HBox lifeBox;
 	@FXML
 	private Text levelText;
@@ -37,11 +39,15 @@ public class GameController {
 	private ImageView snow;
 
 	private AnimationTimer timer;
-	private Frog frog;
 	private BackgroundMusic bgm = BackgroundMusic.getBgm();
 	private boolean gamePaused = false;
 	private boolean musicMuted = false;
+	private char keyPressed;
+	private boolean keyHold = false; // Whether the jump key is held.
+	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
+	private int slotsOccupied = 0; // The number of occupied slots.
 	static int score;
+	private int lives = 3;
 	private int level = 1;
 	private int timeValue = 0;
 	private boolean specialSlots = false;
@@ -55,9 +61,6 @@ public class GameController {
 	 */
 	@FXML
 	private void initialize() {
-		// Add frog.
-		frog = new Frog();
-		world.add(frog);
 		// Initialise score.
 		setScoreNumber(0);
 		// Start game.
@@ -68,11 +71,11 @@ public class GameController {
 	 * Handles key-pressed events on the game view.
 	 * This includes the movement controls of the frog, pausing or muting the game, and the activation of the easter egg.
 	 *
-	 * @param event the key-pressed event.
+	 * @param keyEvent the key-pressed event.
 	 */
 	@FXML
-	public void keyPressed(KeyEvent event) {
-		switch (event.getCode()) {
+	public void keyPressed(KeyEvent keyEvent) {
+		switch (keyEvent.getCode()) {
 			case SPACE:
 				if (gamePaused) {
 					resumeGame();
@@ -89,7 +92,49 @@ public class GameController {
 				}
 				musicMuted = !musicMuted;
 				break;
+			case W:
+				if (!frog.checkNoMove()) {
+					if (keyHold) {
+						keyReleased(keyEvent);
+					} else {
+						frog.moveUp(true);
+						keyPressed = 'W';
+						keyHold = true;
+					}
+				}
+				break;
+			case A:
+				if (!frog.checkNoMove()) {
+					if (keyHold) {
+						keyReleased(keyEvent);
+					} else {
+						frog.moveLeft(true);
+						keyPressed = 'A';
+						keyHold = true;
+					}
+				}
+				break;
+			case D:
+				if (!frog.checkNoMove()) {
+					if (keyHold) {
+						keyReleased(keyEvent);
+					} else {
+						frog.moveRight(true);
+						keyPressed = 'D';
+						keyHold = true;
+					}
+				}
+				break;
 			case S:
+				if (!frog.checkNoMove()) {
+					if (keyHold) {
+						keyReleased(keyEvent);
+					} else {
+						frog.moveDown(true);
+						keyPressed = 'S';
+						keyHold = true;
+					}
+				}
 				if (easterEgg == 0) {
 					easterEgg++;
 				} else {
@@ -131,6 +176,33 @@ public class GameController {
 		}
 	}
 
+	@FXML
+	public void keyReleased(KeyEvent keyEvent) {
+		if (!frog.checkNoMove() && keyHold) {
+			if (keyPressed == 'W') {
+				frog.moveUp(false);
+				keyHold = false;
+				if (frog.getY() < progressY) {
+					// A further reach in the current life. 10 points awarded.
+					progressY = frog.getY();
+					score += 10;
+					setScoreNumber(score);
+					// Hide the message on score change.
+					message.setVisible(false);
+				}
+			} else if (keyPressed == 'A') {
+				frog.moveLeft(false);
+				keyHold = false;
+			} else if (keyPressed == 'S') {
+				frog.moveDown(false);
+				keyHold = false;
+			} else if (keyPressed == 'D') {
+				frog.moveRight(false);
+				keyHold = false;
+			}
+		}
+	}
+
 	/**
 	 * Creates the timer for checking events consecutively.
 	 * The events include the change of score or number of lives, addition of random elements, and the winning or losing of the game.
@@ -141,16 +213,18 @@ public class GameController {
 			public void handle(long now) {
 				timeValue++;
 
-				// Set number of lives if applicable.
-				if (frog.changeLives()) {
-					setLivesNumber(frog.getLives());
+				if (frog.checkWin()) {
+					winReset();
+				}
+
+				if (frog.checkDeath()) {
+					deathReset();
 				}
 
 				// Set the score if applicable.
-				if (frog.changeScore()) {
-					setScoreNumber(frog.getScore());
-					// Hide the message on score change.
-					message.setVisible(false);
+				if (frog.getBonus()) {
+					score += 25;
+					setScoreNumber(score);
 				}
 
 				// Make a random special slot periodically.
@@ -185,23 +259,23 @@ public class GameController {
 				}
 
 				// Handles the completion of a level.
-				if (frog.levelComplete()) {
+				if (slotsOccupied == 5) {
 					// Clear slots.
-					frog.resetSlots();
+					resetSlots();
 					// Level up.
 					levelUp();
 					// Display message.
 					levelText.setText("LEVEL-" + level);
 					message.setVisible(true);
 					// Award an extra life on occasion.
-					if (level % 5 == 1 && frog.getLives() < 3) {
-						frog.setLives(frog.getLives() + 1);
-						setLivesNumber(frog.getLives());
+					if (level % 5 == 1 && lives < 3) {
+						lives++;
+						setLivesNumber(lives);
 					}
 				}
 
 				// Handles the ending of the game.
-				if (frog.gameOver()) {
+				if (lives == 0) {
 					// Stop game.
 					stopGame();
 				}
@@ -259,7 +333,6 @@ public class GameController {
 		world.stop();
 
 		// Check for high score.
-		score = frog.getScore();
 		try {
 			File dataDirectory = new File(".data");
 			File leaderboardFile = new File(dataDirectory, "leaderboard.csv");
@@ -274,7 +347,7 @@ public class GameController {
 				}
 			}
 			List<String> records = Files.readAllLines(Paths.get(".data/leaderboard.csv"), StandardCharsets.UTF_8);
-			if (records.size() < 10 || frog.getScore() > Integer.parseInt(records.get(9).substring(0, records.get(9).indexOf(',')))) {
+			if (records.size() < 10 || score > Integer.parseInt(records.get(9).substring(0, records.get(9).indexOf(',')))) {
 				// Go to high score.
 				Parent highScoreLoader = FXMLLoader.load(getClass().getResource("/view/HighScoreView.fxml"));
 				Scene highScoreScene = new Scene(highScoreLoader, 600, 800);
@@ -290,6 +363,34 @@ public class GameController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Resets death associated data.
+	 */
+	private void deathReset() {
+		// Decrement number of lives.
+		lives--;
+		setLivesNumber(lives);
+		// Update score.
+		if (score >= 50) {
+			score -= 50;
+			setScoreNumber(score);
+		}
+		// Reset key-hold status.
+		keyHold = false;
+	}
+
+	/**
+	 * Resets death associated data.
+	 */
+	private void winReset() {
+		slotsOccupied++;
+		score += 50;
+		setScoreNumber(score);
+		progressY = 800;
+		// Reset key-hold status.
+		keyHold = false;
 	}
 
 	/**
@@ -324,6 +425,17 @@ public class GameController {
 				shift += 25;
 				score /= 10;
 			}
+		}
+	}
+
+	/**
+	 * Resets all slots to empty.
+	 */
+	public void resetSlots() {
+		slotsOccupied = 0;
+		for (Actor a : world.getObjects(Slot.class)) {
+			Slot s = (Slot) a;
+			s.setEmpty();
 		}
 	}
 

@@ -58,7 +58,7 @@ public class WetTurtle extends MovingActor {
 		this.speed = speed;
 	}
 
-	boolean isSunk() {
+	public boolean isSunk() {
 		return isSunk;
 	}
 }

@@ -1,25 +1,18 @@
 package scyjc1.frogger.model;
 
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 public class Frog extends Actor {
 	private int imgSize = 40;
-	private int lives = 3;
-	private int score = 0;
 	private double movementX = 10.666666 * 2;
 	private double movementY = 13.333333 * 2;
-	private int slotsOccupied = 0; // The number of occupied slots.
-	private char keyPressed;
-	private boolean keyHold = false; // Whether the jump key is held.
 	private boolean noMove = false; // Whether the frog is forbidden to move.
 	private boolean carDeath = false; // Whether the frog is dead because of a car.
 	private boolean waterDeath = false; // Whether the frog is dead because of water.
 	private int deathAnimationFlag = 0; // The stage of death animation.
-	private boolean changeLives = false; // Whether the number of lives should be redisplayed in this frame.
-	private boolean changeScore = false; // Whether the score should be redisplayed in this frame.
-	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
+	private boolean win = false;
+	private boolean death = false;
+	private boolean bonus = false;
 
 	private Image imgUp = new Image("file:src/main/resources/images/frogger_up.png", imgSize, imgSize, true, true);
 	private Image imgLeft = new Image("file:src/main/resources/images/frogger_left.png", imgSize, imgSize, true, true);
@@ -29,72 +22,19 @@ public class Frog extends Actor {
 	private Image imgLeftJump = new Image("file:src/main/resources/images/frogger_left_jump.png", imgSize, imgSize, true, true);
 	private Image imgDownJump = new Image("file:src/main/resources/images/frogger_down_jump.png", imgSize, imgSize, true, true);
 	private Image imgRightJump = new Image("file:src/main/resources/images/frogger_right_jump.png", imgSize, imgSize, true, true);
+	private Image imgCarDeath1 = new Image("file:src/main/resources/images/car_death_animation_1.png", imgSize, imgSize, true, true);
+	private Image imgCarDeath2 = new Image("file:src/main/resources/images/car_death_animation_2.png", imgSize, imgSize, true, true);
+	private Image imgCarDeath3 = new Image("file:src/main/resources/images/car_death_animation_3.png", imgSize, imgSize, true, true);
+	private Image imgWaterDeath1 = new Image("file:src/main/resources/images/water_death_animation_1.png", imgSize, imgSize, true, true);
+	private Image imgWaterDeath2 = new Image("file:src/main/resources/images/water_death_animation_2.png", imgSize, imgSize, true, true);
+	private Image imgWaterDeath3 = new Image("file:src/main/resources/images/water_death_animation_3.png", imgSize, imgSize, true, true);
+	private Image imgWaterDeath4 = new Image("file:src/main/resources/images/water_death_animation_4.png", imgSize, imgSize, true, true);
 
 	public Frog() {
 		// Initialise image and position.
 		setImage(imgUp);
 		setX(300);
 		setY(705);
-
-		// Set key handlers.
-		setOnKeyPressed(this::handleKeyPressed);
-		setOnKeyReleased(this::handleKeyReleased);
-	}
-
-	private void handleKeyPressed(KeyEvent event) {
-		if (!noMove) {
-			if (keyHold) {
-				handleKeyReleased(event);
-			} else if (event.getCode() == KeyCode.W) {
-				move(0, -movementY);
-				setImage(imgUpJump);
-				keyPressed = 'W';
-				keyHold = true;
-			} else if (event.getCode() == KeyCode.A) {
-				move(-movementX, 0);
-				setImage(imgLeftJump);
-				keyPressed = 'A';
-				keyHold = true;
-			} else if (event.getCode() == KeyCode.S) {
-				move(0, movementY);
-				setImage(imgDownJump);
-				keyPressed = 'S';
-				keyHold = true;
-			} else if (event.getCode() == KeyCode.D) {
-				move(movementX, 0);
-				setImage(imgRightJump);
-				keyPressed = 'D';
-				keyHold = true;
-			}
-		}
-	}
-
-	private void handleKeyReleased(KeyEvent event) {
-		if (!noMove && keyHold) {
-			if (keyPressed == 'W') {
-				move(0, -movementY);
-				setImage(imgUp);
-				if (getY() < progressY) {
-					// A further reach in the current life. 10 points awarded.
-					progressY = getY();
-					score += 10;
-					changeScore = true;
-				}
-				keyHold = false;
-			} else if (keyPressed == 'A') {
-				move(-movementX, 0);
-				setImage(imgLeft);
-				keyHold = false;
-			} else if (keyPressed == 'S') {
-				move(0, movementY);
-				setImage(imgDown);
-				keyHold = false;
-			} else if (keyPressed == 'D') {
-				move(movementX, 0);
-				setImage(imgRight);
-				keyHold = false;
-			}
-		}
 	}
 
 	@Override
@@ -120,15 +60,16 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:src/main/resources/images/car_death_animation_1.png", imgSize, imgSize, true, true));
+				setImage(imgCarDeath1);
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:src/main/resources/images/car_death_animation_2.png", imgSize, imgSize, true, true));
+				setImage(imgCarDeath2);
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:src/main/resources/images/car_death_animation_3.png", imgSize, imgSize, true, true));
+				setImage(imgCarDeath3);
 			}
 			if (deathAnimationFlag == 4) {
+				death = true;
 				deathReset();
 			}
 		}
@@ -139,18 +80,19 @@ public class Frog extends Actor {
 				deathAnimationFlag++;
 			}
 			if (deathAnimationFlag == 1) {
-				setImage(new Image("file:src/main/resources/images/water_death_animation_1.png", imgSize, imgSize, true, true));
+				setImage(imgWaterDeath1);
 			}
 			if (deathAnimationFlag == 2) {
-				setImage(new Image("file:src/main/resources/images/water_death_animation_2.png", imgSize, imgSize, true, true));
+				setImage(imgWaterDeath2);
 			}
 			if (deathAnimationFlag == 3) {
-				setImage(new Image("file:src/main/resources/images/water_death_animation_3.png", imgSize, imgSize, true, true));
+				setImage(imgWaterDeath3);
 			}
 			if (deathAnimationFlag == 4) {
-				setImage(new Image("file:src/main/resources/images/water_death_animation_4.png", imgSize, imgSize, true, true));
+				setImage(imgWaterDeath4);
 			}
 			if (deathAnimationFlag == 5) {
+				death = true;
 				deathReset();
 			}
 		}
@@ -205,120 +147,104 @@ public class Frog extends Actor {
 				} else {
 					if (getIntersectingObjects(Slot.class).get(0).getStatus() == 3) {
 						// Fly slot.
-						score += 25;
+						bonus = true;
 					}
-					getIntersectingObjects(Slot.class).get(0).setOccupied();
-					slotsOccupied++;
-					score += 50;
-					changeScore = true;
-					progressY = 800;
-					setX(300);
-					setY(705);
+					win = true;
+					winReset();
 				}
 			} else if (getY() < 413) {
 				// Frog enters the river but lands on nothing.
 				waterDeath = true;
-				noMove = true; // Disable moving.
+				noMove = true;
 			}
 		}
+	}
+
+	public void winReset() {
+		getIntersectingObjects(Slot.class).get(0).setOccupied();
+		setX(300);
+		setY(705);
 	}
 
 	/**
 	 * Resets death associated data.
 	 */
-	private void deathReset() {
-		// Decrement number of lives.
-		lives--;
-		changeLives = true;
+	public void deathReset() {
 		// Reset frog image and position.
-		setImage(new Image("file:src/main/resources/images/frogger_up.png", imgSize, imgSize, true, true));
+		setImage(imgUp);
 		setX(300);
 		setY(705);
-		// Reset key holding status.
-		keyHold = false;
 		// Clear death flags.
 		carDeath = waterDeath = false;
 		deathAnimationFlag = 0;
 		noMove = false;
-		// Update score.
-		if (score >= 50) {
-			score -= 50;
-			changeScore = true;
-		}
 	}
 
-	/**
-	 * @return boolean indicating whether all slots are occupied.
-	 */
-	public boolean levelComplete() {
-		return slotsOccupied == 5;
-	}
-
-	/**
-	 * @return boolean indicating whether all lives are spent.
-	 */
-	public boolean gameOver() {
-		return lives == 0;
-	}
-
-	/**
-	 * @return the current number of lives as an integer.
-	 */
-	public int getLives() {
-		return lives;
-	}
-
-	/**
-	 * @param lives the number of lives to be set.
-	 *
-	 * Sets the number of lives of the frog.
-	 */
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-
-	/**
-	 * @return the current points as an integer.
-	 */
-	public int getScore() {
-		return score;
-	}
-
-	/**
-	 * @return boolean indicating whether an update to the life images is pending.
-	 *
-	 * Resets the pending status as a side effect.
-	 */
-	public boolean changeLives() {
-		if (changeLives) {
-			changeLives = false;
+	public boolean getBonus() {
+		if (bonus) {
+			bonus = false;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
-	/**
-	 * @return boolean indicating whether an update to the score digits is pending.
-	 *
-	 * Resets the pending status as a side effect.
-	 */
-	public boolean changeScore() {
-		if (changeScore) {
-			changeScore = false;
+	public void moveUp(boolean jumping) {
+		move(0, -movementY);
+		if (jumping) {
+			setImage(imgUpJump);
+		} else {
+			setImage(imgUp);
+		}
+	}
+
+	public void moveLeft(boolean jumping) {
+		move(-movementX, 0);
+		if (jumping) {
+			setImage(imgLeftJump);
+		} else {
+			setImage(imgLeft);
+		}
+	}
+
+	public void moveDown(boolean jumping) {
+		move(0, movementY);
+		if (jumping) {
+			setImage(imgDownJump);
+		} else {
+			setImage(imgDown);
+		}
+	}
+
+	public void moveRight(boolean jumping) {
+		move(movementX, 0);
+		if (jumping) {
+			setImage(imgRightJump);
+		} else {
+			setImage(imgRight);
+		}
+	}
+
+	public boolean checkWin() {
+		if (win) {
+			win = false;
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
-	/**
-	 * Resets all slots to empty.
-	 */
-	public void resetSlots() {
-		slotsOccupied = 0;
-		for (Actor a : getWorld().getObjects(Slot.class)) {
-			Slot s = (Slot) a;
-			s.setEmpty();
+	public boolean checkDeath() {
+		if (death) {
+			death = false;
+			return true;
+		} else {
+			return false;
 		}
+	}
+
+	public boolean checkNoMove() {
+		return noMove;
 	}
 
 	public void toggleNoMove() {

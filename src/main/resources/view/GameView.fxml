@@ -5,7 +5,7 @@
 <?import scyjc1.frogger.model.*?>
 <?import javafx.scene.text.Text?>
 
-<World fx:id="world" onKeyPressed="#keyPressed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<World fx:id="world" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
        minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Game.css" xmlns="http://javafx.com/javafx/11.0.1"
        xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.GameController">
     <ImageView fx:id="background" fitHeight="800.0" fitWidth="600.0">
@@ -64,4 +64,6 @@
     <Obstacle type="6" size="200" x="0" y="540" speed="1"/>
     <Obstacle type="6" size="200" x="500" y="540" speed="1"/>
     <Obstacle type="1" size="50" x="500" y="490" speed="-5"/>
+
+    <Frog fx:id="frog"/>
 </World>

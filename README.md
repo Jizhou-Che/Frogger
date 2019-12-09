@@ -22,7 +22,7 @@
 
 * The first stage of refactoring focused on reformatting, renaming and extracting methods. This process brought enhanced readability and reduced duplication of the code, while establishing a clearer understanding to the purposes of fields and methods and the structure of method calling chains.
 
-* _A further refactoring?_
+* A further refactoring took place later on extracting the controls of Frog to GameController. This enhanced the separation of model and controller and brought higher clarity to the code.
 
 ### 4. Refactoring on Concrete Classes
 
@@ -72,7 +72,7 @@
     * Level 3: Snakes start to appear in middle lane. Medium speed.
     * Level 4: Introducing swimming crocodiles. Increased speed.
     * Level 5: Occasional snakes on logs. High speed.
-    * Level 6 and onwards: Same as level #5.
+    * Level 6 and onwards: Same as level 5.
 
 * Bonus points for catching a fly.
 
