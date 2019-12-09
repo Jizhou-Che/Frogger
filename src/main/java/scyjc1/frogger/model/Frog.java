@@ -1,12 +1,36 @@
 package scyjc1.frogger.model;
 
+import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
+/**
+ * <h1>Frog</h1>
+ * <h2>Extends {@link Actor}.</h2>
+ * <p>
+ *     The most important element in the game.
+ *     The frog can jump around and interact with other game elements, causing a possible change to the game score.
+ * </p>
+ */
 public class Frog extends Actor {
-	private int imgSize = 40;
+	private Image imgUp;
+	private Image imgLeft;
+	private Image imgDown;
+	private Image imgRight;
+	private Image imgUpJump;
+	private Image imgLeftJump;
+	private Image imgDownJump;
+	private Image imgRightJump;
+	private Image imgCarDeath1;
+	private Image imgCarDeath2;
+	private Image imgCarDeath3;
+	private Image imgWaterDeath1;
+	private Image imgWaterDeath2;
+	private Image imgWaterDeath3;
+	private Image imgWaterDeath4;
+	private int imgSize;
 	private double movementX = 10.666666 * 2;
 	private double movementY = 13.333333 * 2;
-	private boolean noMove = false; // Whether the frog is forbidden to move.
+	private boolean movable = true; // Whether the frog is able to move.
 	private boolean carDeath = false; // Whether the frog is dead because of a car.
 	private boolean waterDeath = false; // Whether the frog is dead because of water.
 	private int deathAnimationFlag = 0; // The stage of death animation.
@@ -14,29 +38,42 @@ public class Frog extends Actor {
 	private boolean death = false;
 	private boolean bonus = false;
 
-	private Image imgUp = new Image("file:src/main/resources/images/frogger_up.png", imgSize, imgSize, true, true);
-	private Image imgLeft = new Image("file:src/main/resources/images/frogger_left.png", imgSize, imgSize, true, true);
-	private Image imgDown = new Image("file:src/main/resources/images/frogger_down.png", imgSize, imgSize, true, true);
-	private Image imgRight = new Image("file:src/main/resources/images/frogger_right.png", imgSize, imgSize, true, true);
-	private Image imgUpJump = new Image("file:src/main/resources/images/frogger_up_jump.png", imgSize, imgSize, true, true);
-	private Image imgLeftJump = new Image("file:src/main/resources/images/frogger_left_jump.png", imgSize, imgSize, true, true);
-	private Image imgDownJump = new Image("file:src/main/resources/images/frogger_down_jump.png", imgSize, imgSize, true, true);
-	private Image imgRightJump = new Image("file:src/main/resources/images/frogger_right_jump.png", imgSize, imgSize, true, true);
-	private Image imgCarDeath1 = new Image("file:src/main/resources/images/car_death_animation_1.png", imgSize, imgSize, true, true);
-	private Image imgCarDeath2 = new Image("file:src/main/resources/images/car_death_animation_2.png", imgSize, imgSize, true, true);
-	private Image imgCarDeath3 = new Image("file:src/main/resources/images/car_death_animation_3.png", imgSize, imgSize, true, true);
-	private Image imgWaterDeath1 = new Image("file:src/main/resources/images/water_death_animation_1.png", imgSize, imgSize, true, true);
-	private Image imgWaterDeath2 = new Image("file:src/main/resources/images/water_death_animation_2.png", imgSize, imgSize, true, true);
-	private Image imgWaterDeath3 = new Image("file:src/main/resources/images/water_death_animation_3.png", imgSize, imgSize, true, true);
-	private Image imgWaterDeath4 = new Image("file:src/main/resources/images/water_death_animation_4.png", imgSize, imgSize, true, true);
-
-	public Frog() {
+	/**
+	 * Initialises the Frog with image, size and position.
+	 *
+	 * @param size the desired width or height of the frog image, whichever is smaller, as an integer.
+	 * @param x the initial x position of the frog in the game world as an integer.
+	 * @param y the initial y position of the frog in the game world as an integer.
+	 */
+	public Frog(@NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y) {
+		imgUp = new Image("file:src/main/resources/images/frogger_up.png", size, size, true, true);
+		imgLeft = new Image("file:src/main/resources/images/frogger_left.png", size, size, true, true);
+		imgDown = new Image("file:src/main/resources/images/frogger_down.png", size, size, true, true);
+		imgRight = new Image("file:src/main/resources/images/frogger_right.png", size, size, true, true);
+		imgUpJump = new Image("file:src/main/resources/images/frogger_up_jump.png", size, size, true, true);
+		imgLeftJump = new Image("file:src/main/resources/images/frogger_left_jump.png", size, size, true, true);
+		imgDownJump = new Image("file:src/main/resources/images/frogger_down_jump.png", size, size, true, true);
+		imgRightJump = new Image("file:src/main/resources/images/frogger_right_jump.png", size, size, true, true);
+		imgCarDeath1 = new Image("file:src/main/resources/images/car_death_animation_1.png", size, size, true, true);
+		imgCarDeath2 = new Image("file:src/main/resources/images/car_death_animation_2.png", size, size, true, true);
+		imgCarDeath3 = new Image("file:src/main/resources/images/car_death_animation_3.png", size, size, true, true);
+		imgWaterDeath1 = new Image("file:src/main/resources/images/water_death_animation_1.png", size, size, true, true);
+		imgWaterDeath2 = new Image("file:src/main/resources/images/water_death_animation_2.png", size, size, true, true);
+		imgWaterDeath3 = new Image("file:src/main/resources/images/water_death_animation_3.png", size, size, true, true);
+		imgWaterDeath4 = new Image("file:src/main/resources/images/water_death_animation_4.png", size, size, true, true);
 		// Initialise image and position.
 		setImage(imgUp);
-		setX(300);
-		setY(705);
+		setX(x);
+		setY(y);
+		imgSize = size;
 	}
 
+	/**
+	 * Defines the behaviour of frogs.
+	 * This includes the interaction with other elements, image animation, moving and position resetting on boundaries.
+	 *
+	 * @param now the current time.
+	 */
 	@Override
 	public void act(long now) {
 		if (getY() > 734) {
@@ -69,7 +106,6 @@ public class Frog extends Actor {
 				setImage(imgCarDeath3);
 			}
 			if (deathAnimationFlag == 4) {
-				death = true;
 				deathReset();
 			}
 		}
@@ -92,16 +128,15 @@ public class Frog extends Actor {
 				setImage(imgWaterDeath4);
 			}
 			if (deathAnimationFlag == 5) {
-				death = true;
 				deathReset();
 			}
 		}
 
-		if (!noMove) {
+		if (movable) {
 			if (getIntersectingObjects(Obstacle.class).size() >= 1 || getIntersectingObjects(Snake.class).size() >= 1 || getIntersectingObjects(LogSnake.class).size() >= 1) {
 				// Frog crashed by a car or eaten by a snake.
 				carDeath = true;
-				noMove = true;
+				movable = false;
 			} else if (getIntersectingObjects(Log.class).size() >= 1) {
 				// Frog lands on a log.
 				Log currentLog = getIntersectingObjects(Log.class).get(0);
@@ -113,7 +148,7 @@ public class Frog extends Actor {
 				if (currentCrocodile.killsFrog(getBoundsInLocal())) {
 					// Frog killed by crocodile.
 					carDeath = true;
-					noMove = true;
+					movable = false;
 				} else {
 					// Frog follows the crocodile.
 					move(currentCrocodile.getSpeed(), 0);
@@ -129,7 +164,7 @@ public class Frog extends Actor {
 				if (currentWetTurtle.isSunk()) {
 					// Frog dies when the wet turtle sinks.
 					waterDeath = true;
-					noMove = true;
+					movable = false;
 				} else {
 					// Frog follows the wet turtle.
 					move(currentWetTurtle.getSpeed(), 0);
@@ -139,37 +174,41 @@ public class Frog extends Actor {
 				if (getIntersectingObjects(Slot.class).get(0).getStatus() == 1) {
 					// Occupied slot.
 					waterDeath = true;
-					noMove = true;
+					movable = false;
 				} else if (getIntersectingObjects(Slot.class).get(0).getStatus() == 2) {
 					// Crocodile slot.
 					carDeath = true;
-					noMove = true;
+					movable = false;
 				} else {
 					if (getIntersectingObjects(Slot.class).get(0).getStatus() == 3) {
 						// Fly slot.
 						bonus = true;
 					}
-					win = true;
+					getIntersectingObjects(Slot.class).get(0).setStatus(1);
 					winReset();
 				}
 			} else if (getY() < 413) {
 				// Frog enters the river but lands on nothing.
 				waterDeath = true;
-				noMove = true;
+				movable = false;
 			}
 		}
 	}
 
+	/**
+	 * Resets the frog on reaching a slot.
+	 */
 	public void winReset() {
-		getIntersectingObjects(Slot.class).get(0).setOccupied();
+		win = true;
 		setX(300);
 		setY(705);
 	}
 
 	/**
-	 * Resets death associated data.
+	 * Resets the frog on death.
 	 */
 	public void deathReset() {
+		death = true;
 		// Reset frog image and position.
 		setImage(imgUp);
 		setX(300);
@@ -177,18 +216,14 @@ public class Frog extends Actor {
 		// Clear death flags.
 		carDeath = waterDeath = false;
 		deathAnimationFlag = 0;
-		noMove = false;
+		movable = true;
 	}
 
-	public boolean getBonus() {
-		if (bonus) {
-			bonus = false;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
+	/**
+	 * Moves the frog up.
+	 *
+	 * @param jumping whether the frog is in the middle of a jump as a boolean.
+	 */
 	public void moveUp(boolean jumping) {
 		move(0, -movementY);
 		if (jumping) {
@@ -198,6 +233,11 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Moves the frog left.
+	 *
+	 * @param jumping whether the frog is in the middle of a jump as a boolean.
+	 */
 	public void moveLeft(boolean jumping) {
 		move(-movementX, 0);
 		if (jumping) {
@@ -207,6 +247,11 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Moves the frog down.
+	 *
+	 * @param jumping whether the frog is in the middle of a jump as a boolean.
+	 */
 	public void moveDown(boolean jumping) {
 		move(0, movementY);
 		if (jumping) {
@@ -216,6 +261,11 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Moves the frog right.
+	 *
+	 * @param jumping whether the frog is in the middle of a jump as a boolean.
+	 */
 	public void moveRight(boolean jumping) {
 		move(movementX, 0);
 		if (jumping) {
@@ -225,6 +275,11 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Checks whether a winning event is pending.
+	 *
+	 * @return whether a winning event is pending as a boolean.
+	 */
 	public boolean checkWin() {
 		if (win) {
 			win = false;
@@ -234,6 +289,11 @@ public class Frog extends Actor {
 		}
 	}
 
+	/**
+	 * Checks whether a death event is pending.
+	 *
+	 * @return whether a death event is pending as a boolean.
+	 */
 	public boolean checkDeath() {
 		if (death) {
 			death = false;
@@ -243,11 +303,33 @@ public class Frog extends Actor {
 		}
 	}
 
-	public boolean checkNoMove() {
-		return noMove;
+	/**
+	 * Checks whether a bonus event is pending.
+	 *
+	 * @return whether a bonus event is pending as a boolean.
+	 */
+	public boolean checkBonus() {
+		if (bonus) {
+			bonus = false;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public void toggleNoMove() {
-		noMove = !noMove;
+	/**
+	 * Checks whether the frog is movable.
+	 *
+	 * @return whether the frog is movable as a boolean.
+	 */
+	public boolean checkMovable() {
+		return movable;
+	}
+
+	/**
+	 * Toggles the movable status.
+	 */
+	public void toggleMovable() {
+		movable = !movable;
 	}
 }

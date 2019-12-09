@@ -4,7 +4,11 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 
 /**
- * All active ImageView objects that can be added to the game view.
+ * <h1>Actor</h1>
+ * <h2>Extends {@link ImageView}.</h2>
+ * <p>
+ *     All active ImageView objects that can be added to the game view.
+ * </p>
  */
 public abstract class Actor extends ImageView {
 	/**
@@ -28,11 +32,11 @@ public abstract class Actor extends ImageView {
 	}
 
 	/**
-	 * Gets all intersecting objects with the actor in the game world.
+	 * Gets all intersecting objects of a given type with the actor in the game world.
 	 *
 	 * @param cls the class of objects to check for intersection.
 	 * @param <A> the name of the class to be specified.
-	 * @return all intersecting objects as an ArrayList.
+	 * @return all intersecting objects of the specified class as an ArrayList.
 	 */
 	public <A extends Actor> ArrayList<A> getIntersectingObjects(Class<A> cls) {
 		ArrayList<A> intersectingObjects = new ArrayList<A>();

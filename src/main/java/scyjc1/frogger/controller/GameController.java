@@ -93,7 +93,7 @@ public class GameController {
 				musicMuted = !musicMuted;
 				break;
 			case W:
-				if (!frog.checkNoMove()) {
+				if (frog.checkMovable()) {
 					if (keyHold) {
 						keyReleased(keyEvent);
 					} else {
@@ -104,7 +104,7 @@ public class GameController {
 				}
 				break;
 			case A:
-				if (!frog.checkNoMove()) {
+				if (frog.checkMovable()) {
 					if (keyHold) {
 						keyReleased(keyEvent);
 					} else {
@@ -115,7 +115,7 @@ public class GameController {
 				}
 				break;
 			case D:
-				if (!frog.checkNoMove()) {
+				if (frog.checkMovable()) {
 					if (keyHold) {
 						keyReleased(keyEvent);
 					} else {
@@ -126,7 +126,7 @@ public class GameController {
 				}
 				break;
 			case S:
-				if (!frog.checkNoMove()) {
+				if (frog.checkMovable()) {
 					if (keyHold) {
 						keyReleased(keyEvent);
 					} else {
@@ -176,9 +176,15 @@ public class GameController {
 		}
 	}
 
+	/**
+	 * Handles key-released events on the game view.
+	 * This includes the movement controls of the frog and the updating of score.
+	 *
+	 * @param keyEvent the key-released event.
+	 */
 	@FXML
 	public void keyReleased(KeyEvent keyEvent) {
-		if (!frog.checkNoMove() && keyHold) {
+		if (frog.checkMovable() && keyHold) {
 			if (keyPressed == 'W') {
 				frog.moveUp(false);
 				keyHold = false;
@@ -205,13 +211,18 @@ public class GameController {
 
 	/**
 	 * Creates the timer for checking events consecutively.
-	 * The events include the change of score or number of lives, addition of random elements, and the winning or losing of the game.
+	 * The events include the action of all elements, updating of score or number of lives, addition of random elements, and the winning or losing of the game.
 	 */
 	private void createTimer() {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				timeValue++;
+
+				List<Actor> actors = world.getObjects(Actor.class);
+				for (Actor anActor : actors) {
+					anActor.act(now);
+				}
 
 				if (frog.checkWin()) {
 					winReset();
@@ -222,7 +233,7 @@ public class GameController {
 				}
 
 				// Set the score if applicable.
-				if (frog.getBonus()) {
+				if (frog.checkBonus()) {
 					score += 25;
 					setScoreNumber(score);
 				}
@@ -235,9 +246,9 @@ public class GameController {
 						if (randomSlot.getStatus() == 0) {
 							// Make a random special slot if the chosen slot is empty.
 							if ((int) (Math.random() * 2) == 0) {
-								randomSlot.setCrocodile();
+								randomSlot.setStatus(2);
 							} else {
-								randomSlot.setFly();
+								randomSlot.setStatus(3);
 							}
 						}
 						numSpecialSlots++;
@@ -245,7 +256,7 @@ public class GameController {
 						// Remove the special slot if there is already one.
 						for (Slot s : world.getObjects(Slot.class)) {
 							if (s.getStatus() >= 2) {
-								s.setEmpty();
+								s.setStatus(0);
 							}
 						}
 						numSpecialSlots--;
@@ -293,7 +304,6 @@ public class GameController {
 		}
 		createTimer();
 		timer.start();
-		world.start();
 	}
 
 	/**
@@ -304,8 +314,7 @@ public class GameController {
 			bgm.pause();
 		}
 		timer.stop();
-		frog.toggleNoMove();
-		world.stop();
+		frog.toggleMovable();
 	}
 
 	/**
@@ -316,8 +325,7 @@ public class GameController {
 			bgm.play();
 		}
 		timer.start();
-		frog.toggleNoMove();
-		world.resume();
+		frog.toggleMovable();
 	}
 
 	/**
@@ -329,8 +337,7 @@ public class GameController {
 			bgm.stop();
 		}
 		timer.stop();
-		frog.toggleNoMove();
-		world.stop();
+		frog.toggleMovable();
 
 		// Check for high score.
 		try {
@@ -435,7 +442,7 @@ public class GameController {
 		slotsOccupied = 0;
 		for (Actor a : world.getObjects(Slot.class)) {
 			Slot s = (Slot) a;
-			s.setEmpty();
+			s.setStatus(0);
 		}
 	}
 

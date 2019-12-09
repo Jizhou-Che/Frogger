@@ -2,6 +2,15 @@ package scyjc1.frogger.model;
 
 import javafx.scene.image.Image;
 
+/**
+ * <h1>LogSnake</h1>
+ * <h2>Extends {@link MovingActor}.</h2>
+ * <p>
+ *     A moving element in the game.
+ *     Attached to a {@link Log} and moves around on it.
+ *     The {@link Frog} gets killed when they meet.
+ * </p>
+ */
 public class LogSnake extends MovingActor {
 	private Image logSnakeLeft1;
 	private Image logSnakeLeft2;
@@ -12,6 +21,12 @@ public class LogSnake extends MovingActor {
 	private Log log;
 	private double speed;
 
+	/**
+	 * Initialises the LogSnake with image, size, position and speed.
+	 *
+	 * @param log the Log to attach the LogSnake to.
+	 * @param speed the speed of the LogSnake as a double.
+	 */
 	public LogSnake(Log log, double speed) {
 		int size = (int) (log.getImage().getHeight() * 1.4);
 		logSnakeLeft1 = new Image("file:src/main/resources/images/snake_left_animation_1.png", size, size, true, true);
@@ -32,6 +47,12 @@ public class LogSnake extends MovingActor {
 		this.log = log;
 	}
 
+	/**
+	 * Defines the behaviour of LogSnake.
+	 * This includes image animation, moving, position resetting on boundaries and removal.
+	 *
+	 * @param now the current time.
+	 */
 	@Override
 	public void act(long now) {
 		if (speed >= 0) {
@@ -65,11 +86,21 @@ public class LogSnake extends MovingActor {
 		}
 	}
 
+	/**
+	 * Gets the speed of the LogSnake.
+	 *
+	 * @return the speed of the LogSnake as a double.
+	 */
 	@Override
 	public double getSpeed() {
 		return speed;
 	}
 
+	/**
+	 * Sets the speed of the LogSnake.
+	 *
+	 * @param speed the desired speed of the LogSnake as a double.
+	 */
 	@Override
 	public void setSpeed(double speed) {
 		this.speed = speed;

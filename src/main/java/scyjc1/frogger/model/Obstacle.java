@@ -3,9 +3,26 @@ package scyjc1.frogger.model;
 import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
+/**
+ * <h1>Obstacle</h1>
+ * <h2>Extends {@link MovingActor}.</h2>
+ * <p>
+ *     A moving element in the game.
+ *     The {@link Frog} gets killed when they meet.
+ * </p>
+ */
 public class Obstacle extends MovingActor {
 	private double speed;
 
+	/**
+	 * Initialises the Obstacle with image, size, position and speed.
+	 *
+	 * @param type the type of the Obstacle as an integer.
+	 * @param size the desired width or height of the obstacle image, whichever is smaller, as an integer.
+	 * @param x the initial x position of the Obstacle in the game world as an integer.
+	 * @param y the initial y position of the Obstacle in the game world as an integer.
+	 * @param speed the speed of the Obstacle as a double.
+	 */
 	public Obstacle(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		switch (type) {
 			case 1:
@@ -32,6 +49,12 @@ public class Obstacle extends MovingActor {
 		setSpeed(speed);
 	}
 
+	/**
+	 * Defines the behaviour of obstacles.
+	 * This includes moving and position resetting on boundaries.
+	 *
+	 * @param now the current time.
+	 */
 	@Override
 	public void act(long now) {
 		move(speed, 0);
@@ -43,11 +66,21 @@ public class Obstacle extends MovingActor {
 		}
 	}
 
+	/**
+	 * Gets the speed of the Obstacle.
+	 *
+	 * @return the speed of the Obstacle as a double.
+	 */
 	@Override
 	public double getSpeed() {
 		return speed;
 	}
 
+	/**
+	 * Sets the speed of the Obstacle.
+	 *
+	 * @param speed the desired speed of the Obstacle as a double.
+	 */
 	@Override
 	public void setSpeed(double speed) {
 		this.speed = speed;

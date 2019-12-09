@@ -82,3 +82,7 @@ Draft of README written.
 Refactoring on the controllers for single responsibility.
 Javadoc partially added.
 Controlling of Frog extracted to GameController.
+
+09/12/19
+Controlling responsibility of World transferred to GameController.
+Javadoc generally completed.

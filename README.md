@@ -28,9 +28,11 @@
 
 * A MovingActor class was abstracted from actors with customisable speed to facilitate the implementation of related features such as speeding up moving actors on level up.
 
+* BackgroundMusic was extracted from MyStage and adapted to the Singleton pattern to enforce the use of a single instance, and therefore facilitate further extensions and features such as muting and pausing.
+
 * Abstract class MyStage was removed and the World class was made concrete for the single purpose of managing actors and related events.
 
-* BackgroundMusic was extracted from MyStage and adapted to the Singleton pattern to enforce the use of a single instance, and therefore facilitate further extensions and features such as muting and pausing.
+* The responsibility of controlling Actors in World was extracted to GameController for clarity and the principle of single responsibility.
 
 * Visibility of fields and methods within or among packages was carefully managed.
 
