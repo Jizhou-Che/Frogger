@@ -2,9 +2,6 @@ package scyjc1.frogger.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -63,36 +60,15 @@ public class HomeController {
 				switch (optionNew) {
 					case 0:
 						// Start game.
-						try {
-							Parent gameLoader = FXMLLoader.load(getClass().getResource("/view/GameView.fxml"));
-							Scene gameScene = new Scene(gameLoader, 600, 800);
-							gameScene.getRoot().requestFocus();
-							Main.mainStage.setScene(gameScene);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+						Main.switchScene(1);
 						break;
 					case 1:
 						// Go to leaderboard.
-						try {
-							Parent leaderboardLoader = FXMLLoader.load(getClass().getResource("/view/LeaderboardView.fxml"));
-							Scene leaderboardScene = new Scene(leaderboardLoader, 600, 800);
-							leaderboardScene.getRoot().requestFocus();
-							Main.mainStage.setScene(leaderboardScene);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+						Main.switchScene(3);
 						break;
 					case 2:
 						// Go to help.
-						try {
-							Parent helpLoader = FXMLLoader.load(getClass().getResource("/view/HelpView.fxml"));
-							Scene helpScene = new Scene(helpLoader, 600, 800);
-							helpScene.getRoot().requestFocus();
-							Main.mainStage.setScene(helpScene);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+						Main.switchScene(4);
 						break;
 					case 3:
 						// Switch music.

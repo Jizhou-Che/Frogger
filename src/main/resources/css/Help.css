@@ -11,10 +11,6 @@ Text {
     -fx-stroke-width: 2;
 }
 
-.subtitles {
-    -fx-font-size: 15;
-}
-
 .instructions {
-    -fx-font-size: 15;
+    -fx-font-size: 13;
 }

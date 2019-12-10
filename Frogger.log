@@ -86,3 +86,7 @@ Controlling of Frog extracted to GameController.
 09/12/19
 Controlling responsibility of World transferred to GameController.
 Javadoc generally completed.
+Scene switching extracted to Main: extract method refactoring.
+File reading and writing extracted to Record: extract class refactoring.
+Refinements in Help view.
+FXML version issue resolved.
