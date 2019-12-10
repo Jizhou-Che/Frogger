@@ -8,16 +8,23 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+/**
+ * The entry point of the game.
+ */
 public class Main extends Application {
 	public static Stage primaryStage;
 
+	/**
+	 * The fallback entry of the application.
+	 *
+	 * @param args the command line arguments.
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	/**
 	 * Initialises the primary stage of the application.
-	 * This includes the loading of the home view, fonts, title and icon.
 	 *
 	 * @param primaryStage the primary stage of the application.
 	 */
@@ -34,6 +41,11 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * Handles the switching between different scenes of the application.
+	 *
+	 * @param id the id of the scene to switch to, 0 - Home, 1 - Game, 2 - High Score, 3 - Leaderboard, 4 - Help, as an integer.
+	 */
 	public static void switchScene(int id) {
 		try {
 			Parent loader;

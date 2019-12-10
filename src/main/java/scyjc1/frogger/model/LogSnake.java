@@ -3,29 +3,25 @@ package scyjc1.frogger.model;
 import javafx.scene.image.Image;
 
 /**
- * <h1>LogSnake</h1>
- * <h2>Extends {@link MovingActor}.</h2>
- * <p>
- *     A moving element in the game.
- *     Attached to a {@link Log} and moves around on it.
- *     The {@link Frog} gets killed when they meet.
- * </p>
+ * A moving element in the game.
+ * Attached to a {@link Log} and moves around on it.
+ * The {@link Frog} gets killed when they meet.
  */
 public class LogSnake extends MovingActor {
+	private Log log;
+	private double speed;
 	private Image logSnakeLeft1;
 	private Image logSnakeLeft2;
 	private Image logSnakeLeft3;
 	private Image logSnakeRight1;
 	private Image logSnakeRight2;
 	private Image logSnakeRight3;
-	private Log log;
-	private double speed;
 
 	/**
-	 * Initialises the LogSnake with image, size, position and speed.
+	 * Initialises the {@link LogSnake} with image, size, position and speed.
 	 *
-	 * @param log the Log to attach the LogSnake to.
-	 * @param speed the speed of the LogSnake as a double.
+	 * @param log   the {@link Log} to attach the {@link LogSnake} to.
+	 * @param speed the speed of the {@link LogSnake} as a double.
 	 */
 	public LogSnake(Log log, double speed) {
 		int size = (int) (log.getImage().getHeight() * 1.4);
@@ -48,10 +44,10 @@ public class LogSnake extends MovingActor {
 	}
 
 	/**
-	 * Defines the behaviour of LogSnake.
+	 * Defines the behaviour of {@link LogSnake}.
 	 * This includes image animation, moving, position resetting on boundaries and removal.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
 	public void act(long now) {
@@ -87,9 +83,9 @@ public class LogSnake extends MovingActor {
 	}
 
 	/**
-	 * Gets the speed of the LogSnake.
+	 * Gets the speed of the {@link LogSnake}.
 	 *
-	 * @return the speed of the LogSnake as a double.
+	 * @return the speed of the {@link LogSnake} as a double.
 	 */
 	@Override
 	public double getSpeed() {
@@ -97,9 +93,9 @@ public class LogSnake extends MovingActor {
 	}
 
 	/**
-	 * Sets the speed of the LogSnake.
+	 * Sets the speed of the {@link LogSnake}.
 	 *
-	 * @param speed the desired speed of the LogSnake as a double.
+	 * @param speed the desired speed of the {@link LogSnake} as a double.
 	 */
 	@Override
 	public void setSpeed(double speed) {

@@ -4,28 +4,24 @@ import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
 /**
- * <h1>WetTurtle</h1>
- * <h2>Extends {@link MovingActor}.</h2>
- * <p>
- *     A moving element in the game.
- *     The frog can land on it and follow its movement only when it is not sunk.
- * </p>
+ * A moving element in the game.
+ * The {@link Frog} can land on it and then follow its movement only when it is not sunk.
  */
 public class WetTurtle extends MovingActor {
+	private double speed;
+	private boolean isSunk = false;
 	private Image wetTurtle1;
 	private Image wetTurtle2;
 	private Image wetTurtle3;
 	private Image wetTurtle4;
-	private double speed;
-	private boolean isSunk = false;
 
 	/**
-	 * Initialises the WetTurtle with image, position and speed.
+	 * Initialises the {@link WetTurtle} with image, position and speed.
 	 *
-	 * @param size the desired width or height of the wet turtle image, whichever is smaller, as an integer.
-	 * @param x the initial x position of the WetTurtle as an integer.
-	 * @param y the initial y position of the WetTurtle as an integer.
-	 * @param speed the speed of the WetTurtle as a double.
+	 * @param size  the desired width or height of the {@link WetTurtle}, whichever is smaller, as an integer.
+	 * @param x     the initial x position of the {@link WetTurtle} as an integer.
+	 * @param y     the initial y position of the {@link WetTurtle} as an integer.
+	 * @param speed the speed of the {@link WetTurtle} as a double.
 	 */
 	public WetTurtle(@NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		wetTurtle1 = new Image("file:src/main/resources/images/turtle_animation_1.png", size, size, true, true);
@@ -39,10 +35,10 @@ public class WetTurtle extends MovingActor {
 	}
 
 	/**
-	 * Defines the behaviour of WetTurtle.
+	 * Defines the behaviour of {@link WetTurtle}.
 	 * This includes moving and position resetting on boundaries.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
 	public void act(long now) {
@@ -71,9 +67,9 @@ public class WetTurtle extends MovingActor {
 	}
 
 	/**
-	 * Gets the speed of the WetTurtle.
+	 * Gets the speed of the {@link WetTurtle}.
 	 *
-	 * @return the speed of the WetTurtle as a double.
+	 * @return the speed of the {@link WetTurtle} as a double.
 	 */
 	@Override
 	public double getSpeed() {
@@ -81,9 +77,9 @@ public class WetTurtle extends MovingActor {
 	}
 
 	/**
-	 * Sets the speed of the WetTurtle.
+	 * Sets the speed of the {@link WetTurtle}.
 	 *
-	 * @param speed the desired speed of the WetTurtle as a double.
+	 * @param speed the desired speed of the {@link WetTurtle} as a double.
 	 */
 	@Override
 	public void setSpeed(double speed) {
@@ -91,9 +87,9 @@ public class WetTurtle extends MovingActor {
 	}
 
 	/**
-	 * Checks whether the WetTurtle is currently sunk.
+	 * Checks whether the {@link WetTurtle} is currently sunk.
 	 *
-	 * @return whether the WetTurtle is sunk as a boolean.
+	 * @return whether the {@link WetTurtle} is currently sunk as a boolean.
 	 */
 	public boolean isSunk() {
 		return isSunk;

@@ -4,24 +4,20 @@ import javafx.beans.NamedArg;
 import javafx.scene.image.Image;
 
 /**
- * <h1>Obstacle</h1>
- * <h2>Extends {@link MovingActor}.</h2>
- * <p>
- *     A moving element in the game.
- *     The {@link Frog} gets killed when they meet.
- * </p>
+ * A moving element in the game.
+ * The {@link Frog} gets killed when they meet.
  */
 public class Obstacle extends MovingActor {
 	private double speed;
 
 	/**
-	 * Initialises the Obstacle with image, size, position and speed.
+	 * Initialises the {@link Obstacle} with image, size, position and speed.
 	 *
-	 * @param type the type of the Obstacle as an integer.
-	 * @param size the desired width or height of the obstacle image, whichever is smaller, as an integer.
-	 * @param x the initial x position of the Obstacle in the game world as an integer.
-	 * @param y the initial y position of the Obstacle in the game world as an integer.
-	 * @param speed the speed of the Obstacle as a double.
+	 * @param type  the type of the {@link Obstacle} as an integer.
+	 * @param size  the desired width or height of the {@link Obstacle}, whichever is smaller, as an integer.
+	 * @param x     the initial x position of the {@link Obstacle} in the game world as an integer.
+	 * @param y     the initial y position of the {@link Obstacle} in the game world as an integer.
+	 * @param speed the speed of the {@link Obstacle} as a double.
 	 */
 	public Obstacle(@NamedArg("type") int type, @NamedArg("size") int size, @NamedArg("x") int x, @NamedArg("y") int y, @NamedArg("speed") double speed) {
 		switch (type) {
@@ -50,10 +46,10 @@ public class Obstacle extends MovingActor {
 	}
 
 	/**
-	 * Defines the behaviour of obstacles.
+	 * Defines the behaviour of {@link Obstacle}.
 	 * This includes moving and position resetting on boundaries.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
 	public void act(long now) {
@@ -67,9 +63,9 @@ public class Obstacle extends MovingActor {
 	}
 
 	/**
-	 * Gets the speed of the Obstacle.
+	 * Gets the speed of the {@link Obstacle}.
 	 *
-	 * @return the speed of the Obstacle as a double.
+	 * @return the speed of the {@link Obstacle} as a double.
 	 */
 	@Override
 	public double getSpeed() {
@@ -77,9 +73,9 @@ public class Obstacle extends MovingActor {
 	}
 
 	/**
-	 * Sets the speed of the Obstacle.
+	 * Sets the speed of the {@link Obstacle}.
 	 *
-	 * @param speed the desired speed of the Obstacle as a double.
+	 * @param speed the desired speed of the {@link Obstacle} as a double.
 	 */
 	@Override
 	public void setSpeed(double speed) {

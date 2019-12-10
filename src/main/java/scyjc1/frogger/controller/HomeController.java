@@ -18,7 +18,7 @@ public class HomeController {
 	static boolean musicOn = true;
 
 	/**
-	 * Initialises the home view.
+	 * Initialises the Home view.
 	 */
 	@FXML
 	private void initialize() {

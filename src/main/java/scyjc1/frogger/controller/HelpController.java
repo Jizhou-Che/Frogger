@@ -6,13 +6,9 @@ import javafx.scene.input.KeyEvent;
 import scyjc1.frogger.Main;
 
 /**
- * Controls behaviours and handles events on the help view.
+ * Controls behaviours and handles events on the Help view.
  */
 public class HelpController {
-	@FXML
-	private void initialize() {
-	}
-
 	/**
 	 * Handles key-pressed events on the help view.
 	 * This includes the scene switching to the home view.

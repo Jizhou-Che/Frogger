@@ -3,29 +3,25 @@ package scyjc1.frogger.model;
 import javafx.scene.image.Image;
 
 /**
- * <h1>Snake</h1>
- * <h2>Extends {@link MovingActor}.</h2>
- * <p>
- *     A moving element in the game.
- *     Appears in the middle lane of the game periodically.
- * </p>
+ * A moving element in the game.
+ * Appears in the middle lane periodically.
  */
 public class Snake extends MovingActor {
+	private double speed;
 	private Image snakeLeft1;
 	private Image snakeLeft2;
 	private Image snakeLeft3;
 	private Image snakeRight1;
 	private Image snakeRight2;
 	private Image snakeRight3;
-	private double speed;
 
 	/**
-	 * Initialises the Snake with image, position and speed.
+	 * Initialises the {@link Snake} with image, position and speed.
 	 *
-	 * @param size the desired width or height of the snake image, whichever is smaller, as an integer.
-	 * @param x the initial x position of the Snake in the game world as an integer.
-	 * @param y the initial y position of the Snake in the game world as an integer.
-	 * @param speed the speed of the Snake as a double.
+	 * @param size  the desired width or height of the {@link Snake}, whichever is smaller, as an integer.
+	 * @param x     the initial x position of the {@link Snake} in the game world as an integer.
+	 * @param y     the initial y position of the {@link Snake} in the game world as an integer.
+	 * @param speed the speed of the {@link Snake} as a double.
 	 */
 	public Snake(int size, int x, int y, double speed) {
 		snakeLeft1 = new Image("file:src/main/resources/images/snake_left_animation_1.png", size, size, true, true);
@@ -45,10 +41,10 @@ public class Snake extends MovingActor {
 	}
 
 	/**
-	 * Defines the behaviour of Snake.
+	 * Defines the behaviour of {@link Snake}.
 	 * This includes image animation, moving and turning around on boundaries.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
 	public void act(long now) {
@@ -78,9 +74,9 @@ public class Snake extends MovingActor {
 	}
 
 	/**
-	 * Gets the speed of the Snake.
+	 * Gets the speed of the {@link Snake}.
 	 *
-	 * @return the speed of the Snake as a double.
+	 * @return the speed of the {@link Snake} as a double.
 	 */
 	@Override
 	public double getSpeed() {
@@ -88,9 +84,9 @@ public class Snake extends MovingActor {
 	}
 
 	/**
-	 * Sets the speed of the Snake.
+	 * Sets the speed of the {@link Snake}.
 	 *
-	 * @param speed the desired speed of the Snake as a double.
+	 * @param speed the desired speed of the {@link Snake} as a double.
 	 */
 	@Override
 	public void setSpeed(double speed) {

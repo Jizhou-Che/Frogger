@@ -6,7 +6,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 /**
- * The background music.
+ * The background music of the game.
  * Singleton pattern applied.
  */
 public class BackgroundMusic {
@@ -16,12 +16,13 @@ public class BackgroundMusic {
 	/**
 	 * Private constructor in case of careless use.
 	 */
-	private BackgroundMusic() {}
+	private BackgroundMusic() {
+	}
 
 	/**
-	 * Gets the single BackgroundMusic instance.
+	 * Gets the single {@link BackgroundMusic} instance.
 	 *
-	 * @return the single BackgroundMusic instance.
+	 * @return the single {@link BackgroundMusic} instance.
 	 */
 	public static BackgroundMusic getBgm() {
 		if (bgm == null) {

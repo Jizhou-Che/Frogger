@@ -19,7 +19,7 @@ public class HighScoreController {
 	private Text name;
 
 	/**
-	 * Initialises the high score view.
+	 * Initialises the High Score view.
 	 */
 	@FXML
 	private void initialize() {

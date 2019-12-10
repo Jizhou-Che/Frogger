@@ -1,21 +1,18 @@
 package scyjc1.frogger.model;
 
 import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 
 /**
- * <h1>Actor</h1>
- * <h2>Extends {@link ImageView}.</h2>
- * <p>
- *     All active ImageView objects that can be added to the game view.
- * </p>
+ * All active {@link ImageView} objects that can be added to the game world.
  */
 public abstract class Actor extends ImageView {
 	/**
-	 * Changes position of the Actor.
+	 * Changes position of the {@link Actor}.
 	 *
-	 * @param dx movement to the x direction, possibly negative.
-	 * @param dy movement to the y direction, possibly negative.
+	 * @param dx movement to the x direction, possibly negative, as a double.
+	 * @param dy movement to the y direction, possibly negative, as a double.
 	 */
 	public void move(double dx, double dy) {
 		setX(getX() + dx);
@@ -23,20 +20,20 @@ public abstract class Actor extends ImageView {
 	}
 
 	/**
-	 * Gets the game world the Actor is in.
+	 * Gets the game world the {@link Actor} is in.
 	 *
-	 * @return the pane the actor is in as a World.
+	 * @return the game world the actor is in as a {@link World}.
 	 */
 	public World getWorld() {
 		return (World) getParent();
 	}
 
 	/**
-	 * Gets all intersecting objects of a given type with the actor in the game world.
+	 * Gets all intersecting objects with the {@link Actor} of a given type in the game world.
 	 *
-	 * @param cls the class of objects to check for intersection.
-	 * @param <A> the name of the class to be specified.
-	 * @return all intersecting objects of the specified class as an ArrayList.
+	 * @param cls the class of the specified type.
+	 * @param <A> the type of objects to check for intersection.
+	 * @return all intersecting objects of the specified type in the game world as an {@link ArrayList}.
 	 */
 	public <A extends Actor> ArrayList<A> getIntersectingObjects(Class<A> cls) {
 		ArrayList<A> intersectingObjects = new ArrayList<A>();
@@ -49,9 +46,9 @@ public abstract class Actor extends ImageView {
 	}
 
 	/**
-	 * Defines the behaviour of the Actor with respect to the current time.
+	 * Defines the behaviour of the {@link Actor} with respect to the timestamp of the current frame.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	public abstract void act(long now);
 }

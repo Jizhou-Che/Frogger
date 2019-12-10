@@ -8,7 +8,7 @@ import scyjc1.frogger.Main;
 import scyjc1.frogger.model.Record;
 
 /**
- * Controls behaviours and handles events on the leaderboard view.
+ * Controls behaviours and handles events on the Leaderboard view.
  */
 public class LeaderboardController {
 	@FXML

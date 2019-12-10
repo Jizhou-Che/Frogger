@@ -90,3 +90,6 @@ Scene switching extracted to Main: extract method refactoring.
 File reading and writing extracted to Record: extract class refactoring.
 Refinements in Help view.
 FXML version issue resolved.
+
+10/12/19
+Javadoc for source code completed.

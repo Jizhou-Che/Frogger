@@ -1,29 +1,24 @@
 package scyjc1.frogger.model;
 
-import javafx.geometry.Bounds;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * <h1>Crocodile</h1>
- * <h2>Extends {@link MovingActor}.</h2>
- * <p>
- *     A moving element in the game.
- *     The frog can land on its back but not on its mouth area.
- * </p>
+ * A moving element in the game.
+ * The {@link Frog} can land on its back but not on its mouth area.
  */
 public class Crocodile extends MovingActor {
+	private double speed;
 	private Image crocodile1;
 	private Image crocodile2;
-	private double speed;
 
 	/**
-	 * Initialises the Crocodile with size, position and speed.
+	 * Initialises the {@link Crocodile} with size, position and speed.
 	 *
-	 * @param size the desired width or height of the crocodile image, whichever is smaller, as an integer.
-	 * @param x the initial x position of the crocodile in the game world as an integer.
-	 * @param y the initial y position of the crocodile in the game world as an integer.
-	 * @param speed the speed of the crocodile as a double.
+	 * @param size  the desired width or height of the {@link Crocodile}, whichever is smaller, as an integer.
+	 * @param x     the initial x position of the {@link Crocodile} in the game world as an integer.
+	 * @param y     the initial y position of the {@link Crocodile} in the game world as an integer.
+	 * @param speed the speed of the {@link Crocodile} as a double.
 	 */
 	public Crocodile(int size, int x, int y, double speed) {
 		crocodile1 = new Image("file:src/main/resources/images/crocodile_animation_1.png", size, size, true, true);
@@ -35,10 +30,10 @@ public class Crocodile extends MovingActor {
 	}
 
 	/**
-	 * Defines the behaviour of crocodiles.
+	 * Defines the behaviour of {@link Crocodile}.
 	 * This includes image animation, moving and position resetting on boundaries.
 	 *
-	 * @param now the current time.
+	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
 	public void act(long now) {
@@ -61,9 +56,9 @@ public class Crocodile extends MovingActor {
 	}
 
 	/**
-	 * Gets the speed of the crocodile.
+	 * Gets the speed of the {@link Crocodile}.
 	 *
-	 * @return the speed of the crocodile as a double.
+	 * @return the speed of the {@link Crocodile} as a double.
 	 */
 	@Override
 	public double getSpeed() {
@@ -71,9 +66,9 @@ public class Crocodile extends MovingActor {
 	}
 
 	/**
-	 * Sets the speed of the crocodile.
+	 * Sets the speed of the {@link Crocodile}.
 	 *
-	 * @param speed the desired speed of the crocodile as a double.
+	 * @param speed the desired speed of the {@link Crocodile} as a double.
 	 */
 	@Override
 	public void setSpeed(double speed) {
@@ -81,16 +76,16 @@ public class Crocodile extends MovingActor {
 	}
 
 	/**
-	 * Checks whether the frog is killed by the crocodile.
+	 * Checks whether the {@link Frog} is killed by the {@link Crocodile}.
 	 *
-	 * @param frogBoundsInLocal the Bounds object of the frog.
-	 * @return whether the frog is killed by the crocodile as a boolean.
+	 * @param frog the {@link Frog}.
+	 * @return whether the {@link Frog} is killed by the {@link Crocodile} as a boolean.
 	 */
-	public boolean killsFrog(Bounds frogBoundsInLocal) {
+	public boolean killsFrog(Frog frog) {
 		ImageView crocodileHead = new ImageView();
 		crocodileHead.setX(getX() + getImage().getWidth() - getImage().getHeight() / 2);
 		crocodileHead.setY(getY() + getImage().getHeight() / 2);
 		crocodileHead.setFitWidth(getImage().getHeight() / 2);
-		return crocodileHead.intersects(frogBoundsInLocal);
+		return crocodileHead.intersects(frog.getBoundsInLocal());
 	}
 }

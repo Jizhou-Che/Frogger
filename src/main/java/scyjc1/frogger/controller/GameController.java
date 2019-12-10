@@ -13,7 +13,7 @@ import scyjc1.frogger.model.*;
 import java.util.List;
 
 /**
- * Controls behaviours and handles events on the game view.
+ * Controls behaviours and handles events on the Game view.
  */
 public class GameController {
 	@FXML
@@ -31,23 +31,25 @@ public class GameController {
 	@FXML
 	private ImageView snow;
 
-	private AnimationTimer timer;
-	private BackgroundMusic bgm = BackgroundMusic.getBgm();
-	private boolean gamePaused = false;
-	private boolean musicMuted = false;
-	private char keyPressed;
-	private boolean keyHold = false; // Whether the jump key is held.
-	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
-	private int slotsOccupied = 0; // The number of occupied slots.
 	static int score;
 	private int lives = 3;
 	private int level = 1;
-	private int timeValue = 0;
-	private boolean specialSlots = false;
-	private int numSpecialSlots = 0;
-	private boolean logSnakes = false;
-	private int easterEgg = 0;
-	private boolean easterEggOn = false;
+	private boolean gamePaused = false;
+	private boolean musicMuted = false;
+	private boolean keyHold = false; // Whether the jump key is held.
+	private char keyPressed; // The pressed jump key character.
+	private double progressY = 800; // The furthest position reached in the current life. Used for points calculation.
+	private int slotsOccupied = 0; // The number of occupied slots.
+	private int timeFrame = 0; // The flag for periodic enabling of special features.
+	private boolean specialSlots = false; // Whether crocodile heads and flies can appear in slots.
+	private int numSpecialSlots = 0; // The number of special slots.
+	private boolean logSnakes = false; // Whether log snakes can appear on logs.
+	private int easterEgg = 0; // The flag for enabling the easter egg.
+	private boolean easterEggOn = false; // Whether the easter egg is enabled.
+	private AnimationTimer timer;
+	private BackgroundMusic bgm = BackgroundMusic.getBgm();
+	private Image backgroundNormal = new Image("file:src/main/resources/images/game_background.png", 600, 600, true, true);
+	private Image backgroundSnow = new Image("file:src/main/resources/images/game_background_snow.png", 600, 600, true, true);
 
 	/**
 	 * Initialises the game view.
@@ -62,7 +64,7 @@ public class GameController {
 
 	/**
 	 * Handles key-pressed events on the game view.
-	 * This includes the movement controls of the frog, pausing or muting the game, and the activation of the easter egg.
+	 * This includes a part of movement controls of the frog, the pausing or muting of the game, and the activation of the easter egg.
 	 *
 	 * @param keyEvent the key-pressed event.
 	 */
@@ -88,7 +90,7 @@ public class GameController {
 			case W:
 				if (frog.checkMovable()) {
 					if (keyHold) {
-						keyReleased(keyEvent);
+						keyReleased();
 					} else {
 						frog.moveUp(true);
 						keyPressed = 'W';
@@ -99,7 +101,7 @@ public class GameController {
 			case A:
 				if (frog.checkMovable()) {
 					if (keyHold) {
-						keyReleased(keyEvent);
+						keyReleased();
 					} else {
 						frog.moveLeft(true);
 						keyPressed = 'A';
@@ -110,7 +112,7 @@ public class GameController {
 			case D:
 				if (frog.checkMovable()) {
 					if (keyHold) {
-						keyReleased(keyEvent);
+						keyReleased();
 					} else {
 						frog.moveRight(true);
 						keyPressed = 'D';
@@ -121,7 +123,7 @@ public class GameController {
 			case S:
 				if (frog.checkMovable()) {
 					if (keyHold) {
-						keyReleased(keyEvent);
+						keyReleased();
 					} else {
 						frog.moveDown(true);
 						keyPressed = 'S';
@@ -171,12 +173,10 @@ public class GameController {
 
 	/**
 	 * Handles key-released events on the game view.
-	 * This includes the movement controls of the frog and the updating of score.
-	 *
-	 * @param keyEvent the key-released event.
+	 * This includes a part of movement controls of the frog.
 	 */
 	@FXML
-	public void keyReleased(KeyEvent keyEvent) {
+	public void keyReleased() {
 		if (frog.checkMovable() && keyHold) {
 			if (keyPressed == 'W') {
 				frog.moveUp(false);
@@ -204,23 +204,26 @@ public class GameController {
 
 	/**
 	 * Creates the timer for checking events consecutively.
-	 * The events include the action of all elements, updating of score or number of lives, addition of random elements, and the winning or losing of the game.
+	 * The events include the action of all elements, the check of frog conditions, the addition of random elements, the completion of a level, and the ending of the game.
 	 */
 	private void createTimer() {
 		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
-				timeValue++;
+				timeFrame++;
 
+				// Act all actors in the game world.
 				List<Actor> actors = world.getObjects(Actor.class);
 				for (Actor anActor : actors) {
 					anActor.act(now);
 				}
 
-				if (frog.checkWin()) {
-					winReset();
+				// Check for goal condition.
+				if (frog.checkGoal()) {
+					goalReset();
 				}
 
+				// Check for death condition.
 				if (frog.checkDeath()) {
 					deathReset();
 				}
@@ -232,7 +235,7 @@ public class GameController {
 				}
 
 				// Make a random special slot periodically.
-				if (specialSlots && timeValue % 500 == 0) {
+				if (specialSlots && timeFrame % 500 == 0) {
 					if (numSpecialSlots == 0) {
 						// Choose a random slot.
 						Slot randomSlot = world.getObjects(Slot.class).get((int) (Math.random() * 5));
@@ -257,28 +260,18 @@ public class GameController {
 				}
 
 				// Put a log snake on a random log periodically.
-				if (logSnakes && timeValue % 750 == 0) {
+				if (logSnakes && timeFrame % 750 == 0) {
 					world.add(new LogSnake(world.getObjects(Log.class).get((int) (Math.random() * world.getObjects(Log.class).size())), 0.5 - (int) (Math.random() * 2)));
 					frog.toFront();
 				}
 
-				// Handles the completion of a level.
+				// Check the completion of a level.
 				if (slotsOccupied == 5) {
-					// Clear slots.
-					resetSlots();
 					// Level up.
 					levelUp();
-					// Display message.
-					levelText.setText("LEVEL-" + level);
-					message.setVisible(true);
-					// Award an extra life on occasion.
-					if (level % 5 == 1 && lives < 3) {
-						lives++;
-						setLivesNumber(lives);
-					}
 				}
 
-				// Handles the ending of the game.
+				// Check the ending of the game.
 				if (lives == 0) {
 					// Stop game.
 					stopGame();
@@ -364,9 +357,9 @@ public class GameController {
 	}
 
 	/**
-	 * Resets death associated data.
+	 * Resets goal associated data.
 	 */
-	private void winReset() {
+	private void goalReset() {
 		slotsOccupied++;
 		score += 50;
 		setScoreNumber(score);
@@ -411,20 +404,18 @@ public class GameController {
 	}
 
 	/**
-	 * Resets all slots to empty.
+	 * Handles the level up.
+	 * This includes the reset of slots, the speeding up of moving elements, the introduction of challenging elements and the display of message.
 	 */
-	public void resetSlots() {
+	private void levelUp() {
+		// Clear slots.
 		slotsOccupied = 0;
 		for (Actor a : world.getObjects(Slot.class)) {
 			Slot s = (Slot) a;
 			s.setStatus(0);
 		}
-	}
 
-	/**
-	 * Handles the speeding up of moving elements and the introduction of challenging elements on level up.
-	 */
-	private void levelUp() {
+		// Level up.
 		level++;
 		switch (level) {
 			case 2:
@@ -474,6 +465,16 @@ public class GameController {
 				logSnakes = true;
 				break;
 		}
+
+		// Display message.
+		levelText.setText("LEVEL-" + level);
+		message.setVisible(true);
+
+		// Award an extra life on occasion.
+		if (level % 5 == 1 && lives < 3) {
+			lives++;
+			setLivesNumber(lives);
+		}
 	}
 
 	/**
@@ -483,12 +484,12 @@ public class GameController {
 		easterEggOn = !easterEggOn;
 		if (easterEggOn) {
 			// Turn easter egg on.
-			background.setImage(new Image("file:src/main/resources/images/game_background_snow.png", 600, 600, true, true));
+			background.setImage(backgroundSnow);
 			snow.setOpacity(100);
 			snow.toFront();
 		} else {
 			// Turn easter egg off.
-			background.setImage(new Image("file:src/main/resources/images/game_background.png", 600, 600, true, true));
+			background.setImage(backgroundNormal);
 			snow.setOpacity(0);
 		}
 	}
