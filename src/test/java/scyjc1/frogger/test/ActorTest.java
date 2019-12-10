@@ -52,10 +52,10 @@ class ActorTest {
 		testActorDisjointed.setSize(20, 20);
 		testWorld.add(testActorDisjointed);
 
-		ArrayList<ActorImpl> intersectingActors = new ArrayList<ActorImpl>();
+		ArrayList<ActorImpl> intersectingActors = new ArrayList<>();
 		intersectingActors.add(testActorSubset);
 		intersectingActors.add(testActorIntersect);
 		intersectingActors.add(testActorSuperset);
-		assertEquals(intersectingActors, (ArrayList<ActorImpl>) testActor.getIntersectingObjects(ActorImpl.class));
+		assertEquals(intersectingActors, testActor.getIntersectingObjects(ActorImpl.class));
 	}
 }

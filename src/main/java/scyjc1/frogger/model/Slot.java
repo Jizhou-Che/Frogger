@@ -38,8 +38,7 @@ public class Slot extends Actor {
 	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
-	public void act(long now) {
-	}
+	public void act(long now) {}
 
 	/**
 	 * Sets the status of the {@link Slot}.

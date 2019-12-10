@@ -12,8 +12,7 @@ public class Digit extends Actor {
 	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */
 	@Override
-	public void act(long now) {
-	}
+	public void act(long now) {}
 
 	/**
 	 * Initialises the {@link Digit} with respective image, size and position.
