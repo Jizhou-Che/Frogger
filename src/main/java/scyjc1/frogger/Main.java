@@ -9,7 +9,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	public static Stage mainStage;
+	public static Stage primaryStage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -26,16 +26,55 @@ public class Main extends Application {
 		// Load font.
 		Font.loadFont(getClass().getResourceAsStream("/fonts/prstartk.ttf"), 10);
 		// Load the home view.
-		mainStage = primaryStage;
+		Main.primaryStage = primaryStage;
+		primaryStage.setTitle("Frogger");
+		primaryStage.getIcons().add(new Image("file:src/main/resources/images/frogger_icon.png"));
+		primaryStage.setResizable(false);
+		switchScene(0);
+		primaryStage.show();
+	}
+
+	public static void switchScene(int id) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/HomeView.fxml"));
-			Scene scene = new Scene(root, 600, 800);
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-			primaryStage.setTitle("Frogger");
-			primaryStage.getIcons().add(new Image("file:src/main/resources/images/frogger_icon.png"));
-			primaryStage.show();
-			root.requestFocus();
+			Parent loader;
+			Scene scene;
+			switch (id) {
+				case 0:
+					// Switch to Home view.
+					loader = FXMLLoader.load(Main.class.getResource("/view/HomeView.fxml"));
+					scene = new Scene(loader, 600, 800);
+					scene.getRoot().requestFocus();
+					primaryStage.setScene(scene);
+					break;
+				case 1:
+					// Switch to Game view.
+					loader = FXMLLoader.load(Main.class.getResource("/view/GameView.fxml"));
+					scene = new Scene(loader, 600, 800);
+					scene.getRoot().requestFocus();
+					primaryStage.setScene(scene);
+					break;
+				case 2:
+					// Switch to High Score view.
+					loader = FXMLLoader.load(Main.class.getResource("/view/HighScoreView.fxml"));
+					scene = new Scene(loader, 600, 800);
+					scene.getRoot().requestFocus();
+					primaryStage.setScene(scene);
+					break;
+				case 3:
+					// Switch to Leaderboard view.
+					loader = FXMLLoader.load(Main.class.getResource("/view/LeaderboardView.fxml"));
+					scene = new Scene(loader, 600, 800);
+					scene.getRoot().requestFocus();
+					primaryStage.setScene(scene);
+					break;
+				case 4:
+					// Switch to Help view.
+					loader = FXMLLoader.load(Main.class.getResource("/view/HelpView.fxml"));
+					scene = new Scene(loader, 600, 800);
+					scene.getRoot().requestFocus();
+					primaryStage.setScene(scene);
+					break;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,8 +12,6 @@ import java.util.ArrayList;
  * </p>
  */
 public class World extends Pane {
-	public World() {}
-
 	/**
 	 * Adds an Actor to the game world.
 	 *

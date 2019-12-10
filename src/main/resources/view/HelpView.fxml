@@ -1,80 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Help.css"
+            xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="scyjc1.frogger.controller.HelpController">
+    <ImageView fitHeight="800.0" fitWidth="600.0">
+        <Image url="@../images/leaderboard_background.png"/>
+    </ImageView>
 
-<AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Help.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scyjc1.frogger.controller.HelpController">
-   <ImageView fitHeight="800.0" fitWidth="600.0">
-      <Image url="@../images/leaderboard_background.png" />
-   </ImageView>
-   <VBox prefHeight="800.0" prefWidth="600.0">
-      <Text id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP" textAlignment="CENTER" wrappingWidth="600.0">
-         <VBox.margin>
-            <Insets top="80.0" />
-         </VBox.margin>
-      </Text>
-      <AnchorPane prefHeight="530.0" prefWidth="600.0">
-         <VBox.margin>
-            <Insets top="50.0" />
-         </VBox.margin>
-         <ImageView fitHeight="95.0" fitWidth="133.0" layoutX="257.0" layoutY="11.0">
-            <Image url="@../images/help_wasd.png" />
-         </ImageView>
-         <Text fill="#ffe500" layoutX="266.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="instructions" text="MOVE" textAlignment="CENTER" wrappingWidth="115.9652099609375">
-            <font>
-               <Font size="11.0" />
-            </font>
-         </Text>
-         <ImageView fitHeight="43.0" fitWidth="108.0" layoutX="407.0" layoutY="63.0">
-            <Image url="@../images/help_space.png" />
-         </ImageView>
-         <Text fill="#ffe500" layoutX="390.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="instructions" text="PAUSE" textAlignment="CENTER" wrappingWidth="143.0">
-            <font>
-               <Font size="11.0" />
-            </font>
-         </Text>
-         <ImageView fitHeight="49.0" fitWidth="43.0" layoutX="530.0" layoutY="63.0">
-            <Image url="@../images/help_m.png" />
-         </ImageView>
-         <Text fill="#ffe500" layoutX="506.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="instructions" text="MUTE" textAlignment="CENTER" wrappingWidth="90.9652099609375">
-            <font>
-               <Font size="11.0" />
-            </font>
-         </Text>
-         <Text fill="#ffe500" layoutX="14.0" layoutY="40.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="USE THE W, A, S, D KEYS TO HELP THE FROG REACH THE OTHER SIDE." wrappingWidth="240.9652099609375" />
-         <Text fill="#ffe500" layoutX="14.0" layoutY="329.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="AVOID RUNNING VEHICLES, FALLING INTO WATER AND DEADLY CREATURES." wrappingWidth="329.9652099609375" />
-         <Text fill="#ffe500" layoutX="187.0" layoutY="190.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="MAKE GOOD USE OF LOGS, TURTLES AND CROCODILES, BUT WATCH OUT FOR THEIR DANGEROUS BEHAVIOUR!" textAlignment="RIGHT" wrappingWidth="389.9652099609375" />
-         <Text fill="#ffe500" layoutX="260.0" layoutY="469.0" lineSpacing="10.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subtitles" text="CATCH FLIES AND GET BONUS POINTS!" textAlignment="RIGHT" wrappingWidth="321.9652099609375" />
-         <ImageView fitHeight="29.0" fitWidth="81.0" layoutX="333.0" layoutY="282.0">
-            <image>
-               <Image url="@../images/snake_right_animation_1.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="48.0" fitWidth="71.0" layoutX="433.0" layoutY="347.0">
-            <image>
-               <Image url="@../images/car_1_left.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="62.0" fitWidth="178.0" layoutX="34.0" layoutY="182.0">
-            <image>
-               <Image url="@../images/turtle_animation_2.png" />
-            </image>
-         </ImageView>
-         <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="99.0" layoutY="433.0">
-            <image>
-               <Image url="@../images/help_fly.png" />
-            </image>
-         </ImageView>
-      </AnchorPane>
-      <Text id="home" fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="&gt; Home &lt;" textAlignment="CENTER" wrappingWidth="600.0">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Text>
-   </VBox>
+    <VBox prefHeight="800.0" prefWidth="600.0">
+        <Text id="title" fill="#ffe500" strokeType="OUTSIDE" strokeWidth="0.0" text="HELP" textAlignment="CENTER"
+              wrappingWidth="600.0">
+            <VBox.margin>
+                <Insets top="80.0"/>
+            </VBox.margin>
+        </Text>
+
+        <AnchorPane prefHeight="530.0" prefWidth="600.0">
+            <VBox.margin>
+                <Insets top="50.0"/>
+            </VBox.margin>
+            <ImageView fitHeight="95.0" fitWidth="133.0" layoutX="257.0" layoutY="11.0">
+                <Image url="@../images/help_wasd.png"/>
+            </ImageView>
+            <Text fill="#ffe500" layoutX="266.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  styleClass="instructions" text="MOVE" textAlignment="CENTER" wrappingWidth="115.9652099609375"/>
+            <ImageView fitHeight="43.0" fitWidth="108.0" layoutX="407.0" layoutY="63.0">
+                <Image url="@../images/help_space.png"/>
+            </ImageView>
+            <Text fill="#ffe500" layoutX="390.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  styleClass="instructions" text="PAUSE" textAlignment="CENTER" wrappingWidth="143.0"/>
+            <ImageView fitHeight="49.0" fitWidth="43.0" layoutX="530.0" layoutY="63.0">
+                <Image url="@../images/help_m.png"/>
+            </ImageView>
+            <Text fill="#ffe500" layoutX="506.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  styleClass="instructions" text="MUTE" textAlignment="CENTER" wrappingWidth="90.9652099609375"/>
+            <Text fill="#ffe500" layoutX="24.0" layoutY="40.0" lineSpacing="12.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                  styleClass="instructions" text="USE THE W, A, S, D KEYS TO HELP THE FROG REACH THE OTHER SIDE."
+                  wrappingWidth="240.9652099609375"/>
+            <Text fill="#ffe500" layoutX="24.0" layoutY="339.0" lineSpacing="12.0" strokeType="OUTSIDE"
+                  strokeWidth="0.0" styleClass="instructions"
+                  text="AVOID RUNNING VEHICLES, FALLING INTO WATER AND DEADLY CREATURES."
+                  wrappingWidth="329.9652099609375"/>
+            <Text fill="#ffe500" layoutX="232.0" layoutY="177.0" lineSpacing="12.0" strokeType="OUTSIDE"
+                  strokeWidth="0.0" styleClass="instructions"
+                  text="MAKE GOOD USE OF LOGS, TURTLES AND CROCODILES, BUT WATCH OUT FOR THEIR DANGEROUS BEHAVIOUR!"
+                  textAlignment="RIGHT" wrappingWidth="344.9652099609375"/>
+            <Text fill="#ffe500" layoutX="250.0" layoutY="469.0" lineSpacing="12.0" strokeType="OUTSIDE"
+                  strokeWidth="0.0" styleClass="instructions" text="CATCH FLIES AND GET BONUS POINTS!"
+                  textAlignment="RIGHT" wrappingWidth="321.9652099609375"/>
+            <ImageView fitHeight="29.0" fitWidth="81.0" layoutX="333.0" layoutY="282.0">
+                <Image url="@../images/snake_right_animation_1.png"/>
+            </ImageView>
+            <ImageView fitHeight="48.0" fitWidth="71.0" layoutX="433.0" layoutY="347.0">
+                <Image url="@../images/car_1_left.png"/>
+            </ImageView>
+            <ImageView fitHeight="62.0" fitWidth="178.0" layoutX="34.0" layoutY="182.0">
+                <Image url="@../images/turtle_animation_2.png"/>
+            </ImageView>
+            <ImageView fitHeight="76.0" fitWidth="71.0" layoutX="99.0" layoutY="433.0">
+                <Image url="@../images/help_fly.png"/>
+            </ImageView>
+        </AnchorPane>
+
+        <Text id="home" fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="&gt; Home &lt;"
+              textAlignment="CENTER" wrappingWidth="600.0">
+            <VBox.margin>
+                <Insets top="20.0"/>
+            </VBox.margin>
+        </Text>
+    </VBox>
 </AnchorPane>

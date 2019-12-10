@@ -4,24 +4,25 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Home.css"
-            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="scyjc1.frogger.controller.HomeController">
-   <ImageView fitHeight="800.0" fitWidth="600.0">
-      <Image url="@../images/home_background.png"/>
-   </ImageView>
-   <VBox fx:id="optionBox" layoutX="25.0" layoutY="441.0" prefHeight="300.0" prefWidth="400.0" spacing="40.0">
-      <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="&gt; START &lt;" textAlignment="CENTER"
-            wrappingWidth="400.0"/>
-      <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="LEADERBOARD" textAlignment="CENTER"
-            wrappingWidth="400.0"/>
-      <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="HELP" textAlignment="CENTER"
-            wrappingWidth="400.0"/>
-      <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="MUSIC: ON" textAlignment="CENTER"
-            wrappingWidth="400.0"/>
-      <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="QUIT" textAlignment="CENTER"
-            wrappingWidth="400.0"/>
-   </VBox>
+    <ImageView fitHeight="800.0" fitWidth="600.0">
+        <Image url="@../images/home_background.png"/>
+    </ImageView>
+
+    <VBox fx:id="optionBox" layoutX="25.0" layoutY="441.0" prefHeight="300.0" prefWidth="400.0" spacing="40.0">
+        <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="&gt; START &lt;" textAlignment="CENTER"
+              wrappingWidth="400.0"/>
+        <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="LEADERBOARD" textAlignment="CENTER"
+              wrappingWidth="400.0"/>
+        <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="HELP" textAlignment="CENTER"
+              wrappingWidth="400.0"/>
+        <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="MUSIC: ON" textAlignment="CENTER"
+              wrappingWidth="400.0"/>
+        <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="QUIT" textAlignment="CENTER"
+              wrappingWidth="400.0"/>
+    </VBox>
 </AnchorPane>
