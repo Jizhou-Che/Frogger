@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Help.css"
             xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="scyjc1.frogger.controller.HelpController">
+            fx:controller="frogger.controller.HelpController">
     <ImageView fitHeight="800.0" fitWidth="600.0">
         <Image url="@../images/leaderboard_background.png"/>
     </ImageView>

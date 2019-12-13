@@ -1,10 +1,18 @@
 # README
 
-## Important Maintenance
+## Info
+
+* Build script: Maven.
+
+* Tested on: Mac, IntelliJ Ultimate 2019.3, bundled JDK 11 with JavaFX included.
+
+* Should work on any other machine with normal JDK 11 by uncommenting the JavaFX part of dependency in pom.xml.
+
+## Maintenance
 
 ### 1. Project Organisation
 
-* Using Maven as build tool: a standardised project structure makes the project easier to use or import from a different context.
+* Standardised Maven structure, managed dependencies.
 
 * Packaging of source code: model, controller, test.
 
@@ -56,13 +64,13 @@
 
 ### 7. Documentation
 
-* Primary inline documentations were written along the refactoring and extending process.
+* Primary inline comments were written along the refactoring and extending process.
 
-* Javadoc was adopted at the final stage based on existing inline documentations, producing a systematic and user-friendly guide for future maintenance and development.
+* Javadoc was written at the final stage based on existing inline comments, providing a systematic and user-friendly guide for future maintenance and development.
 
 ---
 
-## Key Features
+## Feature
 
 ### Game Rule
 
@@ -86,7 +94,7 @@
 
 * Home page and help page.
 
-* The leaderboard records the top 10 high scores, the dates and the names of their players.
+* A leaderboard that records the top 10 high scores.
 
 ### Easter Egg
 
