@@ -35,7 +35,7 @@ public class World extends Pane {
 	 * @return all objects of the specified type in the game world as an {@link ArrayList}.
 	 */
 	public <A extends Actor> ArrayList<A> getObjects(Class<A> cls) {
-		ArrayList<A> objects = new ArrayList<A>();
+		ArrayList<A> objects = new ArrayList<>();
 		for (Node n : getChildren()) {
 			if (cls.isInstance(n)) {
 				objects.add((A) n);

@@ -5,9 +5,9 @@ import frogger.model.Log;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LogTest {
+public class LogTest {
 	@Test
-	void actTest1() {
+	public void actTest1() {
 		Log testLog = new Log(0, 150, 590, 0, 10);
 		testLog.act(0);
 		assertEquals(600, testLog.getX());
@@ -19,7 +19,7 @@ class LogTest {
 	}
 
 	@Test
-	void actTest2() {
+	public void actTest2() {
 		Log testLog = new Log(0, 150, -290, 0, -10);
 		testLog.act(0);
 		assertEquals(-300, testLog.getX());

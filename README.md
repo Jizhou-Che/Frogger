@@ -4,9 +4,9 @@
 
 * Build script: Maven.
 
-* Tested on: Mac, IntelliJ Ultimate 2019.3, bundled JDK 11 with JavaFX included.
+* Tested on: Mac, IntelliJ Ultimate 2019.3, Oracle JDK 13, JavaFX 13.
 
-* Should work on any other machine with normal JDK 11 by uncommenting the JavaFX part of dependency in pom.xml.
+* Should work on any other machine with JDK 13.
 
 ## Maintenance
 
@@ -18,43 +18,32 @@
 
 * Categorised resources: view, CSS, images, sounds, fonts.
 
-### 2. Testing
+### 2. Refactoring
 
-* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring to ensure that the most crucial functionalities were always preserved.
+* Frog
+    * The first stage focused on reformatting, renaming and extracting methods. This process brought enhanced readability and reduced duplication of the code, while establishing a clearer understanding to the purposes of fields and methods.
+    * A further refactoring took place later on transferring the controls of Frog to GameController, to enhance the separation of model and controller and bring higher clarity to the code.
 
-* Unit tests for concrete models such as World and Obstacle were created along the refactoring of the respective classes. All further refactoring or extension were introduced with the premise of passing all previous tests for quality and correctness assurance.
+* World
+    * BackgroundMusic was extracted from MyStage and applied with singleton pattern to enforce the use of a single instance, therefore facilitate further extensions and features such as muting and pausing.
+    * Abstract class MyStage was removed and the World class was made concrete.
+    * The responsibility of handling events was extracted to GameController, leaving World with the single purpose of managing Actors.
 
-### 3. Refactoring on the Frog Class
+* General
+    * A MovingActor class was abstracted from actors with customisable speed to facilitate the implementation of related features such as speeding up moving actors on level up.
+    * Visibility of fields and methods within or among packages was carefully managed.
+    * Unused fields and methods were eliminated.
+    * Enforced encapsulation where appropriate.
 
-* The original Animal class was renamed to Frog.
+### 3. Debugging
 
-* The first stage of refactoring focused on reformatting, renaming and extracting methods. This process brought enhanced readability and reduced duplication of the code, while establishing a clearer understanding to the purposes of fields and methods and the structure of method calling chains.
-
-* A further refactoring took place later on extracting the controls of Frog to GameController. This enhanced the separation of model and controller and brought higher clarity to the code.
-
-### 4. Refactoring on Concrete Classes
-
-* A MovingActor class was abstracted from actors with customisable speed to facilitate the implementation of related features such as speeding up moving actors on level up.
-
-* BackgroundMusic was extracted from MyStage and adapted to the Singleton pattern to enforce the use of a single instance, and therefore facilitate further extensions and features such as muting and pausing.
-
-* Abstract class MyStage was removed and the World class was made concrete for the single purpose of managing actors and related events.
-
-* The responsibility of controlling Actors in World was extracted to GameController for clarity and the principle of single responsibility.
-
-* Visibility of fields and methods within or among packages was carefully managed.
-
-* Unused fields and methods were eliminated.
-
-### 5. Debugging
-
-* Bugs were discovered along the refactoring and immediately fixed on separate branches. The most important fixes cover:  
+* Bugs were discovered along the refactoring and immediately fixed on separate branches. The most important fixes include:  
     * Score calculation and display logic.
-    * Handling of key press events.
+    * Handling of key events.
     * Death checking logic.
-    * Movement issues under control or around boundaries.
+    * Movement issues between lanes and around boundaries.
 
-### 6. The MVC Pattern
+### 4. MVC
 
 * The project adheres the MVC pattern. This separates design, data/behaviour and event controlling, while providing a convenient link in between.
 
@@ -62,17 +51,21 @@
 
 * Based on the MVC pattern, different views were implemented with little effort.
 
-### 7. Documentation
+### 5. Testing
 
-* Primary inline comments were written along the refactoring and extending process.
+* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring for the preservation of core functionality.
+
+* Unit tests for concrete models such as Obstacle were created along the refactoring of the respective classes.
+
+### 6. Documentation
+
+* Primary inline comments were written along the refactoring and extension process.
 
 * Javadoc was written at the final stage based on existing inline comments, providing a systematic and user-friendly guide for future maintenance and development.
 
----
-
 ## Feature
 
-### Game Rule
+### 1. Game Rule
 
 * Infinite game, limited number of lives.
 
@@ -88,7 +81,7 @@
 
 * Bonus life on occasion.
 
-### New Functionality
+### 2. New Functionality
 
 * Pausing with SPACE and muting with M.
 
@@ -96,6 +89,6 @@
 
 * A leaderboard that records the top 10 high scores.
 
-### Easter Egg
+### 3. Easter Egg
 
 * A snowy theme can be activated or deactivated by typing "scyjc1" (which is my university username obviously) during the game. Do not hesitate to try it out!

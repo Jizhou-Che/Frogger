@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-class ActorTest {
+public class ActorTest {
 	private World testWorld = new World();
 	private ActorImpl testActor = new ActorImpl();
 
 	@Test
-	void moveTest() {
+	public void moveTest() {
 		testActor.setPosition(0, 0);
 		testActor.move(9.9, -9.9);
 		assertEquals(9.9, testActor.getX());
@@ -21,13 +21,13 @@ class ActorTest {
 	}
 
 	@Test
-	void getWorldTest() {
+	public void getWorldTest() {
 		testWorld.add(testActor);
 		assertSame(testWorld, testActor.getWorld());
 	}
 
 	@Test
-	void getIntersectingObjectsTest() {
+	public void getIntersectingObjectsTest() {
 		testActor.setPosition(0, 0);
 		testActor.setSize(40, 40);
 		testWorld.add(testActor);

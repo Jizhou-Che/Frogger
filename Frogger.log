@@ -93,4 +93,11 @@ FXML version issue resolved.
 
 10/12/19
 Javadoc completed.
-Tests repolished.
+Tests polished.
+
+14/12/19
+Project adapted to Java 13 and JavaFX 13.
+Maven dependencies for JavaFX and JUnit resolved.
+Javadoc for tests removed.
+Fix: Initialisation of static score in GameController.
+Drafting of README completed.

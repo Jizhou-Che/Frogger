@@ -57,6 +57,7 @@ public class GameController {
 	@FXML
 	private void initialize() {
 		// Initialise score.
+		score = 0;
 		setScoreNumber(0);
 		// Start game.
 		startGame();

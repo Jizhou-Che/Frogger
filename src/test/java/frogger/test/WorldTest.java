@@ -6,24 +6,24 @@ import frogger.model.World;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class WorldTest {
+public class WorldTest {
 	private World testWorld = new World();
 	private ActorImpl testActor = new ActorImpl();
 
 	@Test
-	void addTest() {
+	public void addTest() {
 		testWorld.add(testActor);
 		assertSame(testWorld, testActor.getWorld());
 	}
 
 	@Test
-	void removeTest() {
+	public void removeTest() {
 		testWorld.remove(testActor);
 		assertNotSame(testWorld, testActor.getWorld());
 	}
 
 	@Test
-	void getObjectsTest() {
+	public void getObjectsTest() {
 		ActorImpl validObject1 = new ActorImpl();
 		ActorImpl validObject2 = new ActorImpl();
 		testWorld.add(validObject1);

@@ -5,9 +5,9 @@ import frogger.model.Obstacle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ObstacleTest {
+public class ObstacleTest {
 	@Test
-	void actTest1() {
+	public void actTest1() {
 		Obstacle testLog = new Obstacle(0, 150, 590, 0, 10);
 		testLog.act(0);
 		assertEquals(600, testLog.getX());
@@ -19,7 +19,7 @@ class ObstacleTest {
 	}
 
 	@Test
-	void actTest2() {
+	public void actTest2() {
 		Obstacle testLog = new Obstacle(0, 150, -40, 0, -10);
 		testLog.act(0);
 		assertEquals(-50, testLog.getX());
