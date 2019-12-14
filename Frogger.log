@@ -101,3 +101,4 @@ Maven dependencies for JavaFX and JUnit resolved.
 Javadoc for tests removed.
 Fix: Initialisation of static score in GameController.
 Drafting of README completed.
+Tests for Maven configuration performed on different platforms.

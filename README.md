@@ -4,9 +4,9 @@
 
 * Build script: Maven.
 
-* Tested on: Mac, IntelliJ Ultimate 2019.3, Oracle JDK 13, JavaFX 13.
+* Tested on: Mac/Windows/Linux, IntelliJ IDEA Ultimate 2019.3, JDK 13.
 
-* Should work on any other machine with JDK 13.
+* Project log: [Frogger.log](Frogger.log).
 
 ## Maintenance
 
@@ -47,13 +47,13 @@
 
 * The project adheres the MVC pattern. This separates design, data/behaviour and event controlling, while providing a convenient link in between.
 
-* FXML and CSS were used for the design of views.
+* Initialisation of Actor objects were translated to FXML tags in GameView.fxml, hence eliminating most of the raw use of constructors and the need of introducing any form of factory pattern.
 
-* Based on the MVC pattern, different views were implemented with little effort.
+* FXML and CSS were used for the design of views, enabling the views to be implemented with little effort.
 
 ### 5. Testing
 
-* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring for the preservation of core functionality.
+* Unit tests focusing on abstract models such as Actor were implemented prior to any refactoring for the preservation of core functionality and its correctness.
 
 * Unit tests for concrete models such as Obstacle were created along the refactoring of the respective classes.
 
