@@ -28,15 +28,27 @@ public class Obstacle extends MovingActor {
 				setImage(new Image("file:src/main/resources/images/car_1_right.png", size, size, true, true));
 				break;
 			case 3:
-				setImage(new Image("file:src/main/resources/images/truck_1_left.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/car_2_left.png", size, size, true, true));
 				break;
 			case 4:
-				setImage(new Image("file:src/main/resources/images/truck_1_right.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/car_2_right.png", size, size, true, true));
 				break;
 			case 5:
-				setImage(new Image("file:src/main/resources/images/truck_2_left.png", size, size, true, true));
+				setImage(new Image("file:src/main/resources/images/van_1_left.png", size, size, true, true));
 				break;
 			case 6:
+				setImage(new Image("file:src/main/resources/images/van_1_right.png", size, size, true, true));
+				break;
+			case 7:
+				setImage(new Image("file:src/main/resources/images/truck_1_left.png", size, size, true, true));
+				break;
+			case 8:
+				setImage(new Image("file:src/main/resources/images/truck_1_right.png", size, size, true, true));
+				break;
+			case 9:
+				setImage(new Image("file:src/main/resources/images/truck_2_left.png", size, size, true, true));
+				break;
+			case 10:
 				setImage(new Image("file:src/main/resources/images/truck_2_right.png", size, size, true, true));
 				break;
 		}
