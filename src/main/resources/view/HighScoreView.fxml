@@ -8,7 +8,7 @@
 
 <AnchorPane onKeyTyped="#keyTyped" onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0"
             stylesheets="@../css/HighScore.css" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="scyjc1.frogger.controller.HighScoreController">
+            fx:controller="frogger.controller.HighScoreController">
     <ImageView fitHeight="800.0" fitWidth="600.0">
         <Image url="@../images/leaderboard_background.png"/>
     </ImageView>

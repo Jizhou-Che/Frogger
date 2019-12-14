@@ -8,7 +8,7 @@
 
 <AnchorPane onKeyPressed="#keyPressed" prefHeight="800.0" prefWidth="600.0" stylesheets="@../css/Home.css"
             xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="scyjc1.frogger.controller.HomeController">
+            fx:controller="frogger.controller.HomeController">
     <ImageView fitHeight="800.0" fitWidth="600.0">
         <Image url="@../images/home_background.png"/>
     </ImageView>

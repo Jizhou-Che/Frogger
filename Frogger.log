@@ -27,8 +27,8 @@ Fix: Points display and calculation error.
 24/11/19
 Resources reorganised.
 General refactoring on concrete Actor classes.
-Extracted BackgroundMusic class from MyStage and applied with Singleton pattern.
-World class made concrete and MyStage class removed.
+Extracted BackgroundMusic from MyStage and applied with Singleton pattern.
+World made concrete and MyStage removed.
 Fix: Turtles and WetTurtles disappear on the left edge.
 
 25/11/19
@@ -49,19 +49,19 @@ Preliminary design to the High Score view.
 01/12/19
 Feature: Leaderboard system implemented.
 Feature: Muting functionality added.
-Home view adapted to css.
+Home view adapted to CSS.
 
 03/12/19
 Game view adapted to the MVC pattern.
 Tests written for concrete classes.
-Adding feature of speeding up on level up: abstract class MovingActor.
-Adding the snake to the game.
-Adding crocodile head and fly to the slots.
+Feature: Speeding up on level up: abstract class MovingActor.
+Feature: Snake in the middle lane.
+Feature: Random crocodile heads and flies in slots.
 Help view implemented.
 
 04/12/19
-Introducing crocodiles to the game.
-Introducing log snakes to the game.
+Feature: Swimming crocodiles.
+Feature: Log snakes.
 Refined digit pictures.
 Improved killing accuracy of crocodile head.
 Level indicator added.
@@ -71,9 +71,9 @@ Fix: Reset music mute status for each game.
 Help view refined.
 
 06/12/19
-Feature: easter egg.
-Feature: Application icon added.
-Giving a bonus life for every passed 5 levels.
+Feature: Easter egg.
+Application icon added.
+Feature: Bonus life for every completed 5 levels.
 
 07/12/19
 Draft of README written.
@@ -81,7 +81,7 @@ Draft of README written.
 08/12/19
 Refactoring on the controllers for single responsibility.
 Javadoc partially added.
-Controlling of Frog extracted to GameController.
+Controlling of Frog transferred to GameController.
 
 09/12/19
 Controlling responsibility of World transferred to GameController.
@@ -93,4 +93,13 @@ FXML version issue resolved.
 
 10/12/19
 Javadoc completed.
-Tests repolished.
+Tests polished.
+
+14/12/19
+Project adapted to Java 13 and JavaFX 13.
+Maven dependencies for JavaFX and JUnit resolved.
+Javadoc for tests removed.
+Fix: Initialisation of static score in GameController.
+Drafting of README completed.
+Tests for Maven configuration performed on different platforms.
+New picture set for Obstacle.
