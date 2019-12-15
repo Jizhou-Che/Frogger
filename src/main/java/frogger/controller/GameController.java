@@ -79,6 +79,7 @@ public class GameController {
 					pauseGame();
 				}
 				gamePaused = !gamePaused;
+				easterEgg = 0;
 				break;
 			case M:
 				if (musicMuted) {
@@ -87,6 +88,7 @@ public class GameController {
 					bgm.mute();
 				}
 				musicMuted = !musicMuted;
+				easterEgg = 0;
 				break;
 			case W:
 				if (frog.checkMovable()) {
@@ -98,6 +100,7 @@ public class GameController {
 						keyHold = true;
 					}
 				}
+				easterEgg = 0;
 				break;
 			case A:
 				if (frog.checkMovable()) {
@@ -109,17 +112,7 @@ public class GameController {
 						keyHold = true;
 					}
 				}
-				break;
-			case D:
-				if (frog.checkMovable()) {
-					if (keyHold) {
-						keyReleased();
-					} else {
-						frog.moveRight(true);
-						keyPressed = 'D';
-						keyHold = true;
-					}
-				}
+				easterEgg = 0;
 				break;
 			case S:
 				if (frog.checkMovable()) {
@@ -136,6 +129,18 @@ public class GameController {
 				} else {
 					easterEgg = 0;
 				}
+				break;
+			case D:
+				if (frog.checkMovable()) {
+					if (keyHold) {
+						keyReleased();
+					} else {
+						frog.moveRight(true);
+						keyPressed = 'D';
+						keyHold = true;
+					}
+				}
+				easterEgg = 0;
 				break;
 			case C:
 				if (easterEgg == 1) {
@@ -285,7 +290,7 @@ public class GameController {
 	 * Starts the game.
 	 */
 	private void startGame() {
-		if (HomeController.musicOn) {
+		if (bgm.isEnabled()) {
 			bgm.unmute();
 			bgm.play();
 		}
@@ -297,7 +302,7 @@ public class GameController {
 	 * Pauses the game.
 	 */
 	private void pauseGame() {
-		if (HomeController.musicOn) {
+		if (bgm.isEnabled()) {
 			bgm.pause();
 		}
 		timer.stop();
@@ -308,7 +313,7 @@ public class GameController {
 	 * Resumes the game.
 	 */
 	private void resumeGame() {
-		if (HomeController.musicOn) {
+		if (bgm.isEnabled()) {
 			bgm.play();
 		}
 		timer.start();
@@ -320,7 +325,7 @@ public class GameController {
 	 * Checks for high scores and switches to the respective view on demand.
 	 */
 	private void stopGame() {
-		if (HomeController.musicOn) {
+		if (bgm.isEnabled()) {
 			bgm.stop();
 		}
 		timer.stop();

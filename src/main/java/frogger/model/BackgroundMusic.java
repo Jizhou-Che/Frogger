@@ -11,12 +11,14 @@ import java.io.File;
  */
 public class BackgroundMusic {
 	private static BackgroundMusic bgm;
-	private static final MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("src/main/resources/sounds/theme.mp3").toURI().toString()));
+	private MediaPlayer mediaPlayer = new MediaPlayer(new Media(new File("src/main/resources/sounds/theme.mp3").toURI().toString()));
+	private boolean enabled = true;
 
 	/**
 	 * Private constructor in case of careless use.
 	 */
-	private BackgroundMusic() {}
+	private BackgroundMusic() {
+	}
 
 	/**
 	 * Gets the single {@link BackgroundMusic} instance.
@@ -28,6 +30,22 @@ public class BackgroundMusic {
 			bgm = new BackgroundMusic();
 		}
 		return bgm;
+	}
+
+	/**
+	 * Checks whether the background music is globally enabled.
+	 *
+	 * @return whether the background music is globally enabled as a boolean.
+	 */
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	/**
+	 * Toggles the global enabling status of background music.
+	 */
+	public void toggleEnabled() {
+		enabled = !enabled;
 	}
 
 	/**

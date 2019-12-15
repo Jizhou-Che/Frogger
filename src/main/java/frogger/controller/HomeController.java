@@ -1,5 +1,6 @@
 package frogger.controller;
 
+import frogger.model.BackgroundMusic;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
@@ -15,7 +16,6 @@ public class HomeController {
 	private VBox optionBox;
 
 	private int optionNew = 0;
-	static boolean musicOn = true;
 
 	/**
 	 * Initialises the Home view.
@@ -25,7 +25,7 @@ public class HomeController {
 		// Set style for start.
 		optionBox.getChildren().get(0).getStyleClass().add("active");
 		// Set music status.
-		if (!musicOn) {
+		if (!BackgroundMusic.getBgm().isEnabled()) {
 			Text musicText = (Text) optionBox.getChildren().get(3);
 			musicText.setText("MUSIC: OFF");
 		}
@@ -73,12 +73,12 @@ public class HomeController {
 					case 3:
 						// Switch music.
 						Text tMusic = (Text) optionBox.getChildren().get(3);
-						if (musicOn) {
+						if (BackgroundMusic.getBgm().isEnabled()) {
 							tMusic.setText("> MUSIC: OFF <");
 						} else {
 							tMusic.setText("> MUSIC: ON <");
 						}
-						musicOn = !musicOn;
+						BackgroundMusic.getBgm().toggleEnabled();
 						break;
 					case 4:
 						// Quit game.

@@ -25,4 +25,6 @@
         <Text fill="#ffe500" stroke="#404040" strokeType="OUTSIDE" text="QUIT" textAlignment="CENTER"
               wrappingWidth="400.0"/>
     </VBox>
+    <Text id="instruction" fill="GREY" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="W/S: SWITCH    ENTER: SELECT" wrappingWidth="600.0"/>
 </AnchorPane>

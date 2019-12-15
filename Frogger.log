@@ -103,3 +103,9 @@ Fix: Initialisation of static score in GameController.
 Drafting of README completed.
 Tests for Maven configuration performed on different platforms.
 New picture set for Obstacle.
+
+15/12/19
+Singleton pattern for BackgroundMusic polished.
+Fix: Activation logic of easter egg.
+Javadoc for BackgroundMusic updated.
+Instruction for Home view added.
