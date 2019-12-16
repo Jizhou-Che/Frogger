@@ -109,3 +109,8 @@ Singleton pattern for BackgroundMusic polished.
 Fix: Activation logic of easter egg.
 Javadoc for BackgroundMusic updated.
 Instruction for Home view added.
+
+16/12/19
+Encapsulation of Record enhanced.
+Class diagram created.
+Javadoc updated.

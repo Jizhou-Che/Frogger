@@ -33,7 +33,7 @@ public class Turtle extends MovingActor {
 
 	/**
 	 * Defines the behaviour of {@link Turtle}.
-	 * This includes moving and position resetting on boundaries.
+	 * This includes image animation, moving and position resetting on boundaries.
 	 *
 	 * @param now the timestamp of the current frame given in nanoseconds.
 	 */

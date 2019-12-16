@@ -63,11 +63,10 @@ public class HighScoreController {
 					// Invalid name.
 					name.setText("> FROGGER <");
 				} else {
-					// Write high score to file.
+					// Add new record.
 					try {
 						Record records = new Record();
 						records.add(GameController.score, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yy")), name.getText().substring(2, name.getText().length() - 2));
-						records.sort();
 						records.write();
 					} catch (Exception e) {
 						e.printStackTrace();

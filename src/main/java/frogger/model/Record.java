@@ -21,10 +21,44 @@ public class Record {
 	/**
 	 * Initialises with a read from the leaderboard file.
 	 *
-	 * @throws IOException if an error occurred.
+	 * @throws IOException if a reading error occurred.
 	 */
 	public Record() throws IOException {
 		records = read();
+	}
+
+	/**
+	 * Reads from the leaderboard file.
+	 * Creates the file if it does not exist.
+	 *
+	 * @return all lines in the leaderboard file as a {@link List}.
+	 * @throws IOException if the directory or file cannot be created.
+	 */
+	private List<String> read() throws IOException {
+		if (!dataDirectory.mkdir()) {
+			if (!dataDirectory.exists()) {
+				throw new IOException("Failed to create the data directory.");
+			}
+		}
+		if (!leaderboardFile.createNewFile()) {
+			if (!leaderboardFile.exists()) {
+				throw new IOException("Failed to create the leaderboard file.");
+			}
+		}
+		return Files.readAllLines(path, StandardCharsets.UTF_8);
+	}
+
+	/**
+	 * Writes the record to the leaderboard file.
+	 *
+	 * @throws IOException if the file cannot be written to.
+	 */
+	public void write() throws IOException {
+		if (size() >= 10) {
+			Files.write(path, records.subList(0, 10));
+		} else {
+			Files.write(path, records.subList(0, size()));
+		}
 	}
 
 	/**
@@ -38,19 +72,16 @@ public class Record {
 
 	/**
 	 * Adds a record.
+	 * Sorts the records according to the score in descending order.
 	 *
 	 * @param score the score as an integer.
-	 * @param date  the date in a specific format as a {@link String}.
-	 * @param name  the name of the player as a {@link String}.
+	 * @param date the date in a specific format as a {@link String}.
+	 * @param name the name of the player as a {@link String}.
 	 */
 	public void add(int score, String date, String name) {
+		// Add new score.
 		records.add(score + "," + date + "," + name);
-	}
-
-	/**
-	 * Sorts the records according to the score in descending order.
-	 */
-	public void sort() {
+		// Sort the records according to the score in descending order.
 		records.sort(Comparator.comparing(s -> Integer.parseInt(s.substring(0, s.indexOf(','))), Comparator.reverseOrder()));
 	}
 
@@ -82,39 +113,5 @@ public class Record {
 	 */
 	public String getName(int id) {
 		return records.get(id).split(",", 3)[2];
-	}
-
-	/**
-	 * Writes the record to the leaderboard file.
-	 *
-	 * @throws IOException if the file cannot be written to.
-	 */
-	public void write() throws IOException {
-		if (size() >= 10) {
-			Files.write(path, records.subList(0, 10));
-		} else {
-			Files.write(path, records.subList(0, size()));
-		}
-	}
-
-	/**
-	 * Reads from the leaderboard file.
-	 * Creates the file if it does not exist.
-	 *
-	 * @return all lines in the leaderboard file as a {@link List}.
-	 * @throws IOException if the directory or file cannot be created.
-	 */
-	private List<String> read() throws IOException {
-		if (!dataDirectory.mkdir()) {
-			if (!dataDirectory.exists()) {
-				throw new IOException("Failed to create the data directory.");
-			}
-		}
-		if (!leaderboardFile.createNewFile()) {
-			if (!leaderboardFile.exists()) {
-				throw new IOException("Failed to create the leaderboard file.");
-			}
-		}
-		return Files.readAllLines(path, StandardCharsets.UTF_8);
 	}
 }
