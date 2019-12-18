@@ -8,6 +8,8 @@
 
 * Project log: [Frogger.log](Frogger.log).
 
+* Game screenshot: ![Screenshot](src/main/resources/images/screenshot.png)
+
 ## Maintenance
 
 ### 1. Project Organisation

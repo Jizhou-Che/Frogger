@@ -124,11 +124,7 @@ public class GameController {
 						keyHold = true;
 					}
 				}
-				if (easterEgg == 0) {
-					easterEgg++;
-				} else {
-					easterEgg = 0;
-				}
+				easterEgg = 1;
 				break;
 			case D:
 				if (frog.checkMovable()) {

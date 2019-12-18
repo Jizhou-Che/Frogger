@@ -17,8 +17,7 @@ public class BackgroundMusic {
 	/**
 	 * Private constructor in case of careless use.
 	 */
-	private BackgroundMusic() {
-	}
+	private BackgroundMusic() {}
 
 	/**
 	 * Gets the single {@link BackgroundMusic} instance.
